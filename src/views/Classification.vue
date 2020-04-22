@@ -1,15 +1,15 @@
 <template>
-    <div class="home">
+    <div>
         <div>
-            等等
+            分类
         </div>
         <div class="footer">
             <router-link to="/" class="go">
-                <img src="../assets/home/icon/5.png" alt="">
-                <span>猜你喜欢</span>
+                <img src="../assets/home/icon/15.png" alt="">
+                <span>首页</span>
             </router-link>
             <router-link to="/classification" class="go">
-                <img src="../assets/home/icon/7.png" alt="">
+                <img src="../assets/home/icon/11.png" alt="">
                 <span>分类</span>
             </router-link>
             <router-link to="/mustgrablist" class="go">
@@ -27,11 +27,6 @@
         </div>
     </div>
 </template>
-<script>
-export default {
-    
-}
-</script>
 <style scoped>
 .footer{
     box-sizing: content-box;
@@ -64,8 +59,5 @@ export default {
     color: #666;
     font-size: .4rem;
 }
-.go:first-child span{
-    color: #000;
-    font-weight: bold;
-}
+
 </style>
