@@ -1,32 +1,76 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#nav {
-  padding: 30px;
+@media screen and (min-width: 320px) {
+  html {
+    font-size: 21.33px;
+  }
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+@media screen and (min-width: 360px) {
+  html {
+    font-size: 24px;
+  }
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+@media screen and (min-width: 375px) {
+  html {
+    font-size: 25px;
+  }
+}
+
+@media screen and (min-width: 384px) {
+  html {
+    font-size: 26.67px;
+  }
+}
+
+@media screen and (min-width: 414px) {
+  html {
+    font-size: 27.6px;
+  }
+}
+
+@media screen and (min-width: 424px) {
+  html {
+    font-size: 28.27px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  html {
+    font-size: 32px;
+  }
+}
+
+@media screen and (min-width: 540px) {
+  html {
+    font-size: 36px;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  html {
+    font-size: 48px;
+  }
+}
+@media screen and (min-width: 750px) {
+  html {
+    font-size: 50px;
+  }
+}
+#app{
+  margin: 0 auto;
+  width: 15rem;
 }
 </style>

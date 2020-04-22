@@ -1,12 +1,12 @@
 <template>
-    <div class="home">
+    <div>
         <div>
-            等等
+            我的易购
         </div>
         <div class="footer">
             <router-link to="/" class="go">
-                <img src="../assets/home/icon/5.png" alt="">
-                <span>猜你喜欢</span>
+                <img src="../assets/home/icon/15.png" alt="">
+                <span>首页</span>
             </router-link>
             <router-link to="/classification" class="go">
                 <img src="../assets/home/icon/7.png" alt="">
@@ -21,17 +21,12 @@
                 <span>购物车</span>
             </router-link>
             <router-link to="/myebay" class="go">
-                <img src="../assets/home/icon/10.png" alt="">
+                <img src="../assets/home/icon/14.png" alt="">
                 <span>我的易购</span>
             </router-link>
         </div>
     </div>
 </template>
-<script>
-export default {
-    
-}
-</script>
 <style scoped>
 .footer{
     box-sizing: content-box;
@@ -64,8 +59,5 @@ export default {
     color: #666;
     font-size: .4rem;
 }
-.go:first-child span{
-    color: #000;
-    font-weight: bold;
-}
+
 </style>
