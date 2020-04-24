@@ -1,31 +1,24 @@
 <template>
     <div class="content">
         <div class="title">
-            <p>天天低价</p>
-            <div class="count">
-                <span>00</span>
-                <span>:</span>
-                <span>00</span>
-                <span>:</span>
-                <span>00</span>
-            </div>
+            <p>{{item.title}}</p>
         </div>
-        <p class="desc">人气好货限时抢</p>
+        <p class="desc">{{item.desc}}</p>
         <div class="main">
             <div class="left">
-                <img src="../../assets/home/channel-warp/1.jpg" alt="">
-                <span>￥2.5</span>
+                <img :src="item.src1" alt="">
+                <p>{{item.text1}}</p>
             </div>
             <div class="right">
-                <img src="../../assets/home/channel-warp/2.jpg" alt="">
-                <span>￥1.25</span>
+                <img :src="item.src2" alt="">
+                <p>{{item.text2}}</p>
             </div>
         </div>
     </div>
 </template>
 <script>
 export default {
-    
+    props:['item']
 }
 </script>
 <style scoped>
@@ -90,11 +83,17 @@ export default {
     width: 2.4rem;
     height: 2.4rem;
 }
-.left span{
-    color: #F50;
-    font-size: .44rem;
-    height: .56rem;
-    margin-top: .02rem;
+.main p{
+    width: 3rem;
+    height: 1.08rem;
+    padding-top: .44rem;
+    line-height: .64rem;
+    overflow: hidden;
+    font-size: .4rem;
+    text-align: center;
+    margin-top: -.44rem;
+    background-image: url(../../assets/home/backgroud/9.png);
+    background-size: 3rem 1.08rem;
 }
 .right{
     width: 2.4rem;
@@ -105,11 +104,5 @@ export default {
 .right img{
     width: 2.4rem;
     height: 2.4rem;
-}
-.right span{
-    color: #F50;
-    font-size: .44rem;
-    height: .56rem;
-    margin-top: .02rem;
 }
 </style>
