@@ -4,9 +4,7 @@
   </div>
 </template>
 
-<<<<<<< HEAD
 
-=======
 <style>
 * {
   margin: 0;
@@ -77,4 +75,3 @@
   width: 15rem;
 }
 </style>
->>>>>>> caa7635b8ab2bbd24f9bcef456839f5032cd91b8

@@ -1,6 +1,70 @@
 <template>
   <div>
     <div class="details_page">
+      <div class="zy">
+        <div class="back" @click="backMainpage"></div>
+        <!-- 更多 -->
+        <div class="more" @click="moreClick">
+          <div class="quick_nav" v-if="quicknav">
+            <div class="tranigle"></div>
+            <div class="quick_text">快速导航</div>
+            <div class="five_box">
+              <div class="quick_item">
+                <div class="main_bgd"></div>
+                <div class="main_text">首页</div>
+              </div>
+              <div class="quick_item">
+                <div class="search_bgd"></div>
+                <div class="search_text">搜索</div>
+              </div>
+              <div class="quick_item">
+                <div class="mycart_bgd"></div>
+                <div class="mycart_text">购物车</div>
+              </div>
+              <div class="quick_item">
+                <div class="myeasy_bgd"></div>
+                <div class="myeasy">我的易购</div>
+                
+              </div>
+              <div class="quick_item">
+                <div class="all_bgd"></div>
+                <div class="all_classify">全部分类</div>
+                
+              </div>
+            </div>
+      </div>
+        </div>
+      </div>
+      <!-- 更多跳转页 -->
+
+      <!-- 地址选择页 -->
+      <div class="address_select" v-if="addresspage">
+        <div class="address_head">
+          <div class="plase_select">
+            <div class="exit"></div>
+            <div class="address_select_title">
+              地址选择
+              <div class="cancel_btn" @click="cancelBtn">
+                <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
+              </div>
+            </div>
+          </div>
+
+          <div class="locate_container">
+            <div class="province_select" :pmessage="provinceMessage">{{provinceMessage}}</div>
+            <div class="city_select">{{cityDefaultValue}}</div>
+            <div class="area_select">{{areaDefaultValue}}</div>
+          </div>
+        </div>
+        <div class="address_middle">
+          <div
+            class="differ_city"
+            :key="index"
+            v-for="(item,index) in provinceList"
+            @click="itemClick(item,index)"
+          >{{item.name}}</div>
+        </div>
+      </div>
       <!-- 购物车选择页 -->
       <div class="cart_select" v-if="selectpage">
         <!-- 头部 -->
@@ -8,7 +72,7 @@
           <div class="interlayer"></div>
           <div class="cancel_box">
             <div class="cancel_btn" @click="cancelBtn">
-              <img src="../../assets/detailsImg/detailspage/cancel.png" alt="">
+              <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
             </div>
             <div class="cart_select_price">
               <p class="change_price">￥299.00 到手价￥279.00</p>
@@ -68,9 +132,9 @@
           <div class="cart_select_number">
             <div class="number_text">购买数量</div>
             <div class="select_wrap_container">
-              <i class="minus">-</i>
-              <input type="text" class="input_container" value="1" />
-              <i class="plus">+</i>
+              <i class="minus clearfix">-</i>
+              <input type="text" class="input_container clearfix" value="1" />
+              <i class="plus clearfix">+</i>
             </div>
           </div>
           <!-- 选择数量 -->
@@ -238,13 +302,6 @@
       <div class="img_container">
         <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
         <!-- 返回 -->
-        <div class="back">
-          <img src="../../assets/detailsImg/detailspage/left.png" alt />
-        </div>
-        <!-- 更多 -->
-        <div class="more">
-          <img src="../../assets/detailsImg/detailspage/more.png" alt />
-        </div>
       </div>
       <!-- 价格 -->
       <div class="price_container">
@@ -290,15 +347,15 @@
               <img src="../../assets/detailsImg/detailspage/ok.png" alt />
             </i>
             <span class="get">
-              参加活动，预计到手价
+              参加以下活动，预计到手价
               <span class="red_word">209.00元</span>
             </span>
           </div>
           <div class="right_container">
-            <span class="seemore">查看更多</span>
-            <i class="right">
-              <img src="../../assets/detailsImg/detailspage/right.png" alt />
-            </i>
+            <div class="kkk">
+              <!-- <div class="seemore">查看更多</div>
+              <div class="  r_icon_"></div>-->
+            </div>
           </div>
         </div>
       </div>
@@ -319,29 +376,23 @@
           <span class="gray_color">刮券</span>
           <span>100%刮中券，最高50元无敌券</span>
         </div>
-        <div class="right second">
-          <img src="../../assets/detailsImg/detailspage/right.png" alt />
-        </div>
+        <div class="right second r_icon"></div>
       </div>
       <div class="fix"></div>
       <div class="service_container">
-        <div class="has_select">
+        <div class="has_select" @click="addServe">
           <div class="ser_container">
             <span class="gray_color">已选</span>
             <span class="bold_text detail">4.8L双圆灶 1件 可选增值服务</span>
           </div>
-          <div class="right second" @click="addServe">
-            <img src="../../assets/detailsImg/detailspage/right.png" alt />
-          </div>
+          <div class="right second r_icon_"></div>
         </div>
-        <div class="has_select">
+        <div class="has_select" @click="addressClick">
           <div class="ser_container">
             <span class="gray_color">送至</span>
             <span class="detail">江苏 南京 玄武区</span>
           </div>
-          <div class="right second">
-            <img src="../../assets/detailsImg/detailspage/right.png" alt />
-          </div>
+          <div class="right second r_icon_"></div>
         </div>
         <div class="has_select">
           <div class="ser_container">
@@ -360,11 +411,41 @@
             <span class="gray_color">服务</span>
             <span class="detail">7天无理由退货</span>
           </div>
-          <div class="right second">
-            <img src="../../assets/detailsImg/detailspage/right.png" alt />
+          <div class="right second r_icon_"></div>
+        </div>
+
+     
+        <!--  -->
+      </div>
+         <!-- 评价 -->
+         <div class="fix"></div>
+        <div class="gray_box">
+          <div class="six_container" @click="commentClick">
+            <div class="six_head">
+              <div class="fifth">评价(15万+)</div>
+              <div class="six_right">
+                <div class="full_good">100%好评率</div>
+                <div class="r_icon"></div>
+              </div>
+            </div>
+            <!-- xx -->
+            <div class="people">
+              <div class="people_left">
+                <div class="people_img"></div>
+                <div class="people_name">1***9</div>
+              </div>
+              <div class="people_star"></div>
+            </div>
+            <p class="people_say">发货神速，锅也很好用</p>
+            <div class="show_container">
+              <img src="../../assets/detailsImg/detailspage/show.jpg" alt="" class="show_img">
+              <img src="../../assets/detailsImg/detailspage/show.jpg" alt="" class="show_img">
+            </div>
+            <div class="see_all_container">
+              <button>查看全部评价</button>
+            </div>
           </div>
         </div>
-      </div>
       <!-- 加入购物车 -->
       <div class="footer">
         <div class="icon_item">
@@ -381,7 +462,7 @@
         <button class="qucik" @click="enterCart">马上抢</button>
         <button class="join_cart" @click="addCart">加入购物车</button>
         <!-- 遮罩层 -->
-        <div class="cover" v-if="cover"></div>
+        <div class="cover" v-if="cover" @click="coverRelieve"></div>
       </div>
       <!--  -->
     </div>
@@ -392,30 +473,76 @@
 
 
 <script>
+import Axios from "axios";
 export default {
-data(){
-  return {
-    cover:false,
-    selectpage:false
-  }
-},
-methods:{
-  enterCart(){
- this.cover=true;
- this.selectpage=true;
+  props: ["pmessage"],
+  data() {
+    return {
+      cover: false,
+      selectpage: false,
+      addresspage: false,
+      quicknav:false,
+      provinceList: [],
+      cityList: [],
+      areaList: [],
+      cityDefaultValue: "请选择",
+      areaDefaultValue: "",
+      provinceMessage: "江苏"
+    };
   },
-  addCart(){
-  this.enterCart();
-  },
-  addServe(){
-    this.enterCart();
-  },
-  cancelBtn(){
-    this.cover=false;
-    this.selectpage=false;
-  }
-}
+  methods: {
+    enterCart() {
+      this.cover = true;
+      this.selectpage = true;
+    },
+    addCart() {
+      this.enterCart();
+    },
+    addServe() {
+      this.enterCart();
+    },
+    cancelBtn() {
+      this.cover = false;
+      this.selectpage = false;
+      this.addresspage = false;
+    },
+    coverRelieve() {
+      this.cancelBtn();
+      this.quicknav=false;
+    },
+    addressClick() {
+      this.cover = true;
+      this.addresspage = true;
+    },
+    itemClick(item, index) {
+      console.log(item, index);
+      this.provinceList = item.city;
+      this.provinceMessage = item.name;
+      // this.provinceList=item.city[index].area;
+    },
+    commentClick(){
+      this.$router.push({
+        path:"/comment"
+      });
+    },
+    backMainpage(){
+      this.$router.push({
+        path:"/"
+      })
+    },
+    moreClick(){
+      this.quicknav=true;
+      this.cover=true;
 
+    }
+  },
+  created() {
+    let that = this;
+    Axios.get("/details_json/address.json").then(function(content) {
+      console.log(content.data[5]);
+      that.provinceList = content.data;
+    });
+  }
 };
 </script>
  
@@ -445,67 +572,67 @@ methods:{
 
 .price_number {
   color: red;
-  font-size: 1.5em;
   font-weight: bold;
 }
 
 #small_number {
-  font-size: 0.8em;
+  font-size: 0.5rem;
 }
 
 .new_yeartag {
   display: inline-block;
-  height: 21px;
-  margin-left: 0.543rem;
-  margin-top: 5px;
-  padding: 0 10px;
-  border: 1px solid red;
-  border-radius: 10px;
+  height: 0.875rem;
+  margin-left: 0.625rem;
+  margin-top: 0.208rem;
+  padding: 0 0.417rem;
+  border: 0.042rem solid red;
+  border-radius: 0.417rem;
   color: red;
-  font-size: 0.9em;
+  font-size: 0.583rem;
   font-weight: bold;
   text-align: center;
   vertical-align: top;
 }
 
 .origin_price {
-  margin-left: 5px;
+  margin-left: 0.208rem;
   color: #ccc;
   text-decoration: line-through;
+  font-size: 0.5rem;
 }
 
 .price {
-  padding: 30px 10px 0.543rem 10px;
+  padding: 1.25rem 0.417rem 0.625rem 0.417rem;
 }
 
 .gray_container {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
-  margin: 0 0.543rem;
+  padding: 0.417rem 0;
+  margin: 0 0.625rem;
   background-color: rgb(246, 246, 246);
-  border-radius: 6px;
+  border-radius: 0.25rem;
 }
 
 .clickview {
   flex-shrink: 0;
-  padding: 11px 8px 0 0;
+  padding: 0.458rem 0.333rem 0 0;
   font-weight: bold;
-  font-size: 0.507rem;
+  font-size: 0.583rem;
 }
 
 .welfare {
-  font-size: 0.435rem;
-  margin-top: 5px;
+  font-size: 0.5rem;
+  margin-top: 0.208rem;
 }
 
 .title_container {
   white-space: nowrap;
-  margin-left: 10px;
+  margin-left: 0.417rem;
 }
 
 .member {
-  font-size: 0.435rem;
+  font-size: 0.5rem;
   font-weight: bold;
 }
 
@@ -515,14 +642,14 @@ methods:{
 }
 
 .media_title {
-  margin: 0.543rem 0 0 0.471rem;
+  margin: 0.625rem 0 0 0.542rem;
 }
 
 .attention_img {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  margin: 17px 0.543rem 0 0.543rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0.708rem 0.625rem 0 0.625rem;
 }
 
 .attention_img img {
@@ -531,45 +658,48 @@ methods:{
 }
 
 .intro_text {
-  font-size: 1.1em;
+  font-size: 0.75rem;
   font-weight: bold;
 }
 
 .net {
   width: 90%;
   margin: 0 5%;
-  margin-top: 10px;
-  padding-bottom: 10px;
+  margin-top: 0.417rem;
+  padding-bottom: 0.417rem;
+  font-size: 0.583rem;
 }
 
 .active {
   display: inline-block;
-  width: 0.507rem;
-  height: 0.507rem;
-  margin-left: 0.543rem;
+  width: 0.583rem;
+  height: 0.583rem;
+  margin-left: 0.625rem;
 }
 
 .active img {
   width: 100%;
   height: 100%;
+  vertical-align: top;
 }
 
 .fix {
   width: 100%;
-  height: 10px;
+  height: 0.417rem;
   background-color: #eee;
 }
 
 .party_active {
   display: flex;
   justify-content: space-between;
-  padding: 0.543rem 10px 10px 0;
+  align-items: center;
+  padding: 0.625rem 0.417rem 0.417rem 0;
 }
 
 .right {
   display: inline-block;
-  width: 0.507rem;
-  height: 0.507rem;
+  width: 0.583rem;
+  height: 0.583rem;
 }
 
 .right img {
@@ -578,19 +708,22 @@ methods:{
 }
 
 .seemore {
+  position: relative;
   flex-shrink: 0;
-  display: block;
   color: #aaa;
-  font-size: 0.507rem;
+  font-size: 0.261rem;
+  margin-top: -0.542rem;
+  margin-right: 0.833rem;
 }
 
 .right_container {
   display: flex;
+  align-items: center;
 }
 
 .get {
-  flex-grow: 1;
-  font-size: 0.507rem;
+  font-size: 0.261rem;
+  vertical-align: top;
 }
 
 .red_word {
@@ -600,39 +733,39 @@ methods:{
 
 .coupon_container,
 .do_container {
-  margin-left: 0.543rem;
-  border-bottom: 1px solid #eee;
-  font-size: 0.507rem;
+  margin-left: 0.625rem;
+  border-bottom: 0.042rem solid #eee;
+  font-size: 0.583rem;
 }
 
 .gray_color {
-  font-size: 0.507rem;
+  font-size: 0.583rem;
   color: #aaa;
 }
 
 .promotion {
   display: inline-block;
-  margin-left: 0.543rem;
-  margin-right: 5px;
-  padding: 0 5px;
-  border: 1px solid #fb0;
+  margin-left: 0.625rem;
+  margin-right: 0.208rem;
+  padding: 0 0.208rem;
+  border: 0.042rem solid #fb0;
   background-color: #fefbee;
-  border-radius: 4px;
+  border-radius: 0.167rem;
 }
 
 .minus_container {
-  padding: 10px 0;
+  padding: 0.417rem 0;
 }
 
 .full_minus {
-  margin-left: 42px;
-  padding: 0 5px;
-  border: 1px solid #fb0;
-  border-radius: 4px;
+  margin-left: 1.75rem;
+  padding: 0 0.208rem;
+  border: 0.042rem solid #fb0;
+  border-radius: 0.167rem;
 }
 
 .do {
-  padding: 10px 0;
+  padding: 0.417rem 0;
 }
 
 .do_container {
@@ -642,18 +775,18 @@ methods:{
 }
 
 .right.second {
-  margin-right: 0.543rem;
+  margin-right: 0.625rem;
 }
 
 .service_container {
-  margin-left: 0.543rem;
+  margin-left: 0.625rem;
 }
 
 .has_select {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 0.417rem 0;
 }
 
 .bold_text {
@@ -661,8 +794,8 @@ methods:{
 }
 
 .detail {
-  margin-left: 10px;
-  font-size: 0.507rem;
+  margin-left: 0.417rem;
+  font-size: 0.583rem;
 }
 
 .footer {
@@ -671,7 +804,7 @@ methods:{
   position: fixed;
   width: 100%;
   left: 0;
-  bottom: 0px;
+  bottom: 0;
   align-items: center;
   background-color: white;
 }
@@ -682,8 +815,8 @@ methods:{
 
 .icon_item {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: 2rem;
+  height: 2rem;
 }
 
 .icon_item img {
@@ -693,100 +826,103 @@ methods:{
 
 .button_container {
   flex-shrink: 0;
-  padding-left: 10px;
+  padding-left: 0.417rem;
 }
 
 .button_container button {
-  width: 95px;
-  height: 32px;
+  width: 3.958rem;
+  height: 1.333rem;
 }
-.last_btn{
+.last_btn {
   display: flex;
   justify-content: center;
 }
-.last_btn button:first-child{
+.last_btn button:first-child {
   flex-grow: 1;
-  margin-left: 10px;
-  margin-right: 5px;
-  height: 32px;
+  margin-left: 0.417rem;
+  margin-right: 0.208rem;
+  height: 1.333rem;
   background-color: rgb(255, 204, 0);
-  border-radius: 6px 0 0 6px;
+  border-radius: 0.25rem 0 0 0.25rem;
   outline: none;
   border-style: none;
-  padding: 0 0.543rem;
+  padding: 0 0.625rem;
 }
-.last_btn button:last-child{
+.last_btn button:last-child {
   flex-grow: 1;
-  margin-right: 10px;
-   background-color: #ff6700;
-   outline: none;
+  margin-right: 0.417rem;
+  background-color: #ff6700;
+  outline: none;
   border-style: none;
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 0.25rem 0.25rem 0;
 }
 
 .qucik {
-  width: 95px;
-  height: 32px;
-  margin-left: 8px;
+  width: 3.958rem;
+  height: 1.333rem;
+  margin-left: 0.333rem;
   background-color: rgb(255, 204, 0);
-  border-radius: 6px 0 0 6px;
+  border-radius: 0.25rem 0 0 0.25rem;
   outline: none;
   border-style: none;
 }
 
 .join_cart {
-  width: 95px;
-  height: 32px;
-  margin-left: 4px;
-  margin-right: 5px;
+  width: 3.958rem;
+  height: 1.333rem;
+  margin-left: 0.167rem;
+  margin-right: 0.208rem;
   background-color: #ff6700;
   color: white;
   outline: none;
   border-style: none;
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 0.25rem 0.25rem 0;
 }
 
 .details_page {
-  margin-bottom: 48px;
+  margin-bottom: 2rem;
 }
 
 .red_circle {
   position: absolute;
-  left: 28px;
-  top: 3px;
-  width: 28px;
-  height: 18px;
+  left: 1.167rem;
+  top: 0.125rem;
+  width: 1.167rem;
+  height: 0.75rem;
   color: white;
-  font-size: 0.471rem;
+  font-size: 0.542rem;
   background-color: rgb(255, 68, 34);
-  border-radius: 11px;
+  border-radius: 0.458rem;
   text-align: center;
-  line-height: 0.543rem;
+  line-height: 0.625rem;
 }
 .cartbox {
   position: relative;
 }
 .two {
-  margin-left: 10px;
+  margin-left: 0.417rem;
 }
 .back {
-  position: absolute;
-  top: 8px;
-  left: 0.543rem;
-  width: 31px;
-  height: 31px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+
+  width: 1.167rem;
+  height: 1.167rem;
+  background: url(../../assets/detailsImg/detailspage/left.png) no-repeat;
+  background-size: 1.167rem 1.167rem;
+  z-index: 10000;
 }
-.back img,
-.more img {
-  width: 100%;
-  height: 100%;
-}
+
 .more {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  width: 31px;
-  height: 31px;
+  position:fixed;
+  top: 10px;
+  left: 90%;
+  width: 1.167rem;
+  height: 1.167rem;
+  background: url(../../assets/detailsImg/detailspage/more.png) no-repeat;
+  background-size: 1.167rem 1.167rem;
+  z-index: -4;
 }
 /* 遮罩层 */
 .cover {
@@ -798,31 +934,34 @@ methods:{
   background: rgba(0, 0, 0, 0.5);
   z-index: 888;
 }
-.cart_select {
+.cart_select,
+.address_select {
   display: flex;
   flex-direction: column;
   position: fixed;
   left: 0.5%;
   bottom: 0.5%;
   width: 99%;
-  height: 450px;
+  height: 18.75rem;
   background-color: white;
   z-index: 999;
-  border-radius: 8px;
+  border-radius: 0.333rem;
 }
+
 .interlayer {
   flex-shrink: 0;
-  width: 120px;
-  height: 120px;
+  width: 5rem;
+  height: 5rem;
 }
 .cart_select_header {
   display: flex;
   flex-shrink: 0;
   justify-content: space-between;
-  padding: 0 0 10px 0;
-  border-bottom: 1px solid #eee;
+  padding: 0 0 0.417rem 0;
+  border-bottom: 0.042rem solid #eee;
 }
-.cart_select_middle {
+.cart_select_middle,
+.address_middle {
   overflow: auto;
   flex-grow: 1;
 }
@@ -830,38 +969,39 @@ methods:{
   flex-shrink: 0;
 }
 .cart_select_price {
-  margin-top: 40px;
+  margin-top: 1.667rem;
 }
 .change_price {
   color: red;
-  font-size: 0.507rem;
+  font-size: 0.583rem;
 }
 .coding {
-  margin-left: 4px;
+  margin-left: 0.167rem;
   color: #aaa;
-  font-size: 0.435rem;
+  font-size: 0.5rem;
 }
 .cart_select_text {
-  font-size: 0.435rem;
-  margin: 10px 0.543rem 0 4px;
+  font-size: 0.5rem;
+  margin: 0.417rem 0.625rem 0 0.167rem;
 }
 .capacity {
-  padding: 6px 0 2px 10px;
-  font-size: 0.435rem;
+  padding: 0.25rem 0 0.083rem 0.417rem;
+  font-size: 0.5rem;
 }
 .select_label {
   display: inline-block;
   background-color: rgb(246, 246, 246);
-  padding: 5px 0.435rem 5px 0.543rem;
-  margin-right: 6px;
-  margin-top: 6px;
-  border-radius: 4px;
+  padding: 0.208rem 0.5rem 0.208rem 0.625rem;
+  margin-right: 0.25rem;
+  margin-top: 0.25rem;
+  border-radius: 0.167rem;
+  font-size: 0.5rem;
 }
 .mini_img {
   display: inline-block;
-  width: 23px;
-  height: 23px;
-  margin-right: 6px;
+  width: 0.959rem;
+  height: 0.959rem;
+  margin-right: 0.25rem;
   vertical-align: middle;
 }
 .mini_img img {
@@ -869,93 +1009,93 @@ methods:{
   height: 100%;
 }
 .cart_select_name {
-  font-size: 0.435rem;
+  font-size: 0.5rem;
 }
 .kind {
-  margin-left: 10px;
-  padding: 1px 0 6px 0;
-  border-bottom: 1px solid #eee;
+  margin-left: 0.417rem;
+  padding: 0.042rem 0 0.25rem 0;
+  border-bottom: 0.042rem solid #eee;
 }
 .cart_select_number {
   display: flex;
   justify-content: space-between;
-  margin: 10px 10px 0 10px;
-  font-size: 0.435rem;
-}
-.minus,
-.plus {
-  display: inline-block;
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: rgb(246, 246, 246);
-  text-align: center;
-  vertical-align: middle;
-  font-style: normal;
-  border-radius: 50%;
-}
-.minus {
-  left: 5px;
-  bottom: 15%;
-}
-.plus {
-  right: 5px;
-  bottom: 15%;
+  margin: 0.417rem 0.417rem 0 0.417rem;
+  font-size: 0.5rem;
 }
 .select_wrap_container {
-  position: relative;
+  border: 0.042rem solid #aaa;
+  border-radius: 15px;
+}
+.plus,
+.minus {
+  float: left;
+  width: 0.833rem;
+  height: 0.833rem;
+  background-color: #ddd;
+  line-height: 0.833rem;
+  text-align: center;
+  font-style: normal;
+  border-radius: 50%;
+  margin-top: 0.125rem;
+}
+.minus {
+  margin-left: 0.083rem;
+}
+.plus {
+  margin-right: 0.083rem;
 }
 .input_container {
-  width: 100px;
-  height: 28px;
-  padding-left: 45%;
-  border-radius: 0.543rem;
+  float: left;
+  width: 2.083rem;
+  height: 1.042rem;
+  line-height: 1.042rem;
+  border-width: 0;
+  text-align: center;
   outline: none;
-  border: 1px solid #bbb;
-  font-size: 0.435rem;
 }
+
 .number_text {
-  margin-top: 3px;
+  margin-top: 0.125rem;
 }
 .addmoney_service {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 0.417rem;
 }
 .buy_container {
-  margin-left: 10px;
+  margin-left: 0.417rem;
 }
 .draw {
-  font-size: 13px;
+  font-size: 0.542rem;
 }
 .buy_add_service {
-  font-size: 0.507rem;
+  font-size: 0.583rem;
 }
 .add_number_left {
   display: inline-block;
   position: relative;
-  padding: 0px 4px 1px 4px;
-  margin-left: 10px;
+  padding: 0 0.167rem 0.042rem 0.167rem;
+  margin-left: 0.417rem;
   background-color: rgb(255, 204, 0);
-  font-size: 0.435rem;
+  font-size: 0.5rem;
 }
 .opacity {
   display: inline-block;
   position: relative;
   background-color: rgb(255, 250, 224);
-  margin-left: -2px;
-  padding: 0 3px;
-  border: 1px solid rgb(255, 204, 0);
+  margin-left: -0.083rem;
+  padding: 0 0.125rem;
+  border: 0.042rem solid rgb(255, 204, 0);
   border-right: transparent;
-  font-size: 0.435rem;
+  font-size: 0.5rem;
 }
 .left_bgd {
   display: inline-block;
   position: absolute;
-  left: -13px;
+  left: -0.542rem;
   width: 100%;
-  height: 17px;
+  height: 0.708rem;
   background: url(../../assets/detailsImg/shopcartImg/leftbgd.png) center center
     no-repeat;
   z-index: -1;
@@ -963,10 +1103,10 @@ methods:{
 .right_bgd {
   display: inline-block;
   position: absolute;
-  top: -1px;
-  left: 0.543rem;
+  top: -0.042rem;
+  left: 0.625rem;
   width: 100%;
-  height: 18px;
+  height: 0.75rem;
   background: url(../../assets/detailsImg/shopcartImg/rightbgd.png) center
     center no-repeat;
   z-index: -1;
@@ -974,113 +1114,315 @@ methods:{
 .all_two {
   display: inline-block;
   color: #aaa;
-  font-size: 0.435rem;
+  font-size: 0.5rem;
 }
 .right_alltwo {
-  margin-right: 0.543rem;
+  margin-right: 0.625rem;
 }
 .right_alltwo img {
   vertical-align: middle;
-  margin-left: 3px;
+  margin-left: 0.125rem;
 }
 .changenot {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 10px;
-  margin-top: 25px;
+  margin-left: 0.417rem;
+  margin-top: 1.042rem;
 }
 .not_img {
   flex-shrink: 0;
   display: inline-block;
-  width: 0.543rem;
-  height: 0.543rem;
-  vertical-align: middle;
+  width: 0.625rem;
+  height: 0.625rem;
 }
 .not_img img {
   width: 100%;
   height: 100%;
 }
 .not_text {
-  margin-left: 5px;
-  vertical-align: middle;
+  margin-left: 0.208rem;
+  font-size: 0.625rem;
 }
 .protect_text {
-  margin-left: 5px;
+  margin-left: 0.208rem;
   color: #aaa;
-  font-size: 0.435rem;
-  vertical-align: bottom;
+  font-size: 0.5rem;
 }
 .unknow {
   flex-shrink: 0;
   display: inline-block;
-  width: 0.58rem;
-  height: 0.58rem;
-  margin-right: 10px;
-  vertical-align: middle;
+  width: 0.667rem;
+  height: 0.667rem;
+  margin-right: 0.417rem;
 }
 .unknow img {
   width: 100%;
   height: 100%;
 }
 .see_details {
-  margin-right: 5px;
-  font-size: 0.435rem;
+  margin-right: 0.208rem;
+  font-size: 0.5rem;
   color: blue;
-  vertical-align: bottom;
 }
 .options_plan {
-  padding: 5px 0.543rem 5px 20px;
-  margin-right: 5px;
-  font-size: 0.435rem;
+  padding: 0.208rem 0.625rem 0.208rem 0.833rem;
+  margin-right: 0.208rem;
+  font-size: 0.5rem;
   background-color: rgb(246, 246, 246);
-  border-radius: 4px;
+  border-radius: 0.167rem;
 }
 
 .top_line {
   display: flex;
   justify-content: space-between;
-  margin-left: 10px;
-  margin-top: 10px;
+  margin-left: 0.417rem;
+  margin-top: 0.417rem;
 }
 .ig {
-  margin-right: 0.543rem;
+  margin-right: 0.625rem;
 }
 .foot_line {
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 0.417rem;
+  margin-left: 0.417rem;
 }
 .cart_select_footer {
-  height: 85px;
+  height: 3.541rem;
 }
 .warn {
-  font-size: 0.435rem;
+  font-size: 0.5rem;
   color: #aaa;
-  line-height: 42px;
+  line-height: 1.75rem;
 }
 b {
   color: red;
 }
 .noname {
-  height: 42px;
+  height: 1.75rem;
   text-align: center;
 }
-.cancel_btn{
-  display: inline-block;
-  width: 0.543rem;
-  height: 0.543rem;
-
+.cancel_btn {
+  display: block;
+  float: right;
+  width: 0.625rem;
+  height: 0.625rem;
+  margin-right: 0.417rem;
 }
-.cancel_btn img{
+.cancel_btn img {
   width: 100%;
   height: 100%;
 }
-.cancelbox{
-  position: relative;
+
+.address_select_title {
+  padding: 0.36rem 0;
+  text-align: center;
+  font-size: 0.721rem;
+  border-bottom: 0.03rem solid #eee;
 }
-.cancel_btn{
-  position:absolute;
-  top: 5px;
-  right: 0.543rem;
+.locate_container {
+  display: flex;
+}
+.locate_container div {
+  padding: 0.417rem 0;
+  font-size: 0.596rem;
+  width: 33.3%;
+  text-align: center;
+}
+.differ_city {
+  padding: 0.333rem 0.25rem;
+  font-size: 0.596rem;
+}
+.clearfix::after {
+  content: "";
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+.clearfix {
+  zoom: 1;
+}
+.zy {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.six_head {
+  display: flex;
+  justify-content: space-between;
+}
+.r_icon {
+  width: 0.583rem;
+  height: 0.583rem;
+  margin-right: 0.625rem;
+  margin-top: 2px;
+  background: url(../../assets/detailsImg/detailspage/right.png) center center
+    no-repeat;
+  background-size: 0.583rem 0.583rem;
+}
+.r_icon_ {
+  width: 0.583rem;
+  height: 0.583rem;
+  margin-right: 0.625rem;
+  margin-top: 10px;
+  background: url(../../assets/detailsImg/detailspage/right.png) center center
+    no-repeat;
+  background-size: 0.583rem 0.583rem;
+}
+.six_right {
+  display: flex;
+}
+.full_good {
+  margin-right: 0.417rem;
+  color: #aaa;
+  font-size: 0.28rem;
+}
+.fifth {
+  font-size: 0.6rem;
+  font-weight: bold;
+  
+}
+.kkk {
+  display: flex;
+}
+.people {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.people_img {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: url(../../assets/detailsImg/commentImg/user.jpg) center center;
+  background-size: 1rem 1rem;
+}
+.people_left {
+  display: flex;
+  align-items: center;
+  margin-top: 0.833rem;
+}
+.people_name {
+  margin-left: 0.208rem;
+  font-size: 0.24rem;
+}
+.people_star {
+  width: 2.72rem ;
+  height: 0.48rem;
+  margin-right: 0.625rem;
+  margin-top: 0.625rem;
+  background: url(../../assets/detailsImg/commentImg/yellowstar.png) center
+    center no-repeat;
+  background-size: 2.72rem 0.48rem;
+}
+
+.six_container{
+  padding: 0px 0 0.625rem 0.625rem;
+  background-color: white;
+  margin-top: 0.417rem;
+}
+.gray_box{
+  background-color: #eee;
+}
+.people_say{
+  margin: 0.417rem 0 0 0.125rem;
+  font-size: 0.583rem;
+}
+.show_container{
+ margin: 0.417rem 0 0 0.208rem;
+}
+.see_all_container button{
+    width: 4.8rem;
+    height: 1.2rem;
+    background-color: white;
+    border-radius: .12rem;
+    font-size: .26rem;
+    outline: none;
+    border: 0.042rem solid#ccc;
+}
+.see_all_container{
+  margin-top: 0.208rem;
+  text-align: center;
+}
+.quick_nav{
+  position: fixed;
+  width: 96%;
+  height: 9.042rem;
+  margin: 1.458rem 2%;
+  background-color: white;
+  border-radius: 0.333rem;
+}
+.tranigle{
+  position: absolute;
+  left: 321px;
+  top: -14px;
+  width: 0;
+  height: 0;
+  border-width:8px ;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+}
+.quick_text{
+  padding: 0.625rem 0.417rem;
+  font-size: 0.583rem;
+}
+.five_box{
+  /* width: 13rem; */
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.quick_item{
+  width: 2.88rem;
+  height: 2.76rem;
+  margin-left: 0.583rem;
+  background-color: #eee;
+  border-radius: 0.25rem;
+}
+.five_box .quick_item:last-child{
+  margin-top: 0.583rem;
+}
+.main_text,
+.search_text,
+.all_classify,
+.myeasy,
+.mycart_text{
+  margin-top: 0.125rem;
+  font-size: 0.583rem;
+  text-align: center;
+}
+.main_bgd{
+  height: 1.43rem;
+  width: 100%;
+  background: url(../../assets/detailsImg/detailspage/main.png) center bottom no-repeat;
+  background-size: 0.958rem 0.958rem;
+}
+.search_bgd{
+  height: 1.43rem;
+  width: 100%;
+  background: url(../../assets/detailsImg/detailspage/search.png) center bottom no-repeat;
+  background-size: 0.958rem 0.958rem;
+}
+.mycart_bgd{
+  height: 1.43rem;
+  width: 100%;
+  background: url(../../assets/detailsImg/detailspage/yellowcart.png) center bottom no-repeat;
+  background-size: 0.958rem 0.958rem;
+}
+.myeasy_bgd{
+  height: 1.43rem;
+  width: 100%;
+  background: url(../../assets/detailsImg/detailspage/my.png) center bottom no-repeat;
+  background-size: 0.958rem 0.958rem;
+}
+.all_bgd{
+  height: 1.43rem;
+  width: 100%;
+  background: url(../../assets/detailsImg/detailspage/classify.png) center bottom no-repeat;
+  background-size: 0.958rem 0.958rem;
 }
 </style>
