@@ -5,6 +5,8 @@ import store from './store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import animate from 'animate.css'
+Vue.use(animate)
 Vue.use(VueAxios,axios)
 
 import 'swiper/css/swiper.css'

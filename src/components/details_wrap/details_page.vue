@@ -1,308 +1,378 @@
 <template>
   <div>
     <div class="details_page">
-      <div class="zy">
-        <div class="back" @click="backMainpage"></div>
-        <!-- 更多 -->
-        <div class="more" @click="moreClick">
-          <div class="quick_nav" v-if="quicknav">
-            <div class="tranigle"></div>
-            <div class="quick_text">快速导航</div>
-            <div class="five_box">
-              <div class="quick_item">
-                <div class="main_bgd"></div>
-                <div class="main_text">首页</div>
-              </div>
-              <div class="quick_item">
-                <div class="search_bgd"></div>
-                <div class="search_text">搜索</div>
-              </div>
-              <div class="quick_item">
-                <div class="mycart_bgd"></div>
-                <div class="mycart_text">购物车</div>
-              </div>
-              <div class="quick_item">
-                <div class="myeasy_bgd"></div>
-                <div class="myeasy">我的易购</div>
-                
-              </div>
-              <div class="quick_item">
-                <div class="all_bgd"></div>
-                <div class="all_classify">全部分类</div>
-                
-              </div>
-            </div>
-      </div>
-        </div>
-      </div>
+      <!-- 更多 -->
+      <div class="zy"></div>
       <!-- 更多跳转页 -->
-
-      <!-- 地址选择页 -->
-      <div class="address_select" v-if="addresspage">
-        <div class="address_head">
-          <div class="plase_select">
-            <div class="exit"></div>
-            <div class="address_select_title">
-              地址选择
-              <div class="cancel_btn" @click="cancelBtn">
-                <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
+      <transition>
+        <!-- 地址选择页 -->
+        <div class="address_select" v-if="addresspage">
+          <div class="address_head">
+            <div class="plase_select">
+              <div class="exit"></div>
+              <div class="address_select_title">
+                地址选择
+                <div class="cancel_btn" @click="cancelBtn">
+                  <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="locate_container">
-            <div class="province_select" :pmessage="provinceMessage">{{provinceMessage}}</div>
-            <div class="city_select">{{cityDefaultValue}}</div>
-            <div class="area_select">{{areaDefaultValue}}</div>
+            <div class="locate_container">
+              <div class="province_select" :pmessage="provinceMessage">{{provinceMessage}}</div>
+              <div class="city_select">{{cityDefaultValue}}</div>
+              <div class="area_select">{{areaDefaultValue}}</div>
+            </div>
+          </div>
+          <div class="address_middle">
+            <div
+              class="differ_city"
+              :key="index"
+              v-for="(item,index) in provinceList"
+              @click="itemClick(item,index)"
+            >{{item.name}}</div>
           </div>
         </div>
-        <div class="address_middle">
-          <div
-            class="differ_city"
-            :key="index"
-            v-for="(item,index) in provinceList"
-            @click="itemClick(item,index)"
-          >{{item.name}}</div>
-        </div>
-      </div>
-      <!-- 购物车选择页 -->
-      <div class="cart_select" v-if="selectpage">
-        <!-- 头部 -->
-        <div class="cart_select_header">
-          <div class="interlayer"></div>
-          <div class="cancel_box">
+      </transition>
+
+      <transition>
+        <div class="see_select" v-if="see">
+          <div class="minus_money">
+            优惠
             <div class="cancel_btn" @click="cancelBtn">
               <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
             </div>
-            <div class="cart_select_price">
-              <p class="change_price">￥299.00 到手价￥279.00</p>
-              <span class="coding">商品编码：1005010218</span>
+          </div>
+          <div class="see_footer">
+            <div class="up">可参加以下优惠活动</div>
+            <p class="gray_color">促销</p>
+            <div class="first_minus">
+              <span class="diamond">云钻促销</span>
+              <div class="see_text">
+                <span>普通卡会员立返4云钻</span>
+                <br />
+                <span>可通过购物、评价、打卡、云钻游戏获得云钻，可兑换商品，券，玩游戏，还可购物抵现</span>
+              </div>
             </div>
-            <div class="cart_select_text">美的（Media）WAOHAO5A一锅双胆5L12大烹饪菜单7大压力调节韩式电饭煲电压力锅</div>
+            <div class="second_see_ten">
+              <div class="second_left">
+                <span class="shiming">实名领券</span>
+                <span class="ten">实名认证领10元支付券</span>
+              </div>
+              <div class="right_sign"></div>
+            </div>
           </div>
         </div>
-        <!-- 中间（auto） -->
-        <div class="cart_select_middle">
-          <div class="capacity">容量</div>
-          <div class="kind">
-            <div class="first_line">
-              <span class="select_label">
-                <i class="mini_img">
-                  <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                </i>
-                <span class="cart_select_name">5L经典款</span>
-              </span>
-              <span class="select_label">
-                <i class="mini_img">
-                  <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                </i>
-                <span class="cart_select_name">5L韩式浓香</span>
-              </span>
+      </transition>
+      <!-- 服务选择 -->
+      <transition>
+        <div class="service_select" v-if="servicepage">
+          <div class="basic_service">
+            基础服务
+            <div class="cancel_btn" @click="cancelBtn">
+              <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
             </div>
-            <div class="second_line">
-              <span class="select_label">
-                <i class="mini_img">
-                  <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                </i>
-                <span class="cart_select_name">5L大红爆款</span>
-              </span>
-              <span class="select_label">
-                <i class="mini_img">
-                  <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                </i>
-                <span class="cart_select_name">4.8L双圆灶釜</span>
-              </span>
-            </div>
-            <div class="third_line">
-              <span class="select_label">
-                <i class="mini_img">
-                  <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                </i>
-                <span class="cart_select_name">【新品】4.8精控浓香</span>
-              </span>
-              <span class="select_label">
-                <i class="mini_img">
-                  <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                </i>
-                <span class="cart_select_name">5L IH品质</span>
-              </span>
-            </div>
-          </div>
-          <!-- 选择数量 -->
-          <div class="cart_select_number">
-            <div class="number_text">购买数量</div>
-            <div class="select_wrap_container">
-              <i class="minus clearfix">-</i>
-              <input type="text" class="input_container clearfix" value="1" />
-              <i class="plus clearfix">+</i>
-            </div>
-          </div>
-          <!-- 选择数量 -->
-          <!-- 购买增值服务 -->
-          <div class="buy_container">
-            <div class="buy_add_service">购买增值服务</div>
-            <div class="addmoney_service">
-              <div>
-                <span class="draw">领延保券</span>
-                <span class="add_number_left">
-                  <i class="left_bgd"></i>
-                  ￥200.00
-                </span>
-                <span class="opacity">
-                  最高减200元
-                  <i class="right_bgd"></i>
-                </span>
-              </div>
-              <div class="right_alltwo">
-                <span class="all_two">共2张</span>
-                <i class="right">
-                  <img src="../../assets/detailsImg/detailspage/right.png" alt />
-                </i>
-              </div>
-            </div>
-          </div>
-          <!-- 购买增值服务 -->
-          <!-- 只换不修 -->
-          <div>
-            <div class="changenot">
-              <div class="change_left">
-                <i class="not_img">
-                  <img src="../../assets/detailsImg/shopcartImg/changenot.png" alt />
-                </i>
-                <span class="not_text">只换不修</span>
-                <span class="protect_text">厂保性能保障...</span>
-              </div>
-              <div class="change_right">
-                <span class="see_details">查看详情</span>
-                <i class="unknow">
-                  <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-                </i>
-              </div>
-            </div>
-            <!-- 只换不修 -->
-            <!-- 选项 -->
-            <div class="options">
-              <div class="top_line">
-                <span class="options_plan">只换不修1年 | ￥70.00</span>
-                <span class="options_plan ig">只换不修2年 | ￥105.00</span>
-              </div>
-              <div class="foot_line">
-                <span class="options_plan">只换不修3年 | ￥150.00</span>
-              </div>
-            </div>
-            <!-- 选项 -->
           </div>
 
-          <!-- 整机保 -->
-
-          <div>
-            <div class="changenot">
-              <div class="change_left">
-                <i class="not_img">
-                  <img src="../../assets/detailsImg/shopcartImg/allpro.png" alt />
-                </i>
-                <span class="not_text">全保修</span>
-                <span class="protect_text">性能以外全保修</span>
-              </div>
-              <div class="change_right">
-                <span class="see_details">查看详情</span>
-                <i class="unknow">
-                  <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-                </i>
-              </div>
-            </div>
-            <!-- 只换不修 -->
-            <!-- 选项 -->
-            <div class="options">
-              <div class="top_line">
-                <span class="options_plan">全保修3年 | ￥59.00</span>
-                <span class="options_plan ig">全保修5年 | ￥79.00</span>
-              </div>
-            </div>
-            <!-- 选项 -->
+          <div class="sn">
+            <span class="deliver">苏宁发货</span>
+            <p class="sn_text">由苏宁发货，并提供售后服务</p>
           </div>
-          <!-- 整机保 -->
-
-          <!-- 全保修 -->
-          <div>
-            <div class="changenot">
-              <div class="change_left">
-                <i class="not_img">
-                  <img src="../../assets/detailsImg/shopcartImg/allpro2.png" alt />
-                </i>
-                <span class="not_text">整机保</span>
-                <span class="protect_text">整机性能故障免费...</span>
-              </div>
-              <div class="change_right">
-                <span class="see_details">查看详情</span>
-                <i class="unknow">
-                  <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-                </i>
-              </div>
-            </div>
-            <!-- 只换不修 -->
-            <!-- 选项 -->
-            <div class="options">
-              <div class="top_line">
-                <span class="options_plan">整机保2年 | ￥39.00</span>
-                <span class="options_plan ig">整机保3年 | ￥59.00</span>
-              </div>
-              <div class="foot_line">
-                <span class="options_plan">整机保4年 | ￥89.00</span>
-              </div>
-            </div>
-            <!-- 选项 -->
+          <div class="sn">
+            <span class="deliver">自提</span>
+            <p class="sn_text">支持门店自提点、自助提货柜等自助服务</p>
           </div>
-          <!-- 全保修 -->
-          <!-- 百万 -->
-
-          <div>
-            <div class="changenot">
-              <div class="change_left">
-                <i class="not_img">
-                  <img src="../../assets/detailsImg/shopcartImg/changenot.png" alt />
-                </i>
-                <span class="not_text">百万家财保障</span>
-                <span class="protect_text">百万保额，先补录...</span>
-              </div>
-              <div class="change_right">
-                <span class="see_details">查看详情</span>
-                <i class="unknow">
-                  <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-                </i>
-              </div>
-            </div>
-            <!-- 只换不修 -->
-            <!-- 选项 -->
-            <div class="options">
-              <div class="top_line">
-                <span class="options_plan">￥20.00</span>
-              </div>
-            </div>
-            <!-- 选项 -->
+          <div class="sn">
+            <span class="retreat">7天无理由退货</span>
+            <p class="sn_text">无理由退货、保购物无忧</p>
           </div>
-          <!-- 百万 -->
+
+          <div></div>
+          <div></div>
         </div>
-        <!-- 底部 -->
-        <div class="cart_select_footer">
-          <div class="noname">
-            <span class="warn">
-              当前活动可参加满减活动，预计优惠
-              <b>20.00元</b>
-            </span>
-          </div>
-          <div class="last_btn">
-            <button>马上抢</button>
-            <button>加入购物车</button>
-          </div>
-        </div>
-      </div>
+      </transition>
+
       <!--  -->
-      <!-- 顶部图片 -->
-      <div class="img_container">
+
+      <!-- 购物车选择页 -->
+
+      <transition>
+        <div class="cart_select" v-if="selectpage">
+          <!-- 定位 -->
+          <div class="style_img"></div>
+          <!-- 头部 -->
+          <div class="cart_select_header">
+            <div class="interlayer"></div>
+            <div class="cancel_box">
+              <div class="cancel_btn" @click="cancelBtn">
+                <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
+              </div>
+              <div class="cart_select_price">
+                <p class="change_price">￥299.00 到手价￥279.00</p>
+                <span class="coding">商品编码：1005010218</span>
+              </div>
+              <div class="cart_select_text">美的（Media）WAOHAO5A一锅双胆5L12大烹饪菜单7大压力调节韩式电饭煲电压力锅</div>
+            </div>
+          </div>
+          <!-- 中间（auto） -->
+          <div class="cart_select_middle">
+            <div class="capacity">容量</div>
+            <div class="kind">
+              <div class="first_line">
+                <span class="select_label">
+                  <i class="mini_img">
+                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
+                  </i>
+                  <span class="cart_select_name">5L经典款</span>
+                </span>
+                <span class="select_label">
+                  <i class="mini_img">
+                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
+                  </i>
+                  <span class="cart_select_name">5L韩式浓香</span>
+                </span>
+              </div>
+              <div class="second_line">
+                <span class="select_label">
+                  <i class="mini_img">
+                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
+                  </i>
+                  <span class="cart_select_name">5L大红爆款</span>
+                </span>
+                <span class="select_label">
+                  <i class="mini_img">
+                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
+                  </i>
+                  <span class="cart_select_name">4.8L双圆灶釜</span>
+                </span>
+              </div>
+              <div class="third_line">
+                <span class="select_label">
+                  <i class="mini_img">
+                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
+                  </i>
+                  <span class="cart_select_name">【新品】4.8精控浓香</span>
+                </span>
+                <span class="select_label">
+                  <i class="mini_img">
+                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
+                  </i>
+                  <span class="cart_select_name">5L IH品质</span>
+                </span>
+              </div>
+            </div>
+            <!-- 选择数量 -->
+            <div class="cart_select_number">
+              <div class="number_text">购买数量</div>
+              <div class="select_wrap_container">
+                <button class="minus clearfix" @click="minusNum" :disabled="zero">-</button>
+                <input type="text" class="input_container clearfix" :value="num" />
+                <i class="plus clearfix" @click="plusNum">+</i>
+              </div>
+            </div>
+            <!-- 选择数量 -->
+            <!-- 购买增值服务 -->
+            <div class="buy_container">
+              <div class="buy_add_service">购买增值服务</div>
+              <div class="addmoney_service">
+                <div>
+                  <span class="draw">领延保券</span>
+                  <span class="add_number_left">
+                    <i class="left_bgd"></i>
+                    ￥200.00
+                  </span>
+                  <span class="opacity">
+                    最高减200元
+                    <i class="right_bgd"></i>
+                  </span>
+                </div>
+                <div class="right_alltwo">
+                  <span class="all_two">共2张</span>
+                  <i class="right">
+                    <img src="../../assets/detailsImg/detailspage/right.png" alt />
+                  </i>
+                </div>
+              </div>
+            </div>
+            <!-- 购买增值服务 -->
+            <!-- 只换不修 -->
+            <div>
+              <div class="changenot">
+                <div class="change_left">
+                  <i class="not_img">
+                    <img src="../../assets/detailsImg/shopcartImg/changenot.png" alt />
+                  </i>
+                  <span class="not_text">只换不修</span>
+                  <span class="protect_text">厂保性能保障...</span>
+                </div>
+                <div class="change_right">
+                  <span class="see_details">查看详情</span>
+                  <i class="unknow">
+                    <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
+                  </i>
+                </div>
+              </div>
+              <!-- 只换不修 -->
+              <!-- 选项 -->
+              <div class="options">
+                <div class="top_line">
+                  <span class="options_plan">只换不修1年 | ￥70.00</span>
+                  <span class="options_plan ig">只换不修2年 | ￥105.00</span>
+                </div>
+                <div class="foot_line">
+                  <span class="options_plan">只换不修3年 | ￥150.00</span>
+                </div>
+              </div>
+              <!-- 选项 -->
+            </div>
+
+            <!-- 整机保 -->
+
+            <div>
+              <div class="changenot">
+                <div class="change_left">
+                  <i class="not_img">
+                    <img src="../../assets/detailsImg/shopcartImg/allpro.png" alt />
+                  </i>
+                  <span class="not_text">全保修</span>
+                  <span class="protect_text">性能以外全保修</span>
+                </div>
+                <div class="change_right">
+                  <span class="see_details">查看详情</span>
+                  <i class="unknow">
+                    <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
+                  </i>
+                </div>
+              </div>
+              <!-- 只换不修 -->
+              <!-- 选项 -->
+              <div class="options">
+                <div class="top_line">
+                  <span class="options_plan">全保修3年 | ￥59.00</span>
+                  <span class="options_plan ig">全保修5年 | ￥79.00</span>
+                </div>
+              </div>
+              <!-- 选项 -->
+            </div>
+            <!-- 整机保 -->
+
+            <!-- 全保修 -->
+            <div>
+              <div class="changenot">
+                <div class="change_left">
+                  <i class="not_img">
+                    <img src="../../assets/detailsImg/shopcartImg/allpro2.png" alt />
+                  </i>
+                  <span class="not_text">整机保</span>
+                  <span class="protect_text">整机性能故障免费...</span>
+                </div>
+                <div class="change_right">
+                  <span class="see_details">查看详情</span>
+                  <i class="unknow">
+                    <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
+                  </i>
+                </div>
+              </div>
+              <!-- 只换不修 -->
+              <!-- 选项 -->
+              <div class="options">
+                <div class="top_line">
+                  <span class="options_plan">整机保2年 | ￥39.00</span>
+                  <span class="options_plan ig">整机保3年 | ￥59.00</span>
+                </div>
+                <div class="foot_line">
+                  <span class="options_plan">整机保4年 | ￥89.00</span>
+                </div>
+              </div>
+              <!-- 选项 -->
+            </div>
+            <!-- 全保修 -->
+            <!-- 百万 -->
+
+            <div>
+              <div class="changenot">
+                <div class="change_left">
+                  <i class="not_img">
+                    <img src="../../assets/detailsImg/shopcartImg/changenot.png" alt />
+                  </i>
+                  <span class="not_text">百万家财保障</span>
+                  <span class="protect_text">百万保额，先补录...</span>
+                </div>
+                <div class="change_right">
+                  <span class="see_details">查看详情</span>
+                  <i class="unknow">
+                    <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
+                  </i>
+                </div>
+              </div>
+              <!-- 只换不修 -->
+              <!-- 选项 -->
+              <div class="options">
+                <div class="top_line">
+                  <span class="options_plan">￥20.00</span>
+                </div>
+              </div>
+              <!-- 选项 -->
+            </div>
+            <!-- 百万 -->
+          </div>
+          <!-- 底部 -->
+          <div class="cart_select_footer">
+            <div class="noname">
+              <span class="warn">
+                当前活动可参加满减活动，预计优惠
+                <b>20.00元</b>
+              </span>
+            </div>
+            <div class="last_btn">
+              <button>马上抢</button>
+              <button>加入购物车</button>
+            </div>
+          </div>
+        </div>
+      </transition>
+      <!--  -->
+
+      <detailswiper></detailswiper>
+
+      <!-- <div class="img_container">
         <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-        <!-- 返回 -->
+      </div>-->
+      <div>
+        <div class="back" @click="backMainpage"></div>
+        <div class="more" @click="moreClick" v-if="more">
+          <div class="wrong" v-if="close" @click.stop="closeNav"></div>
+          <transition name="fade">
+            <div class="quick_nav" v-if="quicknav">
+              <div class="tranigle"></div>
+              <div class="quick_text">快速导航</div>
+              <div class="five_box">
+                <div class="quick_item" @click="toMainPage">
+                  <div class="main_bgd"></div>
+                  <div class="main_text">首页</div>
+                </div>
+                <div class="quick_item" @click="toSearchPage">
+                  <div class="search_bgd"></div>
+                  <div class="search_text">搜索</div>
+                </div>
+                <div class="quick_item" @click="toCartPage">
+                  <div class="mycart_bgd"></div>
+                  <div class="mycart_text">购物车</div>
+                </div>
+                <div class="quick_item" @click="toMyPage">
+                  <div class="myeasy_bgd"></div>
+                  <div class="myeasy">我的易购</div>
+                </div>
+                <div class="quick_item" @click="toClassifyPage">
+                  <div class="all_bgd"></div>
+                  <div class="all_classify">全部分类</div>
+                </div>
+              </div>
+            </div>
+          </transition>
+        </div>
       </div>
+
       <!-- 价格 -->
       <div class="price_container">
         <!-- 价格 -->
@@ -342,21 +412,11 @@
       <!-- 折扣 -->
       <div class="discount_container">
         <div class="party_active">
-          <div>
-            <i class="active">
-              <img src="../../assets/detailsImg/detailspage/ok.png" alt />
-            </i>
-            <span class="get">
-              参加以下活动，预计到手价
-              <span class="red_word">209.00元</span>
-            </span>
+          <div class="join_active">
+            参加以下活动最高减
+            <b>20.00元</b>
           </div>
-          <div class="right_container">
-            <div class="kkk">
-              <!-- <div class="seemore">查看更多</div>
-              <div class="  r_icon_"></div>-->
-            </div>
-          </div>
+          <div class="look_more">查看更多</div>
         </div>
       </div>
       <!-- 优惠券 -->
@@ -371,7 +431,7 @@
           <span class="two">每满299元减20元</span>
         </div>
       </div>
-      <div class="do_container">
+      <div class="do_container" @click="seeClick">
         <div class="do">
           <span class="gray_color">刮券</span>
           <span>100%刮中券，最高50元无敌券</span>
@@ -406,46 +466,48 @@
             <span class="detail">免运费</span>
           </div>
         </div>
-        <div class="has_select">
+        <div class="has_select ui" @click="serviceClick">
           <div class="ser_container">
             <span class="gray_color">服务</span>
-            <span class="detail">7天无理由退货</span>
+            <span class="detail seven">苏宁发货</span>
+            <span class="detail seven">7天无理由退货</span>
+            <span class="detail seven">自提</span>
           </div>
+
           <div class="right second r_icon_"></div>
         </div>
 
-     
         <!--  -->
       </div>
-         <!-- 评价 -->
-         <div class="fix"></div>
-        <div class="gray_box">
-          <div class="six_container" @click="commentClick">
-            <div class="six_head">
-              <div class="fifth">评价(15万+)</div>
-              <div class="six_right">
-                <div class="full_good">100%好评率</div>
-                <div class="r_icon"></div>
-              </div>
-            </div>
-            <!-- xx -->
-            <div class="people">
-              <div class="people_left">
-                <div class="people_img"></div>
-                <div class="people_name">1***9</div>
-              </div>
-              <div class="people_star"></div>
-            </div>
-            <p class="people_say">发货神速，锅也很好用</p>
-            <div class="show_container">
-              <img src="../../assets/detailsImg/detailspage/show.jpg" alt="" class="show_img">
-              <img src="../../assets/detailsImg/detailspage/show.jpg" alt="" class="show_img">
-            </div>
-            <div class="see_all_container">
-              <button>查看全部评价</button>
+      <!-- 评价 -->
+      <div class="fix"></div>
+      <div class="gray_box">
+        <div class="six_container" @click="commentClick">
+          <div class="six_head">
+            <div class="fifth">评价(15万+)</div>
+            <div class="six_right">
+              <div class="full_good">100%好评率</div>
+              <div class="r_icon"></div>
             </div>
           </div>
+          <!-- xx -->
+          <div class="people">
+            <div class="people_left">
+              <div class="people_img"></div>
+              <div class="people_name">1***9</div>
+            </div>
+            <div class="people_star"></div>
+          </div>
+          <p class="people_say">发货神速，锅也很好用</p>
+          <div class="show_container">
+            <img src="../../assets/detailsImg/detailspage/show.jpg" alt class="show_img" />
+            <img src="../../assets/detailsImg/detailspage/show.jpg" alt class="show_img" />
+          </div>
+          <div class="see_all_container">
+            <button>查看全部评价</button>
+          </div>
         </div>
+      </div>
       <!-- 加入购物车 -->
       <div class="footer">
         <div class="icon_item">
@@ -474,21 +536,31 @@
 
 <script>
 import Axios from "axios";
+import detailswiper from "./detail_swiper.vue";
 export default {
-  props: ["pmessage"],
+  props: ["pmessage","value"],
   data() {
     return {
       cover: false,
       selectpage: false,
       addresspage: false,
-      quicknav:false,
+      quicknav: false,
+      servicepage: false,
+      close: false,
+      more: true,
+      see: false,
       provinceList: [],
       cityList: [],
       areaList: [],
       cityDefaultValue: "请选择",
       areaDefaultValue: "",
-      provinceMessage: "江苏"
+      provinceMessage: "江苏",
+      num:1,
+      zero:false,
     };
+  },
+  components: {
+    detailswiper
   },
   methods: {
     enterCart() {
@@ -505,10 +577,14 @@ export default {
       this.cover = false;
       this.selectpage = false;
       this.addresspage = false;
+      this.servicepage = false;
+      this.see = false;
     },
     coverRelieve() {
       this.cancelBtn();
-      this.quicknav=false;
+      this.quicknav = false;
+      this.servicepage = false;
+      this.see = false;
     },
     addressClick() {
       this.cover = true;
@@ -520,19 +596,70 @@ export default {
       this.provinceMessage = item.name;
       // this.provinceList=item.city[index].area;
     },
-    commentClick(){
+    commentClick() {
       this.$router.push({
-        path:"/comment"
+        path: "/comment"
       });
     },
-    backMainpage(){
+    backMainpage() {
       this.$router.push({
-        path:"/"
-      })
+        path: "/"
+      });
     },
-    moreClick(){
-      this.quicknav=true;
-      this.cover=true;
+    moreClick() {
+      this.quicknav = true;
+      this.cover = true;
+      this.close = true;
+    },
+    closeNav() {
+      this.coverRelieve();
+      this.close=false
+    },
+    toMainPage() {
+      this.$router.push({
+        path: "/"
+      });
+    },
+    toClassifyPage() {
+      this.$router.push({
+        path: "/Classification"
+      });
+    },
+    toMyPage() {
+      this.$router.push({
+        path: "/myebay"
+      });
+    },
+    toSearchPage() {
+      this.$router.push({
+        path: "/mustgrablist"
+      });
+    },
+    toCartPage() {
+      this.$router.push({
+        path: "/shoppingcart"
+      });
+    },
+    serviceClick() {
+      this.servicepage = true;
+      this.cover = true;
+    },
+    seeClick() {
+      this.see = true;
+      this.cover = true;
+    },
+    plusNum(){
+    this.num++;
+    if(this.num!=1){
+       this.zero=false;
+     }
+    },
+    minusNum(){
+      this.num--;
+      if(this.num==1){
+        this.zero=true;
+      }
+     
 
     }
   },
@@ -562,6 +689,7 @@ export default {
   height: 0;
   padding-bottom: 100%;
   background-color: blueviolet;
+  z-index: 1;
 }
 
 .img_container img {
@@ -735,11 +863,11 @@ export default {
 .do_container {
   margin-left: 0.625rem;
   border-bottom: 0.042rem solid #eee;
-  font-size: 0.583rem;
+  font-size: 0.48rem;
 }
 
 .gray_color {
-  font-size: 0.583rem;
+  font-size: 0.48rem;
   color: #aaa;
 }
 
@@ -758,7 +886,7 @@ export default {
 }
 
 .full_minus {
-  margin-left: 1.75rem;
+  margin-left: 1.62rem;
   padding: 0 0.208rem;
   border: 0.042rem solid #fb0;
   border-radius: 0.167rem;
@@ -784,8 +912,8 @@ export default {
 
 .has_select {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 0.417rem 0;
 }
 
@@ -795,7 +923,7 @@ export default {
 
 .detail {
   margin-left: 0.417rem;
-  font-size: 0.583rem;
+  font-size: 0.48rem;
 }
 
 .footer {
@@ -852,6 +980,7 @@ export default {
   flex-grow: 1;
   margin-right: 0.417rem;
   background-color: #ff6700;
+  color: white;
   outline: none;
   border-style: none;
   border-radius: 0 0.25rem 0.25rem 0;
@@ -906,36 +1035,48 @@ export default {
   position: fixed;
   top: 10px;
   left: 10px;
-
   width: 1.167rem;
   height: 1.167rem;
   background: url(../../assets/detailsImg/detailspage/left.png) no-repeat;
   background-size: 1.167rem 1.167rem;
-  z-index: 10000;
 }
 
 .more {
-  position:fixed;
-  top: 10px;
+  position: fixed;
+  top: 0.417rem;
   left: 90%;
   width: 1.167rem;
   height: 1.167rem;
   background: url(../../assets/detailsImg/detailspage/more.png) no-repeat;
   background-size: 1.167rem 1.167rem;
-  z-index: -4;
+  z-index: 9999;
+}
+.wrong {
+  position: fixed;
+  top: 0.417rem;
+  left: 90%;
+  width: 1.167rem;
+  height: 1.167rem;
+  background: url(../../assets/detailsImg/detailspage/close-nav2.png) no-repeat;
+  background-size: contain;
+  z-index: 10001;
 }
 /* 遮罩层 */
 .cover {
+  overflow: hidden;
   position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 888;
+  transform: translateY(0%);
+  z-index: 103;
 }
 .cart_select,
-.address_select {
+.address_select,
+.service_select,
+.see_select {
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -1031,12 +1172,17 @@ export default {
   float: left;
   width: 0.833rem;
   height: 0.833rem;
-  background-color: #ddd;
+  background-color:#eee;
   line-height: 0.833rem;
   text-align: center;
+  font-weight: bold;
   font-style: normal;
   border-radius: 50%;
   margin-top: 0.125rem;
+}
+.minus{
+  outline: none;
+  border-style: none;
 }
 .minus {
   margin-left: 0.083rem;
@@ -1249,7 +1395,7 @@ b {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 1;
 }
 .six_head {
   display: flex;
@@ -1284,7 +1430,6 @@ b {
 .fifth {
   font-size: 0.6rem;
   font-weight: bold;
-  
 }
 .kkk {
   display: flex;
@@ -1311,7 +1456,7 @@ b {
   font-size: 0.24rem;
 }
 .people_star {
-  width: 2.72rem ;
+  width: 2.72rem;
   height: 0.48rem;
   margin-right: 0.625rem;
   margin-top: 0.625rem;
@@ -1320,35 +1465,35 @@ b {
   background-size: 2.72rem 0.48rem;
 }
 
-.six_container{
+.six_container {
   padding: 0px 0 0.625rem 0.625rem;
   background-color: white;
   margin-top: 0.417rem;
 }
-.gray_box{
+.gray_box {
   background-color: #eee;
 }
-.people_say{
+.people_say {
   margin: 0.417rem 0 0 0.125rem;
   font-size: 0.583rem;
 }
-.show_container{
- margin: 0.417rem 0 0 0.208rem;
+.show_container {
+  margin: 0.417rem 0 0 0.208rem;
 }
-.see_all_container button{
-    width: 4.8rem;
-    height: 1.2rem;
-    background-color: white;
-    border-radius: .12rem;
-    font-size: .26rem;
-    outline: none;
-    border: 0.042rem solid#ccc;
+.see_all_container button {
+  width: 4.8rem;
+  height: 1.2rem;
+  background-color: white;
+  border-radius: 0.12rem;
+  font-size: 0.26rem;
+  outline: none;
+  border: 0.042rem solid#ccc;
 }
-.see_all_container{
+.see_all_container {
   margin-top: 0.208rem;
   text-align: center;
 }
-.quick_nav{
+.quick_nav {
   position: fixed;
   width: 96%;
   height: 9.042rem;
@@ -1356,73 +1501,250 @@ b {
   background-color: white;
   border-radius: 0.333rem;
 }
-.tranigle{
+.tranigle {
   position: absolute;
   left: 321px;
   top: -14px;
   width: 0;
   height: 0;
-  border-width:8px ;
+  border-width: 8px;
   border-style: solid;
   border-color: transparent transparent white transparent;
 }
-.quick_text{
+.quick_text {
   padding: 0.625rem 0.417rem;
   font-size: 0.583rem;
 }
-.five_box{
+.five_box {
   /* width: 13rem; */
   display: flex;
   flex-wrap: wrap;
-
 }
-.quick_item{
+.quick_item {
   width: 2.88rem;
   height: 2.76rem;
   margin-left: 0.583rem;
   background-color: #eee;
   border-radius: 0.25rem;
 }
-.five_box .quick_item:last-child{
+.five_box .quick_item:last-child {
   margin-top: 0.583rem;
 }
 .main_text,
 .search_text,
 .all_classify,
 .myeasy,
-.mycart_text{
+.mycart_text {
   margin-top: 0.125rem;
   font-size: 0.583rem;
   text-align: center;
 }
-.main_bgd{
+.main_bgd {
   height: 1.43rem;
   width: 100%;
-  background: url(../../assets/detailsImg/detailspage/main.png) center bottom no-repeat;
+  background: url(../../assets/detailsImg/detailspage/main.png) center bottom
+    no-repeat;
   background-size: 0.958rem 0.958rem;
 }
-.search_bgd{
+.search_bgd {
   height: 1.43rem;
   width: 100%;
-  background: url(../../assets/detailsImg/detailspage/search.png) center bottom no-repeat;
+  background: url(../../assets/detailsImg/detailspage/search.png) center bottom
+    no-repeat;
   background-size: 0.958rem 0.958rem;
 }
-.mycart_bgd{
+.mycart_bgd {
   height: 1.43rem;
   width: 100%;
-  background: url(../../assets/detailsImg/detailspage/yellowcart.png) center bottom no-repeat;
+  background: url(../../assets/detailsImg/detailspage/yellowcart.png) center
+    bottom no-repeat;
   background-size: 0.958rem 0.958rem;
 }
-.myeasy_bgd{
+.myeasy_bgd {
   height: 1.43rem;
   width: 100%;
-  background: url(../../assets/detailsImg/detailspage/my.png) center bottom no-repeat;
+  background: url(../../assets/detailsImg/detailspage/my.png) center bottom
+    no-repeat;
   background-size: 0.958rem 0.958rem;
 }
-.all_bgd{
+.all_bgd {
   height: 1.43rem;
   width: 100%;
-  background: url(../../assets/detailsImg/detailspage/classify.png) center bottom no-repeat;
+  background: url(../../assets/detailsImg/detailspage/classify.png) center
+    bottom no-repeat;
   background-size: 0.958rem 0.958rem;
+}
+.v-enter {
+  transform: translateY(18.75rem);
+}
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.2s ease-in;
+}
+.v-leave-to {
+  transform: translateY(18.75rem);
+}
+.seven::before {
+  display: inline-block;
+  width: 0.48rem;
+  height: 0.48rem;
+  content: "";
+  vertical-align: middle;
+  margin-right: 0.125rem;
+  background: url(../../assets/detailsImg/detailspage/yes.png) center center
+    no-repeat;
+  background-size: 0.48rem 0.48rem;
+}
+.basic_service {
+  font-size: 0.667rem;
+  text-align: center;
+  padding: 0.333rem 0;
+  margin-left: 1.042rem;
+  border-bottom: 0.042rem solid #eee;
+}
+.deliver {
+  font-size: 0.48rem;
+}
+.deliver::before {
+  display: inline-block;
+  content: "";
+  width: 0.66rem;
+  height: 0.66rem;
+  margin-left: 0.417rem;
+  margin-right: 0.208rem;
+  vertical-align: middle;
+  background: url(../../assets/detailsImg/detailspage/self.png) center center
+    no-repeat;
+  background-size: 0.66rem 0.66rem;
+}
+.sn_text {
+  padding-left: 1.25rem;
+  padding-bottom: 0.333rem;
+  font-size: 0.48rem;
+  color: #aaa;
+  border-bottom: 0.042rem solid #eee;
+}
+.retreat {
+  font-size: 0.48rem;
+}
+.retreat::before {
+  display: inline-block;
+  content: "";
+  width: 0.66rem;
+  height: 0.66rem;
+  margin-left: 0.417rem;
+  margin-right: 0.208rem;
+  vertical-align: middle;
+  background: url(../../assets/detailsImg/detailspage/tui.jpg) center center
+    no-repeat;
+  background-size: 0.66rem 0.66rem;
+}
+.swiper-container {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 0;
+}
+.fade-enter-active {
+  animation: fadeIn 0.3s;
+}
+.fade-leave-active {
+  animation: fadeOut 0.3s;
+}
+.join_active {
+  padding: 0.208rem 0.417rem;
+  font-size: 0.48rem;
+}
+.look_more {
+  font-size: 0.48rem;
+  color: #aaa;
+}
+.look_more::after {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  content: "";
+  background: url(../../assets/detailsImg/detailspage/right.png);
+  background-size: contain;
+  margin-right: 0.208rem;
+  vertical-align: middle;
+}
+.join_active::before {
+  display: inline-block;
+  width: 0.52rem;
+  height: 0.52rem;
+  content: "";
+  background: url(../../assets/detailsImg/detailspage/ok.png) center center
+    no-repeat;
+  background-size: contain;
+  margin-left: 0.208rem;
+  margin-right: 0.125rem;
+}
+.minus_money {
+  padding: 0.333rem 0;
+  padding-left: 1.04rem;
+  font-size: 0.72rem;
+  text-align: center;
+  border-bottom: 0.042rem solid#eee;
+}
+
+.up {
+  padding: 0.417rem 0;
+  font-size: 0.48rem;
+}
+.see_footer {
+  margin-left: 0.417rem;
+}
+.first_minus {
+  display: flex;
+  margin-top: 0.417rem;
+}
+.second_left {
+  display: flex;
+}
+.diamond,
+.shiming {
+  height: 0.875rem;
+  flex-shrink: 0;
+  padding: 0 0.167rem;
+  font-size: 0.5rem;
+  border: 0.042rem solid #fb0;
+  border-radius: 0.167rem;
+  line-height: 0.833rem;
+}
+.see_text,
+.ten {
+  margin-left: 0.208rem;
+  padding-right: 0.542rem;
+  font-size: 0.48rem;
+}
+.second_see_ten {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.417rem;
+}
+.ten {
+  margin-top: 0.042rem;
+}
+.right_sign {
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-right: 0.417rem;
+  background: url(../../assets/detailsImg/detailspage/right.png) center center;
+  background-size: contain;
+}
+.style_img {
+  position: absolute;
+  top: -0.875rem;
+  left: 0.417rem;
+  width: 4.16rem;
+  height: 4.16rem;
+  border-radius: 0.333rem;
+  background: url(../../assets/detailsImg/detailspage/cooker.png) no-repeat;
+  background-size: contain;
+  border: 0.042rem solid #ccc;
 }
 </style>
