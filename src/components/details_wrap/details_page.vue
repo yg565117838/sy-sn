@@ -5,37 +5,6 @@
       <div class="zy"></div>
       <!-- 更多跳转页 -->
       <transition>
-        <!-- 地址选择页 -->
-        <div class="address_select" v-if="addresspage">
-          <div class="address_head">
-            <div class="plase_select">
-              <div class="exit"></div>
-              <div class="address_select_title">
-                地址选择
-                <div class="cancel_btn" @click="cancelBtn">
-                  <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
-                </div>
-              </div>
-            </div>
-
-            <div class="locate_container">
-              <div class="province_select" :pmessage="provinceMessage">{{provinceMessage}}</div>
-              <div class="city_select">{{cityDefaultValue}}</div>
-              <div class="area_select">{{areaDefaultValue}}</div>
-            </div>
-          </div>
-          <div class="address_middle">
-            <div
-              class="differ_city"
-              :key="index"
-              v-for="(item,index) in provinceList"
-              @click="itemClick(item,index)"
-            >{{item.name}}</div>
-          </div>
-        </div>
-      </transition>
-
-      <transition>
         <div class="see_select" v-if="see">
           <div class="minus_money">
             优惠
@@ -65,311 +34,36 @@
         </div>
       </transition>
       <!-- 服务选择 -->
-      <transition>
-        <div class="service_select" v-if="servicepage">
-          <div class="basic_service">
-            基础服务
-            <div class="cancel_btn" @click="cancelBtn">
-              <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
-            </div>
-          </div>
 
-          <div class="sn">
-            <span class="deliver">苏宁发货</span>
-            <p class="sn_text">由苏宁发货，并提供售后服务</p>
-          </div>
-          <div class="sn">
-            <span class="deliver">自提</span>
-            <p class="sn_text">支持门店自提点、自助提货柜等自助服务</p>
-          </div>
-          <div class="sn">
-            <span class="retreat">7天无理由退货</span>
-            <p class="sn_text">无理由退货、保购物无忧</p>
-          </div>
+    <serviceselect :servicepage="servicepage" @service-cancel="cancelBtn"></serviceselect>
 
-          <div></div>
-          <div></div>
-        </div>
-      </transition>
+      <!-- 购物车选择商品 -->
+      <cartselect
+        :selectpage="selectpage"
+        :zero="zero"
+        @cart-cancel="cancelBtn"
+        @minus-num="minusNum"
+        @plus-num="plusNum"
+        :num="num"
+      ></cartselect>
+      <!-- 购物车选择商品页面 -->
 
-      <!--  -->
-
-      <!-- 购物车选择页 -->
-
-      <transition>
-        <div class="cart_select" v-if="selectpage">
-          <!-- 定位 -->
-          <div class="style_img"></div>
-          <!-- 头部 -->
-          <div class="cart_select_header">
-            <div class="interlayer"></div>
-            <div class="cancel_box">
-              <div class="cancel_btn" @click="cancelBtn">
-                <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
-              </div>
-              <div class="cart_select_price">
-                <p class="change_price">￥299.00 到手价￥279.00</p>
-                <span class="coding">商品编码：1005010218</span>
-              </div>
-              <div class="cart_select_text">美的（Media）WAOHAO5A一锅双胆5L12大烹饪菜单7大压力调节韩式电饭煲电压力锅</div>
-            </div>
-          </div>
-          <!-- 中间（auto） -->
-          <div class="cart_select_middle">
-            <div class="capacity">容量</div>
-            <div class="kind">
-              <div class="first_line">
-                <span class="select_label">
-                  <i class="mini_img">
-                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                  </i>
-                  <span class="cart_select_name">5L经典款</span>
-                </span>
-                <span class="select_label">
-                  <i class="mini_img">
-                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                  </i>
-                  <span class="cart_select_name">5L韩式浓香</span>
-                </span>
-              </div>
-              <div class="second_line">
-                <span class="select_label">
-                  <i class="mini_img">
-                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                  </i>
-                  <span class="cart_select_name">5L大红爆款</span>
-                </span>
-                <span class="select_label">
-                  <i class="mini_img">
-                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                  </i>
-                  <span class="cart_select_name">4.8L双圆灶釜</span>
-                </span>
-              </div>
-              <div class="third_line">
-                <span class="select_label">
-                  <i class="mini_img">
-                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                  </i>
-                  <span class="cart_select_name">【新品】4.8精控浓香</span>
-                </span>
-                <span class="select_label">
-                  <i class="mini_img">
-                    <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-                  </i>
-                  <span class="cart_select_name">5L IH品质</span>
-                </span>
-              </div>
-            </div>
-            <!-- 选择数量 -->
-            <div class="cart_select_number">
-              <div class="number_text">购买数量</div>
-              <div class="select_wrap_container">
-                <button class="minus clearfix" @click="minusNum" :disabled="zero">-</button>
-                <input type="text" class="input_container clearfix" :value="num" />
-                <i class="plus clearfix" @click="plusNum">+</i>
-              </div>
-            </div>
-            <!-- 选择数量 -->
-            <!-- 购买增值服务 -->
-            <div class="buy_container">
-              <div class="buy_add_service">购买增值服务</div>
-              <div class="addmoney_service">
-                <div>
-                  <span class="draw">领延保券</span>
-                  <span class="add_number_left">
-                    <i class="left_bgd"></i>
-                    ￥200.00
-                  </span>
-                  <span class="opacity">
-                    最高减200元
-                    <i class="right_bgd"></i>
-                  </span>
-                </div>
-                <div class="right_alltwo">
-                  <span class="all_two">共2张</span>
-                  <i class="right">
-                    <img src="../../assets/detailsImg/detailspage/right.png" alt />
-                  </i>
-                </div>
-              </div>
-            </div>
-            <!-- 购买增值服务 -->
-            <!-- 只换不修 -->
-            <div>
-              <div class="changenot">
-                <div class="change_left">
-                  <i class="not_img">
-                    <img src="../../assets/detailsImg/shopcartImg/changenot.png" alt />
-                  </i>
-                  <span class="not_text">只换不修</span>
-                  <span class="protect_text">厂保性能保障...</span>
-                </div>
-                <div class="change_right">
-                  <span class="see_details">查看详情</span>
-                  <i class="unknow">
-                    <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-                  </i>
-                </div>
-              </div>
-              <!-- 只换不修 -->
-              <!-- 选项 -->
-              <div class="options">
-                <div class="top_line">
-                  <span class="options_plan">只换不修1年 | ￥70.00</span>
-                  <span class="options_plan ig">只换不修2年 | ￥105.00</span>
-                </div>
-                <div class="foot_line">
-                  <span class="options_plan">只换不修3年 | ￥150.00</span>
-                </div>
-              </div>
-              <!-- 选项 -->
-            </div>
-
-            <!-- 整机保 -->
-
-            <div>
-              <div class="changenot">
-                <div class="change_left">
-                  <i class="not_img">
-                    <img src="../../assets/detailsImg/shopcartImg/allpro.png" alt />
-                  </i>
-                  <span class="not_text">全保修</span>
-                  <span class="protect_text">性能以外全保修</span>
-                </div>
-                <div class="change_right">
-                  <span class="see_details">查看详情</span>
-                  <i class="unknow">
-                    <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-                  </i>
-                </div>
-              </div>
-              <!-- 只换不修 -->
-              <!-- 选项 -->
-              <div class="options">
-                <div class="top_line">
-                  <span class="options_plan">全保修3年 | ￥59.00</span>
-                  <span class="options_plan ig">全保修5年 | ￥79.00</span>
-                </div>
-              </div>
-              <!-- 选项 -->
-            </div>
-            <!-- 整机保 -->
-
-            <!-- 全保修 -->
-            <div>
-              <div class="changenot">
-                <div class="change_left">
-                  <i class="not_img">
-                    <img src="../../assets/detailsImg/shopcartImg/allpro2.png" alt />
-                  </i>
-                  <span class="not_text">整机保</span>
-                  <span class="protect_text">整机性能故障免费...</span>
-                </div>
-                <div class="change_right">
-                  <span class="see_details">查看详情</span>
-                  <i class="unknow">
-                    <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-                  </i>
-                </div>
-              </div>
-              <!-- 只换不修 -->
-              <!-- 选项 -->
-              <div class="options">
-                <div class="top_line">
-                  <span class="options_plan">整机保2年 | ￥39.00</span>
-                  <span class="options_plan ig">整机保3年 | ￥59.00</span>
-                </div>
-                <div class="foot_line">
-                  <span class="options_plan">整机保4年 | ￥89.00</span>
-                </div>
-              </div>
-              <!-- 选项 -->
-            </div>
-            <!-- 全保修 -->
-            <!-- 百万 -->
-
-            <div>
-              <div class="changenot">
-                <div class="change_left">
-                  <i class="not_img">
-                    <img src="../../assets/detailsImg/shopcartImg/changenot.png" alt />
-                  </i>
-                  <span class="not_text">百万家财保障</span>
-                  <span class="protect_text">百万保额，先补录...</span>
-                </div>
-                <div class="change_right">
-                  <span class="see_details">查看详情</span>
-                  <i class="unknow">
-                    <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-                  </i>
-                </div>
-              </div>
-              <!-- 只换不修 -->
-              <!-- 选项 -->
-              <div class="options">
-                <div class="top_line">
-                  <span class="options_plan">￥20.00</span>
-                </div>
-              </div>
-              <!-- 选项 -->
-            </div>
-            <!-- 百万 -->
-          </div>
-          <!-- 底部 -->
-          <div class="cart_select_footer">
-            <div class="noname">
-              <span class="warn">
-                当前活动可参加满减活动，预计优惠
-                <b>20.00元</b>
-              </span>
-            </div>
-            <div class="last_btn">
-              <button>马上抢</button>
-              <button>加入购物车</button>
-            </div>
-          </div>
-        </div>
-      </transition>
-      <!--  -->
-
+      <!-- 轮播图 -->
       <detailswiper></detailswiper>
+      <!-- 轮播图 -->
 
-      <!-- <div class="img_container">
-        <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-      </div>-->
-      <div>
+      <!-- 地址选择 -->
+      <addressselect :addresspage="addresspage" @address-cancel="cancelBtn" ></addressselect>
+      <!-- 地址选择 -->
+
+   
+      <div >
+        <div class="lvzy" v-if="ozy" ></div>
         <div class="back" @click="backMainpage"></div>
         <div class="more" @click="moreClick" v-if="more">
           <div class="wrong" v-if="close" @click.stop="closeNav"></div>
-          <transition name="fade">
-            <div class="quick_nav" v-if="quicknav">
-              <div class="tranigle"></div>
-              <div class="quick_text">快速导航</div>
-              <div class="five_box">
-                <div class="quick_item" @click="toMainPage">
-                  <div class="main_bgd"></div>
-                  <div class="main_text">首页</div>
-                </div>
-                <div class="quick_item" @click="toSearchPage">
-                  <div class="search_bgd"></div>
-                  <div class="search_text">搜索</div>
-                </div>
-                <div class="quick_item" @click="toCartPage">
-                  <div class="mycart_bgd"></div>
-                  <div class="mycart_text">购物车</div>
-                </div>
-                <div class="quick_item" @click="toMyPage">
-                  <div class="myeasy_bgd"></div>
-                  <div class="myeasy">我的易购</div>
-                </div>
-                <div class="quick_item" @click="toClassifyPage">
-                  <div class="all_bgd"></div>
-                  <div class="all_classify">全部分类</div>
-                </div>
-              </div>
-            </div>
-          </transition>
+      <!-- 导航栏 -->
+      <quicknav :quicknav="quicknav"></quicknav>
         </div>
       </div>
 
@@ -377,7 +71,7 @@
       <div class="price_container">
         <!-- 价格 -->
         <div class="price">
-          <span class="price_number">
+          <span class="price_number" @scroll="nubs">
             ￥239.
             <span id="small_number">00</span>
           </span>
@@ -480,7 +174,6 @@
         <!--  -->
       </div>
       <!-- 评价 -->
-      <div class="fix"></div>
       <div class="gray_box">
         <div class="six_container" @click="commentClick">
           <div class="six_head">
@@ -531,14 +224,15 @@
   </div>
 </template>
 
-
-
-
 <script>
 import Axios from "axios";
+import cartselect from "../part_page/cart_select.vue";
+import addressselect from "../part_page/address_select.vue";
+import serviceselect from "../part_page/service_select.vue";
+import quicknav from "../part_page/quicknav.vue";
 import detailswiper from "./detail_swiper.vue";
 export default {
-  props: ["pmessage","value"],
+  props: ["pmessage", "value"],
   data() {
     return {
       cover: false,
@@ -549,18 +243,17 @@ export default {
       close: false,
       more: true,
       see: false,
-      provinceList: [],
-      cityList: [],
-      areaList: [],
-      cityDefaultValue: "请选择",
-      areaDefaultValue: "",
-      provinceMessage: "江苏",
-      num:1,
-      zero:false,
+      num: 1,
+      zero: false,
+      ozy:false
     };
   },
   components: {
-    detailswiper
+    detailswiper,
+    cartselect,
+    addressselect,
+    serviceselect,
+    quicknav
   },
   methods: {
     enterCart() {
@@ -581,7 +274,9 @@ export default {
       this.see = false;
     },
     coverRelieve() {
-      this.cancelBtn();
+      this.selectpage = false;
+      this.addresspage = false;
+      this.cover = false;
       this.quicknav = false;
       this.servicepage = false;
       this.see = false;
@@ -589,12 +284,6 @@ export default {
     addressClick() {
       this.cover = true;
       this.addresspage = true;
-    },
-    itemClick(item, index) {
-      console.log(item, index);
-      this.provinceList = item.city;
-      this.provinceMessage = item.name;
-      // this.provinceList=item.city[index].area;
     },
     commentClick() {
       this.$router.push({
@@ -613,33 +302,9 @@ export default {
     },
     closeNav() {
       this.coverRelieve();
-      this.close=false
+      this.close = false;
     },
-    toMainPage() {
-      this.$router.push({
-        path: "/"
-      });
-    },
-    toClassifyPage() {
-      this.$router.push({
-        path: "/Classification"
-      });
-    },
-    toMyPage() {
-      this.$router.push({
-        path: "/myebay"
-      });
-    },
-    toSearchPage() {
-      this.$router.push({
-        path: "/mustgrablist"
-      });
-    },
-    toCartPage() {
-      this.$router.push({
-        path: "/shoppingcart"
-      });
-    },
+   
     serviceClick() {
       this.servicepage = true;
       this.cover = true;
@@ -648,28 +313,23 @@ export default {
       this.see = true;
       this.cover = true;
     },
-    plusNum(){
-    this.num++;
-    if(this.num!=1){
-       this.zero=false;
-     }
+    nubs(){
+      console.log(111)
     },
-    minusNum(){
-      this.num--;
-      if(this.num==1){
-        this.zero=true;
+    plusNum() {
+      this.num++;
+      if (this.num != 1) {
+        this.zero = false;
       }
-     
-
+    },
+    minusNum() {
+      this.num--;
+      if (this.num == 1) {
+        this.zero = true;
+      }
     }
   },
-  created() {
-    let that = this;
-    Axios.get("/details_json/address.json").then(function(content) {
-      console.log(content.data[5]);
-      that.provinceList = content.data;
-    });
-  }
+
 };
 </script>
  
@@ -1089,252 +749,6 @@ export default {
   border-radius: 0.333rem;
 }
 
-.interlayer {
-  flex-shrink: 0;
-  width: 5rem;
-  height: 5rem;
-}
-.cart_select_header {
-  display: flex;
-  flex-shrink: 0;
-  justify-content: space-between;
-  padding: 0 0 0.417rem 0;
-  border-bottom: 0.042rem solid #eee;
-}
-.cart_select_middle,
-.address_middle {
-  overflow: auto;
-  flex-grow: 1;
-}
-.cart_select_footer {
-  flex-shrink: 0;
-}
-.cart_select_price {
-  margin-top: 1.667rem;
-}
-.change_price {
-  color: red;
-  font-size: 0.583rem;
-}
-.coding {
-  margin-left: 0.167rem;
-  color: #aaa;
-  font-size: 0.5rem;
-}
-.cart_select_text {
-  font-size: 0.5rem;
-  margin: 0.417rem 0.625rem 0 0.167rem;
-}
-.capacity {
-  padding: 0.25rem 0 0.083rem 0.417rem;
-  font-size: 0.5rem;
-}
-.select_label {
-  display: inline-block;
-  background-color: rgb(246, 246, 246);
-  padding: 0.208rem 0.5rem 0.208rem 0.625rem;
-  margin-right: 0.25rem;
-  margin-top: 0.25rem;
-  border-radius: 0.167rem;
-  font-size: 0.5rem;
-}
-.mini_img {
-  display: inline-block;
-  width: 0.959rem;
-  height: 0.959rem;
-  margin-right: 0.25rem;
-  vertical-align: middle;
-}
-.mini_img img {
-  width: 100%;
-  height: 100%;
-}
-.cart_select_name {
-  font-size: 0.5rem;
-}
-.kind {
-  margin-left: 0.417rem;
-  padding: 0.042rem 0 0.25rem 0;
-  border-bottom: 0.042rem solid #eee;
-}
-.cart_select_number {
-  display: flex;
-  justify-content: space-between;
-  margin: 0.417rem 0.417rem 0 0.417rem;
-  font-size: 0.5rem;
-}
-.select_wrap_container {
-  border: 0.042rem solid #aaa;
-  border-radius: 15px;
-}
-.plus,
-.minus {
-  float: left;
-  width: 0.833rem;
-  height: 0.833rem;
-  background-color:#eee;
-  line-height: 0.833rem;
-  text-align: center;
-  font-weight: bold;
-  font-style: normal;
-  border-radius: 50%;
-  margin-top: 0.125rem;
-}
-.minus{
-  outline: none;
-  border-style: none;
-}
-.minus {
-  margin-left: 0.083rem;
-}
-.plus {
-  margin-right: 0.083rem;
-}
-.input_container {
-  float: left;
-  width: 2.083rem;
-  height: 1.042rem;
-  line-height: 1.042rem;
-  border-width: 0;
-  text-align: center;
-  outline: none;
-}
-
-.number_text {
-  margin-top: 0.125rem;
-}
-.addmoney_service {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.417rem;
-}
-.buy_container {
-  margin-left: 0.417rem;
-}
-.draw {
-  font-size: 0.542rem;
-}
-.buy_add_service {
-  font-size: 0.583rem;
-}
-.add_number_left {
-  display: inline-block;
-  position: relative;
-  padding: 0 0.167rem 0.042rem 0.167rem;
-  margin-left: 0.417rem;
-  background-color: rgb(255, 204, 0);
-  font-size: 0.5rem;
-}
-.opacity {
-  display: inline-block;
-  position: relative;
-  background-color: rgb(255, 250, 224);
-  margin-left: -0.083rem;
-  padding: 0 0.125rem;
-  border: 0.042rem solid rgb(255, 204, 0);
-  border-right: transparent;
-  font-size: 0.5rem;
-}
-.left_bgd {
-  display: inline-block;
-  position: absolute;
-  left: -0.542rem;
-  width: 100%;
-  height: 0.708rem;
-  background: url(../../assets/detailsImg/shopcartImg/leftbgd.png) center center
-    no-repeat;
-  z-index: -1;
-}
-.right_bgd {
-  display: inline-block;
-  position: absolute;
-  top: -0.042rem;
-  left: 0.625rem;
-  width: 100%;
-  height: 0.75rem;
-  background: url(../../assets/detailsImg/shopcartImg/rightbgd.png) center
-    center no-repeat;
-  z-index: -1;
-}
-.all_two {
-  display: inline-block;
-  color: #aaa;
-  font-size: 0.5rem;
-}
-.right_alltwo {
-  margin-right: 0.625rem;
-}
-.right_alltwo img {
-  vertical-align: middle;
-  margin-left: 0.125rem;
-}
-.changenot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 0.417rem;
-  margin-top: 1.042rem;
-}
-.not_img {
-  flex-shrink: 0;
-  display: inline-block;
-  width: 0.625rem;
-  height: 0.625rem;
-}
-.not_img img {
-  width: 100%;
-  height: 100%;
-}
-.not_text {
-  margin-left: 0.208rem;
-  font-size: 0.625rem;
-}
-.protect_text {
-  margin-left: 0.208rem;
-  color: #aaa;
-  font-size: 0.5rem;
-}
-.unknow {
-  flex-shrink: 0;
-  display: inline-block;
-  width: 0.667rem;
-  height: 0.667rem;
-  margin-right: 0.417rem;
-}
-.unknow img {
-  width: 100%;
-  height: 100%;
-}
-.see_details {
-  margin-right: 0.208rem;
-  font-size: 0.5rem;
-  color: blue;
-}
-.options_plan {
-  padding: 0.208rem 0.625rem 0.208rem 0.833rem;
-  margin-right: 0.208rem;
-  font-size: 0.5rem;
-  background-color: rgb(246, 246, 246);
-  border-radius: 0.167rem;
-}
-
-.top_line {
-  display: flex;
-  justify-content: space-between;
-  margin-left: 0.417rem;
-  margin-top: 0.417rem;
-}
-.ig {
-  margin-right: 0.625rem;
-}
-.foot_line {
-  margin-top: 0.417rem;
-  margin-left: 0.417rem;
-}
-.cart_select_footer {
-  height: 3.541rem;
-}
 .warn {
   font-size: 0.5rem;
   color: #aaa;
@@ -1493,87 +907,7 @@ b {
   margin-top: 0.208rem;
   text-align: center;
 }
-.quick_nav {
-  position: fixed;
-  width: 96%;
-  height: 9.042rem;
-  margin: 1.458rem 2%;
-  background-color: white;
-  border-radius: 0.333rem;
-}
-.tranigle {
-  position: absolute;
-  left: 321px;
-  top: -14px;
-  width: 0;
-  height: 0;
-  border-width: 8px;
-  border-style: solid;
-  border-color: transparent transparent white transparent;
-}
-.quick_text {
-  padding: 0.625rem 0.417rem;
-  font-size: 0.583rem;
-}
-.five_box {
-  /* width: 13rem; */
-  display: flex;
-  flex-wrap: wrap;
-}
-.quick_item {
-  width: 2.88rem;
-  height: 2.76rem;
-  margin-left: 0.583rem;
-  background-color: #eee;
-  border-radius: 0.25rem;
-}
-.five_box .quick_item:last-child {
-  margin-top: 0.583rem;
-}
-.main_text,
-.search_text,
-.all_classify,
-.myeasy,
-.mycart_text {
-  margin-top: 0.125rem;
-  font-size: 0.583rem;
-  text-align: center;
-}
-.main_bgd {
-  height: 1.43rem;
-  width: 100%;
-  background: url(../../assets/detailsImg/detailspage/main.png) center bottom
-    no-repeat;
-  background-size: 0.958rem 0.958rem;
-}
-.search_bgd {
-  height: 1.43rem;
-  width: 100%;
-  background: url(../../assets/detailsImg/detailspage/search.png) center bottom
-    no-repeat;
-  background-size: 0.958rem 0.958rem;
-}
-.mycart_bgd {
-  height: 1.43rem;
-  width: 100%;
-  background: url(../../assets/detailsImg/detailspage/yellowcart.png) center
-    bottom no-repeat;
-  background-size: 0.958rem 0.958rem;
-}
-.myeasy_bgd {
-  height: 1.43rem;
-  width: 100%;
-  background: url(../../assets/detailsImg/detailspage/my.png) center bottom
-    no-repeat;
-  background-size: 0.958rem 0.958rem;
-}
-.all_bgd {
-  height: 1.43rem;
-  width: 100%;
-  background: url(../../assets/detailsImg/detailspage/classify.png) center
-    bottom no-repeat;
-  background-size: 0.958rem 0.958rem;
-}
+
 .v-enter {
   transform: translateY(18.75rem);
 }
@@ -1736,15 +1070,23 @@ b {
   background: url(../../assets/detailsImg/detailspage/right.png) center center;
   background-size: contain;
 }
-.style_img {
-  position: absolute;
-  top: -0.875rem;
-  left: 0.417rem;
-  width: 4.16rem;
-  height: 4.16rem;
+body {
+  background-color: white !important;
+}
+.quick_nav {
+  position: fixed;
+  width: 96%;
+  height: 9.042rem;
+  margin: 1.458rem 2%;
+  background-color: white;
   border-radius: 0.333rem;
-  background: url(../../assets/detailsImg/detailspage/cooker.png) no-repeat;
-  background-size: contain;
-  border: 0.042rem solid #ccc;
+}
+.lvzy{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background-color: #fb0;
 }
 </style>

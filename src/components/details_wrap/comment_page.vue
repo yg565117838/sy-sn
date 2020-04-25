@@ -55,7 +55,7 @@ export default {
 methods:{
   backPage(){
     this.$router.push({
-      path:"/"
+      path:"/details"
     })
   }
 }

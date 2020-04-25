@@ -1,7 +1,7 @@
 <template>
   <swiper ref="mySwiper">
     <swiper-slide>
-      <div class="img_container">
+      <div class="img_container"  @scroll="imgScroll">
         <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
       </div>
     </swiper-slide>
@@ -28,6 +28,16 @@
     <div class="swiper-pagination" slot="pagination"></div>
   </swiper>
 </template>
+
+<script>
+export default {
+  methods:{
+    imgScroll(){
+      console.log(2222)
+    }
+  }
+}
+</script>
 <style >
 .img_container {
   position: relative;
