@@ -1,15 +1,24 @@
 <template>
     <div class="channerl-warp">
-        <channel-content></channel-content>
+        <channel-content3 :item='one'></channel-content3>
         <div class="hor-gap"></div>
-        <channel-content></channel-content>
+        <channel-content3 :item='two'></channel-content3>
     </div>
 </template>
 <script>
-import ChannelContent from './ChannelContent.vue';
+import ChannelContent3 from './ChannelContent3.vue';
 export default {
     components:{
-        'channel-content':ChannelContent
+        'channel-content3':ChannelContent3
+    },
+    props:['item'],
+    computed:{
+        one(){
+            return this.item[0];
+        },
+        two(){
+            return this.item[1];
+        }
     }
 }
 </script>

@@ -1,43 +1,8 @@
 <template>
   <swiper ref="mySwiper" :options="swiperOptions" class="banner">
-    <swiper-slide>
+    <swiper-slide v-for='(item,index) in banner1' :key="index">
       <div class="banner-content">
-        <img src="../../assets/home/banner1/1.jpg" alt="">
-      </div>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="banner-content">
-        <img src="../../assets/home/banner1/2.jpg" alt="">
-      </div>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="banner-content">
-        <img src="../../assets/home/banner1/3.jpg" alt="">
-      </div>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="banner-content">
-        <img src="../../assets/home/banner1/4.jpg" alt="">
-      </div>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="banner-content">
-        <img src="../../assets/home/banner1/5.png" alt="">
-      </div>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="banner-content">
-        <img src="../../assets/home/banner1/6.png" alt="">
-      </div>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="banner-content">
-        <img src="../../assets/home/banner1/7.jpg" alt="">
-      </div>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="banner-content">
-        <img src="../../assets/home/banner1/8.png" alt="">
+        <img :src="item" alt="">
       </div>
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
@@ -45,7 +10,7 @@
 </template>
 
 <script>
-
+import {banner1} from '../../data/home/banner1.js';
 export default {
   data() {
     return {
@@ -58,7 +23,8 @@ export default {
           disableOnInteraction: false,
         },
         loop:true
-      }
+      },
+      banner1
     }
   }
 }

@@ -11,7 +11,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+body{
+  min-width: 320px;
+  line-height: 1.5;
+  font-family: Arial,Helvetica,STHeiTi,sans-serif;
+  background: #f2f2f2;
+}
 @media screen and (min-width: 320px) {
   html {
     font-size: 21.33px;

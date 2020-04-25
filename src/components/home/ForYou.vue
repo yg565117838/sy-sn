@@ -5,36 +5,23 @@
             <p class="desc">精选频道</p>
         </div>
         <div class="four-space">
-            <div class="four-item">
+            <div class="four-item" v-for="(item,index) in forYou" :key="index">
                 <div>
-                    <img src="../../assets/home/channel-warp/9.webp" alt="">
+                    <img :src="item.src" alt="">
                 </div>
-                <p>苏宁国际</p>
-            </div>
-            <div class="four-item">
-                <div>
-                    <img src="../../assets/home/channel-warp/10.webp" alt="">
-                </div>
-                <p>苏宁Outlets</p>
-            </div>
-            <div class="four-item">
-                <div>
-                    <img src="../../assets/home/channel-warp/11.webp" alt="">
-                </div>
-                <p>新品首发</p>
-            </div>
-            <div class="four-item">
-                <div>
-                    <img src="../../assets/home/channel-warp/12.webp" alt="">
-                </div>
-                <p>0元试用</p>
+                <p>{{item.text}}</p>
             </div>
         </div>
     </div>
 </template>
 <script>
+import {forYou} from '../../data/home/forYou.js';
 export default {
-    
+    data(){
+        return {
+            forYou
+        }
+    }
 }
 </script>
 <style scoped>

@@ -1,64 +1,29 @@
 <template>
     <div class="enter-list">
-        <div class="line">
-            <div class="content">
-                <img src="../../assets/home/channel/1.webp" alt="">
-                <span>天天低价</span>
-            </div>
-            <div class="content">
-                <img src="../../assets/home/channel/2.webp" alt="">
-                <span>苏宁超市</span>
-            </div>
-            <div class="content">
-                <img src="../../assets/home/channel/3.webp" alt="">
-                <span>苏宁拼购</span>
-            </div>
-            <div class="content">
-                <img src="../../assets/home/channel/4.webp" alt="">
-                <span>5G手机</span>
-            </div>
-            <div class="content">
-                <img src="../../assets/home/channel/5.webp" alt="">
-                <span>苏宁家电</span>
-            </div>
-        </div>
-        <div class="line">
-            <div class="content">
-                <img src="../../assets/home/channel/6.webp" alt="">
-                <span>免费水果</span>
-            </div>
-            <div class="content">
-                <img src="../../assets/home/channel/7.webp" alt="">
-                <span>赚钱消消乐</span>
-            </div>
-            <div class="content">
-                <img src="../../assets/home/channel/8.webp" alt="">
-                <span>签到有礼</span>
-            </div>
-            <div class="content">
-                <img src="../../assets/home/channel/9.webp" alt="">
-                <span>领劵中心</span>
-            </div>
-            <div class="content">
-                <img src="../../assets/home/channel/10.webp" alt="">
-                <span>更多频道</span>
-            </div>
+        <div class="content" v-for="(item,index) in channel" :key="index">
+            <img :src="item.src" alt="">
+            <span>{{item.text}}</span>
         </div>
     </div>
 </template>
 <script>
+import {channel} from '../../data/home/channel.js';
 export default {
-    
+    data(){
+        return {
+            channel
+        }
+    }
 }
 </script>
 <style scoped>
-.line{
-    height: 50%;
+.enter-list{
     display: flex;
+    flex-wrap: wrap;
 }
 .content{
-    flex-grow: 1;
-    width: 0;
+    width: 3rem;
+    height: 2.84rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
