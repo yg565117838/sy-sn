@@ -260,7 +260,7 @@ export default {
     height: 5.2rem;
     background-image: url(../assets/home/backgroud/2.png);
     background-repeat: no-repeat;
-    background-size: 100% 150%;
+    background-size: 100% 100%;
     padding: 0 .68rem;
 }
 .enter-list{
