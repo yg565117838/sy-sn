@@ -1,5 +1,5 @@
 <template>
-    <div class="guessulike-content">
+    <div class="guessulike-content" @click="myClick">
         <div class="content-image">
             <img :src="item.src" alt="">
         </div>
@@ -21,7 +21,19 @@
 </template>
 <script>
 export default {
-    props:['item']
+    props:['item'],
+    methods:{
+        myClick(){
+            this.$router.push({
+                path:'/details',
+                query:{
+                    title:this.item.title,
+                    price1:this.item.price1,
+                    price2:this.item.price2,
+                }
+            })
+        }
+    }
 }
 </script>
 <style scoped>
