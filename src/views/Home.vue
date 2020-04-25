@@ -5,7 +5,7 @@
                 <img src="../assets/home/icon/1.png" alt="">
                 <img src="../assets/home/icon/2.png" alt="">
             </div>
-            <div class="nav-search">
+            <div class="nav-search" @click="searchClick">
                 <div class="nav-search-content">
                     <img src="../assets/home/icon/3.png" alt="">
                     <input type="text" placeholder="冰洗抢300元神券">
@@ -80,12 +80,29 @@
             <img src="../assets/home/backgroud/5.png" alt="" class="sn-logo">
         </div>
 
+        <div class="fixed-nav">
+            <img src="../assets/home/icon/1.png" alt="" class="fixed-nav-icon">
+            <div class="fixed-nav-search">
+                <img src="../assets/home/icon/3.png" alt="">
+                <input type="text" placeholder="冰洗抢300元神券">
+            </div>
+            <img src="../assets/home/icon/2.png" alt="" class="fixed-nav-icon">
+        </div>
 
+        <div class="sign">
+            <img src="../assets/home/backgroud/8.png" alt="">
+        </div>
 
         <div class="footer">
             <router-link to="/" class="go">
-                <img src="../assets/home/icon/5.png" alt="">
-                <span>猜你喜欢</span>
+                <template v-if="true">
+                    <img src="../assets/home/icon/5.png" alt="">
+                    <span>猜你喜欢</span>
+                </template>
+                <template v-else>
+                    <img src="../assets/home/icon/6.png" alt="">
+                    <span>首页</span>
+                </template>
             </router-link>
             <router-link to="/classification" class="go">
                 <img src="../assets/home/icon/7.png" alt="">
@@ -204,6 +221,11 @@ export default {
         },
         ad21(){
             return ad2[0];
+        }
+    },
+    methods:{
+        searchClick(){
+            this.$router.push('search');
         }
     }
 }
@@ -365,10 +387,62 @@ export default {
     margin: 0 auto;
     background: #f7f7f7;
 }
-
-
-
-
+.fixed-nav{
+    width: 15rem;
+    padding: 0 .68rem;
+    height: 1.76rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: url(../assets/home/backgroud/1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+.fixed-nav-icon{
+    width: .72rem;
+    height: 1.2rem;
+}
+.fixed-nav-search{
+    width: 10.44rem;
+    height: 1.28rem;
+    border-radius: .6rem;
+    background: #fff;
+    display: flex;
+    align-items: center;
+}
+.fixed-nav-search img{
+    width: .72rem;
+    height: .72rem;
+    margin-left: .4rem;
+}
+.fixed-nav-search input{
+    margin: 0 .4rem 0 .2rem;
+    outline: none;
+    border: none;
+    flex-grow: 1;
+    font-size: .56rem;
+    color: #999;
+}
+.sign{
+    width: 15rem;
+    height: 1.8rem;
+    position: fixed;
+    margin: 0 auto;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+.sign img{
+    width: 15rem;
+    height: 1.8rem;
+}
 
 .footer{
     box-sizing: content-box;
@@ -383,6 +457,7 @@ export default {
     margin: 0 auto;
     width: 15rem;
     height: 2rem;
+    z-index: 9999;
 }
 .go{
     flex-grow: 1;

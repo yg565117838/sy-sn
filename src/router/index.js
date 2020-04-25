@@ -7,6 +7,7 @@ import Classification from '../views/Classification.vue'
 import MustGrabList from '../views/MustGrabList.vue'
 import ShoppingCart from '../views/ShoppingCart.vue'
 import MyEbay from '../views/MyEbay.vue'
+import Search from '../views/Search.vue'
 
 Vue.use(VueRouter)
 
@@ -46,6 +47,10 @@ const routes = [
     path: '/myebay',
     component: MyEbay
   },
+  {
+    path:'/search',
+    component:Search
+  }
 ]
 
 const router = new VueRouter({
