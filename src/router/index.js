@@ -7,15 +7,15 @@ import Classification from '../views/Classification.vue'
 import MustGrabList from '../views/MustGrabList.vue'
 import ShoppingCart from '../views/ShoppingCart.vue'
 import MyEbay from '../views/MyEbay.vue'
-
+import NotShopCart from "../views/ShopCart-Not.vue"
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: Home
+  // },
   {
     path: "/details",
     name: "Detailpage",
@@ -26,10 +26,10 @@ const routes = [
     name:"Commentpage",
     component:Commentpage
   },
-  // {
-  //   path: '/',
-  //   component: Home
-  // },
+  {
+    path: '/',
+    component: Home
+  },
   {
     path: '/Classification',
     component: Classification
@@ -46,6 +46,11 @@ const routes = [
     path: '/myebay',
     component: MyEbay
   },
+  {
+    path:"/notlogincart",
+    component:NotShopCart
+  },
+
 ]
 
 const router = new VueRouter({

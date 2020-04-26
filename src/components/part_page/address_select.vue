@@ -119,4 +119,7 @@ export default {
   left: 0;
   z-index: 1;
 }
+body{
+  line-height: 1;
+}
 </style>

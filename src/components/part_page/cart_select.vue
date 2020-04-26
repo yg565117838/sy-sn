@@ -11,10 +11,10 @@
           <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
         </div>
         <div class="cart_select_price">
-          <p class="change_price">￥299.00 到手价￥279.00</p>
+          <p class="change_price">￥{{$route.query.price1}}{{$route.query.price2}} </p>
           <span class="coding">商品编码：1005010218</span>
         </div>
-        <div class="cart_select_text">美的（Media）WAOHAO5A一锅双胆5L12大烹饪菜单7大压力调节韩式电饭煲电压力锅</div>
+        <div class="cart_select_text">{{$route.query.title}}</div>
       </div>
     </div>
     <!-- 中间（auto） -->
@@ -250,8 +250,14 @@ export default {
         },
         plus(){
             this.$emit("plus-num");
-        }
+        },
+      
 
+    },
+    computed:{
+      discount(){
+        return this.$route.query.price1-20;
+      }
     }
         
 };
@@ -417,7 +423,6 @@ export default {
   margin-left: -0.083rem;
   padding: 0 0.125rem;
   border: 0.042rem solid rgb(255, 204, 0);
-  border-right: transparent;
   font-size: 0.5rem;
 }
 .left_bgd {
@@ -426,8 +431,6 @@ export default {
   left: -0.542rem;
   width: 100%;
   height: 0.708rem;
-  background: url(../../assets/detailsImg/shopcartImg/leftbgd.png) center center
-    no-repeat;
   z-index: -1;
 }
 .right_bgd {
@@ -437,8 +440,6 @@ export default {
   left: 0.625rem;
   width: 100%;
   height: 0.75rem;
-  background: url(../../assets/detailsImg/shopcartImg/rightbgd.png) center
-    center no-repeat;
   z-index: -1;
 }
 .all_two {
@@ -650,4 +651,5 @@ b {
 .v-leave-to {
   transform: translateY(18.75rem);
 }
+
 </style>

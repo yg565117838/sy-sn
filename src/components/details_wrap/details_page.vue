@@ -72,8 +72,8 @@
         <!-- 价格 -->
         <div class="price">
           <span class="price_number" @scroll="nubs">
-            ￥239.
-            <span id="small_number">00</span>
+            ￥{{$route.query.price1}}
+            <span id="small_number">{{$route.query.price2}}</span>
           </span>
           <span class="new_yeartag">新年特惠</span>
           <span class="origin_price">￥290.00</span>
@@ -92,7 +92,7 @@
         <div class="attention_container">
           <div class="attention_menu">
             <div class="media_title">
-              <span class="intro_text">美的（Media）WAOHAO5A一锅双胆5L12大烹饪菜单7大压力调节韩式电饭煲电压力锅</span>
+              <span class="intro_text">{{$route.query.title}}</span>
             </div>
             <div class="attention_img">
               <img src="../../assets/detailsImg/detailspage/attention.png" alt />
@@ -364,19 +364,20 @@ export default {
 }
 
 #small_number {
-  font-size: 0.5rem;
+  font-weight: 700 !important;
+  font-size: 0.7rem;
+  margin-left: -0.208rem;
 }
 
 .new_yeartag {
   display: inline-block;
-  height: 0.875rem;
   margin-left: 0.625rem;
-  margin-top: 0.208rem;
-  padding: 0 0.417rem;
+  margin-top: 0.308rem;
+  padding: 0 0.317rem;
   border: 0.042rem solid red;
   border-radius: 0.417rem;
   color: red;
-  font-size: 0.583rem;
+  font-size: 0.5rem;
   font-weight: bold;
   text-align: center;
   vertical-align: top;
@@ -390,7 +391,7 @@ export default {
 }
 
 .price {
-  padding: 1.25rem 0.417rem 0.625rem 0.417rem;
+  padding: 0.9rem 0.417rem 0.625rem 0.417rem;
 }
 
 .gray_container {
@@ -431,6 +432,7 @@ export default {
 
 .media_title {
   margin: 0.625rem 0 0 0.542rem;
+
 }
 
 .attention_img {
@@ -446,13 +448,13 @@ export default {
 }
 
 .intro_text {
-  font-size: 0.75rem;
+  font-size: 0.64rem;
   font-weight: bold;
 }
 
 .net {
-  width: 90%;
-  margin: 0 5%;
+  width: 94%;
+  margin: 0 3%;
   margin-top: 0.417rem;
   padding-bottom: 0.417rem;
   font-size: 0.583rem;
@@ -1072,6 +1074,7 @@ b {
 }
 body {
   background-color: white !important;
+  line-height: 1 !important;
 }
 .quick_nav {
   position: fixed;
