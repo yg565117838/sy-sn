@@ -8,6 +8,8 @@ import MustGrabList from '../views/MustGrabList.vue'
 import ShoppingCart from '../views/ShoppingCart.vue'
 import MyEbay from '../views/MyEbay.vue'
 import NotShopCart from "../views/ShopCart-Not.vue"
+import Search from '../views/Search.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,9 +24,9 @@ const routes = [
     component: Detailpage
   },
   {
-    path:"/comment",
-    name:"Commentpage",
-    component:Commentpage
+    path: "/comment",
+    name: "Commentpage",
+    component: Commentpage
   },
   {
     path: '/',
@@ -47,10 +49,13 @@ const routes = [
     component: MyEbay
   },
   {
-    path:"/notlogincart",
-    component:NotShopCart
+    path: "/notlogincart",
+    component: NotShopCart
   },
-
+  {
+    path: '/search',
+    component: Search
+  }
 ]
 
 const router = new VueRouter({
