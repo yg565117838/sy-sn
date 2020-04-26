@@ -9,7 +9,7 @@
             </div>
             <span>搜索</span>
         </div>
-        <div class="content" v-show="true">
+        <div class="content" v-show="false">
             <div class="content-title">
                 <p>
                     搜索
@@ -39,7 +39,7 @@
                 </p>
             </div>
         </div>
-        <div class="body" v-show="false">
+        <div class="body" v-show="true">
             <p class="body-title">热门搜索</p>
             <div class="body-list">
                 <div class="body-content">养生壶</div>
@@ -64,6 +64,7 @@ export default {
 <style scoped>
 .search{
     background: #fff;
+    height: 100%;
 }
 .header{
     height: 1.76rem;
@@ -114,7 +115,7 @@ export default {
 
 
 .content{
-    min-height: 768px;
+    height: calc(100% - 1.76rem);
 }
 .content-title{
     height: 1.76rem;
@@ -175,7 +176,7 @@ export default {
 
 
 .body{
-    min-height: 768px;
+    height: calc(100% - 1.76rem);
     padding: .8rem .56rem;
     margin: 0;
 }

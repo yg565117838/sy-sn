@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    shopList:[]
+    shopList:[],
+    searchPlaceholder:'冰洗抢300元神券'
   },
   mutations: {
     addData(state,obj){
