@@ -6,8 +6,11 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import animate from 'animate.css'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(animate)
 Vue.use(VueAxios,axios)
+Vue.use(ElementUI);
 
 import 'swiper/css/swiper.css'
 

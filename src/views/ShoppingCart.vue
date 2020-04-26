@@ -4,13 +4,13 @@
       <div class="true_title">
         <div class="git"></div>
         <div>购物车</div>
-        <div class="edit">编辑</div>
+        <div class="edit" @click="status==!status">{{editbtn}}</div>
       </div>
       <div class="label_one">
         <span>重庆市重庆南岸区</span>
         <div class="icon_right"></div>
       </div>
-      <div class="overall_good">
+      <div class="overall_good" :key="index" v-for="(item,index) in shopList">
         <div class="addshop">
           <div class="add_head">
             <span class="check_box">
@@ -32,24 +32,25 @@
             <span class="inner"></span>
           </span>
           <div class="right_true">
-            <div class="pic"></div>
+            <div class="pic">
+              <img :src="item.img" alt />
+            </div>
             <div class="true_text">
-              <p class="article">荣事达电饭煲RWKS-987DSIUF微电脑迷你电饭锅</p>
+              <p class="article">{{item.title}}</p>
               <div class="big_container">
-                <div class="big">2L全息触控</div>
+                <div class="big">{{item.qt}}</div>
                 <div class="buy_service">购买服务</div>
               </div>
               <span class="secondkill">秒杀</span>
-              <div class="most">最多买19件</div>
               <div class="last">
                 <div class="piice">
-                  ￥199.
-                  <span class="xiao">00</span>
+                  ￥{{item.integer}}
+                  <span class="xiao">{{item.decimals}}</span>
                 </div>
                 <div class="select_wrap_container">
-                  <button class="minus clearfix">-</button>
-                  <input type="text" class="input_container clearfix" />
-                  <i class="plus clearfix">+</i>
+                  <button class="minus clearfix" @click="cartMinus(item)" :disabled="zero">-</button>
+                  <input type="text" class="input_container clearfix" :value="item.num"  />
+                  <i class="plus clearfix" @click="cartPlus(item)">+</i>
                 </div>
               </div>
             </div>
@@ -90,25 +91,23 @@
           <span class="inner"></span>
         </span>
         <span class="all">全部</span>
-</div>
-        <div class="count_right">
-          <div class="count_text">
-            <div class="all_money">
-              <span>合计</span>
-              <span class="good_price">
-              <span class="sign">￥</span>0.
-                <span class="sign">00</span>
-              </span>
-            </div>
-            <div class="road">
-              <span>含运费:</span>
-              <span>￥0</span>
-            </div>
+      </div>
+      <div class="count_right">
+        <div class="count_text">
+          <div class="all_money">
+            <span>合计：</span>
+            <span class="good_price">
+              <span class="sign">￥</span>{{countPrice}}.
+              <span class="smallsign">{{countSmall}}</span>
+            </span>
           </div>
-          <button>去结算(0)</button>
-
+          <div class="road">
+            <span>含运费:</span>
+            <span>￥0</span>
+          </div>
         </div>
-      
+        <button>{{message}}({{count}})</button>
+      </div>
     </div>
     <div class="footer">
       <router-link to="/" class="go">
@@ -134,6 +133,67 @@
     </div>
   </div>
 </template>
+<script>
+import Vue from "vue";
+import Vuex from "vuex";
+Vue.use(Vuex);
+import store from "../store/index.js";
+export default {
+    data(){
+      return {
+        zero:false,
+        status:true,
+        editbtn:"编辑",
+        message:"去结算"
+      }
+    },
+  computed: {
+    shopList() {
+      return this.$store.state.shopList;
+    },
+    count(){
+      let sum=0;
+      for(let val of this.$store.state.shopList){
+        sum+=val.num;
+      }
+      return sum;
+    },
+    countPrice(){
+      let price=0;
+      for(let res of this.$store.state.shopList){
+        price+=res.num*(res.integer);
+      }
+      return price;
+    },
+    countSmall(){
+      let smallnum=0;
+      for(let res of this.$store.state.shopList){
+        smallnum+=res.num*(res.decimals.slice(1));
+      }
+      return smallnum;
+    },
+   
+ 
+   
+  
+  },
+    methods: {
+      cartPlus(item) {
+        console.log(item.decimals.slice(1)*2);
+        item.num++;
+        if (item.num != 1) {
+          this.zero = false;
+        }
+      },
+      cartMinus(item) {
+        item.num--;
+        if (item.num == 1) {
+          this.zero = true;
+        }
+      },
+    },
+};
+</script>
 <style scoped>
 .youlike {
   width: 8.16rem;
@@ -160,26 +220,33 @@
   display: flex;
   flex-wrap: wrap;
 }
-.all{
+.all {
   font-size: 0.56rem;
   margin-left: 0.208rem;
   margin-top: 0.13rem;
 }
-.all_money{
+.all_money {
   font-size: 0.56rem;
 }
-.road{
+.road {
   font-size: 0.45rem;
   margin-top: 0.208rem;
 }
 .sign {
-  font-size: 0.2rem;
+  
+  font-weight: 700;
+  font-size: 0.4rem;
+}
+.smallsign{
+  margin-left: -0.133rem;
+  font-size: 0.3rem;
+  font-weight: 900;
 }
 .shop_wrap {
   padding: 0.7rem;
   border-radius: 0.333rem;
 }
-.count_page{
+.count_page {
   display: flex;
   position: fixed;
   left: 0;
@@ -202,10 +269,10 @@
 .shop_title {
   margin-top: 0.456rem;
 }
-.count_right{
+.count_right {
   display: flex;
 }
-.count_right button{
+.count_right button {
   width: 4rem;
   height: 1.24rem;
   background-color: #fb0;
@@ -214,9 +281,8 @@
   outline: none;
   border-radius: 0.208rem;
   font-weight: 700;
-
 }
-.count_text{
+.count_text {
   margin-right: 0.208rem;
   margin-top: 0.125rem;
 }
@@ -229,9 +295,9 @@
 .good_price {
   font-weight: 700;
   color: red;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
 }
-.sign{
+.sign {
   color: red;
 }
 .shop_title {
@@ -246,16 +312,16 @@
   padding-bottom: 0.9rem;
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 0.3rem;
 }
 .most {
   margin-top: 0.5rem;
   color: #ff6700;
 }
-.count_left{
+.count_left {
   display: flex;
 }
-.count_page{
+.count_page {
   padding: 0.417rem;
 }
 .overall_good {
@@ -315,9 +381,10 @@
   width: 3.51rem;
   height: 3.51rem;
   margin-left: 0.55rem;
-  background: url(../assets/detailsImg/detailspage/cooker.png) center center
-    no-repeat;
-  background-size: contain;
+}
+.pic img {
+  width: 100%;
+  height: 100%;
 }
 .ff {
   margin-left: 0.208rem;

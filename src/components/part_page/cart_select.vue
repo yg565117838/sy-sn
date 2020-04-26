@@ -1,269 +1,285 @@
 <template>
-<transition>
-  <div class="cart_select" v-if="selectpage">
-    <!-- 定位 -->
-    <div class="style_img"></div>
-    <!-- 头部 -->
-    <div class="cart_select_header">
-      <div class="interlayer"></div>
-      <div class="cancel_box">
-        <div class="cancel_btn" @click="cartCancel">
-          <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
-        </div>
-        <div class="cart_select_price">
-          <p class="change_price">￥{{$route.query.price1}}{{$route.query.price2}} </p>
-          <span class="coding">商品编码：1005010218</span>
-        </div>
-        <div class="cart_select_text">{{$route.query.title}}</div>
+  <transition>
+    <div class="cart_select" v-if="selectpage">
+      <!-- 定位 -->
+      <div class="style_img">
+        <img :src="this.$route.query.img" alt />
       </div>
-    </div>
-    <!-- 中间（auto） -->
-    <div class="cart_select_middle">
-      <div class="capacity">容量</div>
-      <div class="kind">
-        <div class="first_line">
-          <span class="select_label">
-            <i class="mini_img">
-              <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-            </i>
-            <span class="cart_select_name">5L经典款</span>
-          </span>
-          <span class="select_label">
-            <i class="mini_img">
-              <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-            </i>
-            <span class="cart_select_name">5L韩式浓香</span>
-          </span>
-        </div>
-        <div class="second_line">
-          <span class="select_label">
-            <i class="mini_img">
-              <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-            </i>
-            <span class="cart_select_name">5L大红爆款</span>
-          </span>
-          <span class="select_label">
-            <i class="mini_img">
-              <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-            </i>
-            <span class="cart_select_name">4.8L双圆灶釜</span>
-          </span>
-        </div>
-        <div class="third_line">
-          <span class="select_label">
-            <i class="mini_img">
-              <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-            </i>
-            <span class="cart_select_name">【新品】4.8精控浓香</span>
-          </span>
-          <span class="select_label">
-            <i class="mini_img">
-              <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
-            </i>
-            <span class="cart_select_name">5L IH品质</span>
-          </span>
+      <!-- 头部 -->
+      <div class="cart_select_header">
+        <div class="interlayer"></div>
+        <div class="cancel_box">
+          <div class="cancel_btn" @click="cartCancel">
+            <img src="../../assets/detailsImg/detailspage/cancel.png" alt />
+          </div>
+          <div class="cart_select_price">
+            <p class="change_price">￥{{$route.query.price1}}{{$route.query.price2}}</p>
+            <span class="coding">商品编码：1005010218</span>
+          </div>
+          <div class="cart_select_text">{{$route.query.title}}</div>
         </div>
       </div>
-      <!-- 选择数量 -->
-      <div class="cart_select_number">
-        <div class="number_text">购买数量</div>
-        <div class="select_wrap_container">
-          <button class="minus clearfix" @click="minus" :disabled="zero">-</button>
-          <input type="text" class="input_container clearfix" :value="num" />
-          <i class="plus clearfix" @click="plus">+</i>
-        </div>
-      </div>
-      <!-- 选择数量 -->
-      <!-- 购买增值服务 -->
-      <div class="buy_container">
-        <div class="buy_add_service">购买增值服务</div>
-        <div class="addmoney_service">
-          <div>
-            <span class="draw">领延保券</span>
-            <span class="add_number_left">
-              <i class="left_bgd"></i>
-              ￥200.00
-            </span>
-            <span class="opacity">
-              最高减200元
-              <i class="right_bgd"></i>
+      <!-- 中间（auto） -->
+      <div class="cart_select_middle">
+        <div class="capacity">规格</div>
+        <div class="kind">
+          <div class="first_line">
+            <span
+              class="select_label"
+              :key="index"
+              v-for="(item,index) in spece"
+              :class="{'active':selectPage==index}"
+              @click="speceClick(item,index)"
+            >
+              <div class="mini_img">
+                <img :src="image" alt />
+              </div>
+              <span class="cart_select_name">{{item.type}}</span>
             </span>
           </div>
-          <div class="right_alltwo">
-            <span class="all_two">共2张</span>
-            <i class="right">
-              <img src="../../assets/detailsImg/detailspage/right.png" alt />
-            </i>
+        </div>
+        <!-- 选择数量 -->
+        <div class="cart_select_number">
+          <div class="number_text">购买数量</div>
+          <div class="select_wrap_container">
+            <button class="minus clearfix" @click="minus" :disabled="zero">-</button>
+            <input type="text" class="input_container clearfix" :value="num" />
+            <i class="plus clearfix" @click="plus">+</i>
           </div>
         </div>
-      </div>
-      <!-- 购买增值服务 -->
-      <!-- 只换不修 -->
-      <div>
-        <div class="changenot">
-          <div class="change_left">
-            <i class="not_img">
-              <img src="../../assets/detailsImg/shopcartImg/changenot.png" alt />
-            </i>
-            <span class="not_text">只换不修</span>
-            <span class="protect_text">厂保性能保障...</span>
-          </div>
-          <div class="change_right">
-            <span class="see_details">查看详情</span>
-            <i class="unknow">
-              <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-            </i>
+        <!-- 选择数量 -->
+        <!-- 购买增值服务 -->
+        <div class="buy_container">
+          <div class="buy_add_service">购买增值服务</div>
+          <div class="addmoney_service">
+            <div>
+              <span class="draw">领延保券</span>
+              <span class="add_number_left">
+                <i class="left_bgd"></i>
+                ￥200.00
+              </span>
+              <span class="opacity">
+                最高减200元
+                <i class="right_bgd"></i>
+              </span>
+            </div>
+            <div class="right_alltwo">
+              <span class="all_two">共2张</span>
+              <i class="right">
+                <img src="../../assets/detailsImg/detailspage/right.png" alt />
+              </i>
+            </div>
           </div>
         </div>
+        <!-- 购买增值服务 -->
         <!-- 只换不修 -->
-        <!-- 选项 -->
-        <div class="options">
-          <div class="top_line">
-            <span class="options_plan">只换不修1年 | ￥70.00</span>
-            <span class="options_plan ig">只换不修2年 | ￥105.00</span>
+        <div>
+          <div class="changenot">
+            <div class="change_left">
+              <i class="not_img">
+                <img src="../../assets/detailsImg/shopcartImg/changenot.png" alt />
+              </i>
+              <span class="not_text">只换不修</span>
+              <span class="protect_text">厂保性能保障...</span>
+            </div>
+            <div class="change_right">
+              <span class="see_details">查看详情</span>
+              <i class="unknow">
+                <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
+              </i>
+            </div>
           </div>
-          <div class="foot_line">
-            <span class="options_plan">只换不修3年 | ￥150.00</span>
+          <!-- 只换不修 -->
+          <!-- 选项 -->
+          <div class="options">
+            <div class="top_line">
+              <span class="options_plan">只换不修1年 | ￥70.00</span>
+              <span class="options_plan ig">只换不修2年 | ￥105.00</span>
+            </div>
+            <div class="foot_line">
+              <span class="options_plan">只换不修3年 | ￥150.00</span>
+            </div>
           </div>
+          <!-- 选项 -->
         </div>
-        <!-- 选项 -->
-      </div>
 
-      <!-- 整机保 -->
+        <!-- 整机保 -->
 
-      <div>
-        <div class="changenot">
-          <div class="change_left">
-            <i class="not_img">
-              <img src="../../assets/detailsImg/shopcartImg/allpro.png" alt />
-            </i>
-            <span class="not_text">全保修</span>
-            <span class="protect_text">性能以外全保修</span>
+        <div>
+          <div class="changenot">
+            <div class="change_left">
+              <i class="not_img">
+                <img src="../../assets/detailsImg/shopcartImg/allpro.png" alt />
+              </i>
+              <span class="not_text">全保修</span>
+              <span class="protect_text">性能以外全保修</span>
+            </div>
+            <div class="change_right">
+              <span class="see_details">查看详情</span>
+              <i class="unknow">
+                <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
+              </i>
+            </div>
           </div>
-          <div class="change_right">
-            <span class="see_details">查看详情</span>
-            <i class="unknow">
-              <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-            </i>
+          <!-- 只换不修 -->
+          <!-- 选项 -->
+          <div class="options">
+            <div class="top_line">
+              <span class="options_plan">全保修3年 | ￥59.00</span>
+              <span class="options_plan ig">全保修5年 | ￥79.00</span>
+            </div>
           </div>
+          <!-- 选项 -->
         </div>
-        <!-- 只换不修 -->
-        <!-- 选项 -->
-        <div class="options">
-          <div class="top_line">
-            <span class="options_plan">全保修3年 | ￥59.00</span>
-            <span class="options_plan ig">全保修5年 | ￥79.00</span>
-          </div>
-        </div>
-        <!-- 选项 -->
-      </div>
-      <!-- 整机保 -->
+        <!-- 整机保 -->
 
-      <!-- 全保修 -->
-      <div>
-        <div class="changenot">
-          <div class="change_left">
-            <i class="not_img">
-              <img src="../../assets/detailsImg/shopcartImg/allpro2.png" alt />
-            </i>
-            <span class="not_text">整机保</span>
-            <span class="protect_text">整机性能故障免费...</span>
+        <!-- 全保修 -->
+        <div>
+          <div class="changenot">
+            <div class="change_left">
+              <i class="not_img">
+                <img src="../../assets/detailsImg/shopcartImg/allpro2.png" alt />
+              </i>
+              <span class="not_text">整机保</span>
+              <span class="protect_text">整机性能故障免费...</span>
+            </div>
+            <div class="change_right">
+              <span class="see_details">查看详情</span>
+              <i class="unknow">
+                <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
+              </i>
+            </div>
           </div>
-          <div class="change_right">
-            <span class="see_details">查看详情</span>
-            <i class="unknow">
-              <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-            </i>
+          <!-- 只换不修 -->
+          <!-- 选项 -->
+          <div class="options">
+            <div class="top_line">
+              <span class="options_plan">整机保2年 | ￥39.00</span>
+              <span class="options_plan ig">整机保3年 | ￥59.00</span>
+            </div>
+            <div class="foot_line">
+              <span class="options_plan">整机保4年 | ￥89.00</span>
+            </div>
           </div>
+          <!-- 选项 -->
         </div>
-        <!-- 只换不修 -->
-        <!-- 选项 -->
-        <div class="options">
-          <div class="top_line">
-            <span class="options_plan">整机保2年 | ￥39.00</span>
-            <span class="options_plan ig">整机保3年 | ￥59.00</span>
-          </div>
-          <div class="foot_line">
-            <span class="options_plan">整机保4年 | ￥89.00</span>
-          </div>
-        </div>
-        <!-- 选项 -->
-      </div>
-      <!-- 全保修 -->
-      <!-- 百万 -->
+        <!-- 全保修 -->
+        <!-- 百万 -->
 
-      <div>
-        <div class="changenot">
-          <div class="change_left">
-            <i class="not_img">
-              <img src="../../assets/detailsImg/shopcartImg/changenot.png" alt />
-            </i>
-            <span class="not_text">百万家财保障</span>
-            <span class="protect_text">百万保额，先补录...</span>
+        <div>
+          <div class="changenot">
+            <div class="change_left">
+              <i class="not_img">
+                <img src="../../assets/detailsImg/shopcartImg/changenot.png" alt />
+              </i>
+              <span class="not_text">百万家财保障</span>
+              <span class="protect_text">百万保额，先补录...</span>
+            </div>
+            <div class="change_right">
+              <span class="see_details">查看详情</span>
+              <i class="unknow">
+                <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
+              </i>
+            </div>
           </div>
-          <div class="change_right">
-            <span class="see_details">查看详情</span>
-            <i class="unknow">
-              <img src="../../assets/detailsImg/shopcartImg/unknow.png" alt />
-            </i>
+          <!-- 只换不修 -->
+          <!-- 选项 -->
+          <div class="options">
+            <div class="top_line">
+              <span class="options_plan">￥20.00</span>
+            </div>
           </div>
+          <!-- 选项 -->
         </div>
-        <!-- 只换不修 -->
-        <!-- 选项 -->
-        <div class="options">
-          <div class="top_line">
-            <span class="options_plan">￥20.00</span>
-          </div>
-        </div>
-        <!-- 选项 -->
+        <!-- 百万 -->
       </div>
-      <!-- 百万 -->
+      <!-- 底部 -->
+      <div class="cart_select_footer">
+        <div class="noname">
+          <span class="warn">
+            当前活动可参加满减活动，预计优惠
+            <b>20.00元</b>
+          </span>
+        </div>
+        <div class="last_btn">
+          <button>马上去抢购</button>
+          <el-button :plain="true" @click="open2">加入购物车</el-button>
+        </div>
+      </div>
     </div>
-    <!-- 底部 -->
-    <div class="cart_select_footer">
-      <div class="noname">
-        <span class="warn">
-          当前活动可参加满减活动，预计优惠
-          <b>20.00元</b>
-        </span>
-      </div>
-      <div class="last_btn">
-        <button>马上抢</button>
-        <button>加入购物车</button>
-      </div>
-    </div>
-  </div>
-  
-  
   </transition>
 </template>
 
 <script>
+import Vue from "vue";
+import Vuex from "vuex";
+Vue.use(Vuex);
+import store from "../../store/index.js";
 export default {
-    props:["selectpage","zero","num"],
-    methods:{
-        cartCancel(){
-            this.$emit("cart-cancel");
-        },
-        minus(){
-            this.$emit("minus-num");
-        },
-        plus(){
-            this.$emit("plus-num");
-        },
-      
-
+  props: ["selectpage", "zero", "num","cover"],
+  methods: {
+    cartCancel() {
+      this.$emit("cart-cancel");
     },
-    computed:{
-      discount(){
-        return this.$route.query.price1-20;
-      }
+    minus() {
+      this.$emit("minus-num");
+    },
+    plus() {
+      this.$emit("plus-num");
+    },
+
+    open2() {
+      this.$emit("cover-none")
+      this.$message({
+        message: "加入购物车成功",
+        type: "success"
+      });
+      let qt = this.$route.query.qt;
+      let title = this.$route.query.title;
+      let integer = this.$route.query.price1;
+      let decimals = this.$route.query.price2;
+      let img = this.$route.query.img;
+      let num=this.num;
+      let obj = {
+        qt: qt,
+        title: title,
+        integer: integer,
+        decimals: decimals,
+        img: img,
+        num:num
+      };
+      this.$store.commit("addData", obj);
+      this.selectPage = 0;
+      
+    },
+    speceClick(item, index) {
+      this.selectPage = index;
+      this.$route.query.price1 = item.count;
+      this.$route.query.qt = item.type;
     }
-        
+  },
+  data() {
+    return {
+      selectPage: 0
+    };
+  },
+  computed: {
+    spece() {
+      return this.$route.query.spece;
+    },
+    image() {
+      return this.$route.query.img;
+    }
+  },
+  mounted() {
+    this.$router.afterEach((to, from, next) => {
+      window.scrollTo(0, 0);
+    });
+  }
 };
 </script>
 <style>
-    .cart_select,
+.cart_select,
 .address_select,
 .service_select,
 .see_select {
@@ -362,7 +378,7 @@ export default {
   float: left;
   width: 0.833rem;
   height: 0.833rem;
-  background-color:#eee;
+  background-color: #eee;
   line-height: 0.833rem;
   text-align: center;
   font-weight: bold;
@@ -370,7 +386,7 @@ export default {
   border-radius: 50%;
   margin-top: 0.125rem;
 }
-.minus{
+.minus {
   outline: none;
   border-style: none;
 }
@@ -564,15 +580,18 @@ b {
   outline: none;
   border-style: none;
   padding: 0 0.625rem;
+  font-size: 0.5rem;
 }
 .last_btn button:last-child {
-  flex-grow: 1;
-  margin-right: 0.417rem;
-  background-color: #ff6700;
-  color: white;
-  outline: none;
-  border-style: none;
-  border-radius: 0 0.25rem 0.25rem 0;
+  height: 1.333rem !important;
+  flex-grow: 1 !important;
+  margin-right: 0.417rem !important;
+  background-color: #ff6700 !important;
+  color: white !important;
+  outline: none !important;
+  border-style: none !important;
+  border-radius: 0 0.25rem 0.25rem 0 !important;
+  font-size: 0.5rem;
 }
 
 .qucik {
@@ -637,9 +656,11 @@ b {
   width: 4.16rem;
   height: 4.16rem;
   border-radius: 0.333rem;
-  background: url(../../assets/detailsImg/detailspage/cooker.png) no-repeat;
-  background-size: contain;
   border: 0.042rem solid #ccc;
+}
+.style_img img {
+  width: 100%;
+  height: 100%;
 }
 .v-enter {
   transform: translateY(18.75rem);
@@ -651,5 +672,23 @@ b {
 .v-leave-to {
   transform: translateY(18.75rem);
 }
-
+.el-message--success {
+  background-color: black !important;
+  border-color: black !important;
+  text-align: center;
+}
+.el-message__content {
+  color: white !important;
+}
+.el-icon-success::before {
+  content: "" !important;
+}
+.el-message {
+  justify-content: center;
+  padding: 15px !important;
+}
+.active {
+  background-color: rgb(255, 237, 162);
+  border: 0.042rem solid rgb(255, 204, 0);
+}
 </style>

@@ -35,7 +35,7 @@
       </transition>
       <!-- 服务选择 -->
 
-    <serviceselect :servicepage="servicepage" @service-cancel="cancelBtn"></serviceselect>
+      <serviceselect :servicepage="servicepage" @service-cancel="cancelBtn"></serviceselect>
 
       <!-- 购物车选择商品 -->
       <cartselect
@@ -45,6 +45,7 @@
         @minus-num="minusNum"
         @plus-num="plusNum"
         :num="num"
+        @cover-none="coverNone"
       ></cartselect>
       <!-- 购物车选择商品页面 -->
 
@@ -53,17 +54,16 @@
       <!-- 轮播图 -->
 
       <!-- 地址选择 -->
-      <addressselect :addresspage="addresspage" @address-cancel="cancelBtn" ></addressselect>
+      <addressselect :addresspage="addresspage" @address-cancel="cancelBtn"></addressselect>
       <!-- 地址选择 -->
 
-   
-      <div >
-        <div class="lvzy" v-if="ozy" ></div>
+      <div>
+        <div class="lvzy" v-if="ozy"></div>
         <div class="back" @click="backMainpage"></div>
         <div class="more" @click="moreClick" v-if="more">
           <div class="wrong" v-if="close" @click.stop="closeNav"></div>
-      <!-- 导航栏 -->
-      <quicknav :quicknav="quicknav"></quicknav>
+          <!-- 导航栏 -->
+          <quicknav :quicknav="quicknav"></quicknav>
         </div>
       </div>
 
@@ -174,6 +174,7 @@
         <!--  -->
       </div>
       <!-- 评价 -->
+      <div class="fix"></div>
       <div class="gray_box">
         <div class="six_container" @click="commentClick">
           <div class="six_head">
@@ -245,7 +246,7 @@ export default {
       see: false,
       num: 1,
       zero: false,
-      ozy:false
+      ozy: false
     };
   },
   components: {
@@ -304,7 +305,7 @@ export default {
       this.coverRelieve();
       this.close = false;
     },
-   
+
     serviceClick() {
       this.servicepage = true;
       this.cover = true;
@@ -313,8 +314,8 @@ export default {
       this.see = true;
       this.cover = true;
     },
-    nubs(){
-      console.log(111)
+    nubs() {
+      console.log(111);
     },
     plusNum() {
       this.num++;
@@ -327,9 +328,18 @@ export default {
       if (this.num == 1) {
         this.zero = true;
       }
+    },
+    coverNone(){
+      this.cover=false;
+      this.selectpage=false;
+      this.num=1
     }
   },
-
+  mounted() {
+    this.$router.afterEach((to, from, next) => {
+      window.scrollTo(0, 0);
+    });
+  }
 };
 </script>
  
@@ -432,7 +442,6 @@ export default {
 
 .media_title {
   margin: 0.625rem 0 0 0.542rem;
-
 }
 
 .attention_img {
@@ -1084,7 +1093,7 @@ body {
   background-color: white;
   border-radius: 0.333rem;
 }
-.lvzy{
+.lvzy {
   position: fixed;
   top: 0;
   left: 0;

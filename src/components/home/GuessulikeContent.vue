@@ -30,6 +30,9 @@ export default {
                     title:this.item.title,
                     price1:this.item.price1,
                     price2:this.item.price2,
+                    spece:this.item.spece,
+                    name:this.item.qt,
+                    img:this.item.src
                 }
             })
         }

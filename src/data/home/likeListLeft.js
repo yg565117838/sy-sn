@@ -5,9 +5,17 @@ let likeListLeft = [
         zy:'',
         qt:'',
         text:['秒杀'],
-        price1:'1',
+        price1:'8',
         price2:'.38',
-        evaluate:'90+评价'
+        evaluate:'90+评价',
+        spece:[
+            {type:"5盒装",count:8},
+            {type:"10盒装",count:14},
+            {type:"15盒装",count:19},
+            {type:"20盒装",count:25},
+            {type:"25盒装",count:29},
+            {type:"30盒装",count:34},
+        ]
     },
     {
         src:'/image/home/likeListLeft/2.webp',
@@ -16,8 +24,16 @@ let likeListLeft = [
         qt:'',
         text:['抢'],
         price1:'129',
-        price2:'',
-        evaluate:'700+评价'
+        price2:'.00',
+        evaluate:'700+评价',
+        spece:[
+            {type:"8档触碰式",count:129},
+            {type:"10档自动式",count:149},
+            {type:"一键划控赠双锅",count:159},
+            {type:"经典爆炒赠单锅",count:259},
+            {type:"纤薄机身赠双锅",count:299},
+            {type:"匀火10档可调",count:349},
+        ]
     },
     {
         src:'/image/home/likeListLeft/3.webp',
@@ -27,7 +43,15 @@ let likeListLeft = [
         text:['拼购'],
         price1:'18',
         price2:'.9',
-        evaluate:'3.9万+评价'
+        evaluate:'3.9万+评价',
+        spece:[
+            {type:"土豪金",count:18},
+            {type:"钛灰银",count:25},
+            {type:"中国红",count:21},
+            {type:"玫瑰金",count:38},
+            {type:"出轨绿",count:31},
+            {type:"活力橙",count:45},
+        ]
     },
     {
         src:'/image/home/likeListLeft/4.webp',
@@ -36,8 +60,16 @@ let likeListLeft = [
         qt:'',
         text:['秒杀','领券88-5'],
         price1:'21',
-        price2:'.9',
-        evaluate:'18万+评价'
+        price2:'.8',
+        evaluate:'18万+评价',
+        spece:[
+            {type:"300gx1盒",count:21},
+            {type:"500gx1盒",count:29},
+            {type:"800gx1盒",count:34},
+            {type:"1000gx1盒",count:40},
+            {type:"1200gx1盒",count:50},
+            {type:"1500gx1盒",count:60},
+        ]
     },
     {
         src:'/image/home/likeListLeft/5.webp',
@@ -46,8 +78,16 @@ let likeListLeft = [
         qt:'',
         text:['拼购'],
         price1:'12',
-        price2:'.9',
-        evaluate:'8.8万+评价'
+        price2:'.8',
+        evaluate:'8.8万+评价',
+        spece:[
+            {type:"南孚碱性7号6粒",count:12},
+            {type:"南孚碱性7号10粒",count:14},
+            {type:"南孚碱性7号16粒",count:19},
+            {type:"丰蓝1号6粒",count:13},
+            {type:"纽扣电池5CR2520",count:9},
+            {type:"南孚碱性7号26粒",count:35},
+        ]
     },
     {
         src:'/image/home/likeListLeft/6.webp',
@@ -56,8 +96,16 @@ let likeListLeft = [
         qt:'',
         text:['秒杀','满5890减400','赠'],
         price1:'5899',
-        price2:'',
-        evaluate:'1400+评价'
+        price2:'.00',
+        evaluate:'1400+评价',
+        spece:[
+            {type:"8GB+128GB 亮黑色",count:5899},
+            {type:"8GB+128GB 紫罗兰",count:5899},
+            {type:"8GB+256GB 星河银",count:6399},
+            {type:"8GB+128GB 青山黛",count:5899},
+            {type:"8GB+128GB 丹霞橙",count:5699},
+            {type:"8GB+256GB 翡冷翠",count:6499},
+        ]
     },
     {
         src:'/image/home/likeListLeft/7.webp',
@@ -67,7 +115,15 @@ let likeListLeft = [
         text:['秒杀','每70-15'],
         price1:'74',
         price2:'.9',
-        evaluate:'2.4万+评价'
+        evaluate:'2.4万+评价',
+        spece:[
+            {type:"倍柔",count:74},
+            {type:"护色",count:79},
+            {type:"浪漫樱花",count:82},
+            {type:"薰衣草",count:89},
+            {type:"索菲亚玫瑰",count:98},
+            
+        ]
     },
     {
         src:'/image/home/likeListLeft/8.webp',
@@ -76,8 +132,16 @@ let likeListLeft = [
         qt:'',
         text:['抢','赠'],
         price1:'1999',
-        price2:'',
-        evaluate:'1.4万+评价'
+        price2:'.00',
+        evaluate:'1.4万+评价',
+        spece:[
+            {type:"【一级能效】230升-变频无双三门",count:1999},
+            {type:"【铂金净味】231升-变频无双三门",count:1899},
+            {type:"【变频风冷】215升-节能静音三门",count:2199},
+            {type:"【一级能效】258升-变频智能三门",count:2599},
+            {type:"【中门调温】258升-风冷无双三门",count:2999},
+
+        ]
     },
     {
         src:'/image/home/likeListLeft/9.webp',
@@ -87,7 +151,14 @@ let likeListLeft = [
         text:['秒杀','领券88-5'],
         price1:'25',
         price2:'.9',
-        evaluate:'4.9万+评价'
+        evaluate:'4.9万+评价',
+        spece:[
+            {type:"蟹柳味",count:25},
+            {type:"麻辣蟹柳味",count:24},
+            {type:"香辣蟹柳味",count:29},
+            {type:"蜜汁蟹柳味",count:35},
+
+        ]
     },
     {
         src:'/image/home/likeListLeft/10.webp',
@@ -96,8 +167,16 @@ let likeListLeft = [
         qt:'',
         text:[],
         price1:'49',
-        price2:'',
-        evaluate:'5评价'
+        price2:'.00',
+        evaluate:'5评价',
+        spece:[
+            {type:"白色",count:49},
+            {type:"褐色",count:44},
+            {type:"黑色",count:49},
+            {type:"红白",count:45},
+            {type:"深蓝色",count:49},
+            {type:"绿色",count:66},
+        ]
     },
     {
         src:'/image/home/likeListLeft/11.webp',
@@ -106,8 +185,15 @@ let likeListLeft = [
         qt:'苏宁极物',
         text:['抢','满10减5'],
         price1:'109',
-        price2:'',
-        evaluate:'2000+评价'
+        price2:'.00',
+        evaluate:'2000+评价',
+        spece:[
+            {type:"官方正品（5W+1m线）",count:109},
+            {type:"官方正品（18W+1米线）",count:149},
+            {type:"官方正品（12W+1米线）",count:119},
+            {type:"官方正品（18W+1米线）增收纳盒",count:299},
+            {type:"官方正品（5W头）",count:99},
+        ]
     },
     {
         src:'/image/home/likeListLeft/12.webp',
@@ -116,8 +202,16 @@ let likeListLeft = [
         qt:'',
         text:['抢','满赠','9.6折券','返'],
         price1:'76',
-        price2:'',
-        evaluate:'1.1万+评价'
+        price2:'.00',
+        evaluate:'1.1万+评价',
+        spece:[
+            {type:"3段400g",count:76},
+            {type:"3段600g",count:96},
+            {type:"3段800g",count:106},
+            {type:"3段1000g",count:136},
+            {type:"3段1200g",count:145},
+            {type:"3段1500g",count:160},
+        ]
     },
     {
         src:'/image/home/likeListLeft/13.webp',
@@ -127,7 +221,14 @@ let likeListLeft = [
         text:['抢'],
         price1:'13',
         price2:'.9',
-        evaluate:'3.6万+评价'
+        evaluate:'3.6万+评价',
+        spece:[
+            {type:"多效净白",count:13},
+            {type:"多效护理",count:18},
+            {type:"矿物盐",count:19},
+            {type:"竹炭深结",count:15},
+ 
+        ]
     },
     {
         src:'/image/home/likeListLeft/14.webp',
@@ -136,8 +237,16 @@ let likeListLeft = [
         qt:'',
         text:['抢'],
         price1:'119',
-        price2:'',
-        evaluate:'2.5万+评价'
+        price2:'.00',
+        evaluate:'2.5万+评价',
+        spece:[
+            {type:"0.6L婴儿辅食",count:119},
+            {type:"1.5L全钢机身",count:129},
+            {type:"2L全钢机身",count:159},
+            {type:"2L粉色双刀",count:189},
+            {type:"2.5L全钢机身",count:199},
+            {type:"2.5L灰色机身",count:249},
+        ]
     },
     {
         src:'/image/home/likeListLeft/15.webp',
@@ -147,7 +256,15 @@ let likeListLeft = [
         text:['秒杀'],
         price1:'34',
         price2:'.9',
-        evaluate:'2000+评价'
+        evaluate:'2000+评价',
+        spece:[
+            {type:"500g*4袋",count:34},
+            {type:"500g*6袋",count:44},
+            {type:"500g*8袋",count:59},
+            {type:"500g*10袋",count:65},
+            {type:"500g*16袋",count:89},
+            {type:"500g*20袋",count:124},
+        ]
     },
     {
         src:'/image/home/likeListLeft/16.webp',
@@ -157,7 +274,18 @@ let likeListLeft = [
         text:['拼购','99元3件','领券10-5','包税'],
         price1:'28',
         price2:'.9',
-        evaluate:'1.1万+评价'
+        evaluate:'1.1万+评价',
+        spece:[
+            {type:"升级版",count:28},
+            {type:"净白板",count:34},
+            {type:"白泥去油脂款",count:39},
+            {type:"胶原蛋白款",count:25},
+            {type:"绵润洁面版",count:29},
+            {type:"悦薇洗面奶",count:44},
+            {type:"月丽丝尔洁面",count:45},
+            {type:"超微米净肤",count:49},
+            {type:"银座界面",count:39},
+        ]
     },
     {
         src:'/image/home/likeListLeft/17.webp',
@@ -166,8 +294,14 @@ let likeListLeft = [
         qt:'',
         text:['秒杀','领券2000-30','赠'],
         price1:'1999',
-        price2:'',
-        evaluate:'15万+评价'
+        price2:'.00',
+        evaluate:'15万+评价',
+        spece:[
+            {type:"智能旗舰款-极酷",count:1999},
+            {type:"1999一级款",count:2199},
+            {type:"闭眼入一级",count:2099},
+        
+        ]
     },
     {
         src:'/image/home/likeListLeft/18.webp',
@@ -177,7 +311,15 @@ let likeListLeft = [
         text:['抢'],
         price1:'32',
         price2:'.9',
-        evaluate:'2.1万+评价'
+        evaluate:'2.1万+评价',
+        spece:[
+            {type:"多花蜂蜜150g",count:32},
+            {type:"多花蜂蜜350g",count:44},
+            {type:"多花蜂蜜500g",count:59},
+            {type:"多花蜂蜜800g",count:65},
+            {type:"多花蜂蜜1000g",count:79},
+            {type:"多花蜂蜜1200g",count:94},
+        ]
     },
     {
         src:'/image/home/likeListLeft/19.webp',
@@ -187,7 +329,15 @@ let likeListLeft = [
         text:['秒杀','99元3件'],
         price1:'39',
         price2:'.9',
-        evaluate:'66万+评价'
+        evaluate:'66万+评价',
+        spece:[
+            {type:"超韧132抽*6包",count:39},
+            {type:"超韧132抽*8包",count:59},
+            {type:"超韧132抽*10包",count:75},
+            {type:"超韧132抽*15包",count:90},
+            {type:"超韧132抽*20包",count:109},
+            {type:"超韧132抽*30包",count:134},
+        ]
     },
     {
         src:'/image/home/likeListLeft/20.webp',
@@ -196,8 +346,16 @@ let likeListLeft = [
         qt:'',
         text:['秒杀','9折券'],
         price1:'299',
-        price2:'',
-        evaluate:'1.0万+评价'
+        price2:'.00',
+        evaluate:'1.0万+评价',
+        spece:[
+            {type:"蓝钻乳粉500g",count:299},
+            {type:"蓝钻乳粉600g",count:349},
+            {type:"蓝钻乳粉800g",count:389},
+            {type:"蓝钻乳粉1000g",count:409},
+            {type:"蓝钻乳粉1200g",count:449},
+            {type:"蓝钻乳粉1500g",count:489},
+        ]
     },
     {
         src:'/image/home/likeListLeft/21.webp',
@@ -206,8 +364,15 @@ let likeListLeft = [
         qt:'',
         text:['拼购'],
         price1:'349',
-        price2:'',
-        evaluate:'3.7万+评价'
+        price2:'.00',
+        evaluate:'3.7万+评价',
+        spece:[
+            {type:"上出水6.6L 1500w 落地安",count:349},
+            {type:"上出水6.6L 1500w 挂墙安",count:359},
+            {type:"上出水5L 1500w 落地安",count:249},
+            {type:"上出水10L 1500w 落地安",count:599},
+            
+        ]
     },
     {
         src:'/image/home/likeListLeft/22.webp',
@@ -216,8 +381,15 @@ let likeListLeft = [
         qt:'',
         text:['秒杀','返'],
         price1:'799',
-        price2:'',
-        evaluate:'5800+评价'
+        price2:'.00',
+        evaluate:'5800+评价',
+        spece:[
+            {type:"【一级能效】手机控制",count:799},
+            {type:"【热销爆款】双管速热",count:759},
+            {type:"【畅销万台】7倍热水",count:699},
+            {type:"【新品上市】智慧物联",count:689},
+            {type:"【新品首发】3000W速热",count:889},
+        ]
     },
     {
         src:'/image/home/likeListLeft/23.webp',
@@ -226,8 +398,15 @@ let likeListLeft = [
         qt:'',
         text:['拼购'],
         price1:'849',
-        price2:'',
-        evaluate:'2.5万+评价'
+        price2:'.00',
+        evaluate:'2.5万+评价',
+        spece:[
+            {type:"7公斤定频大神童",count:849},
+            {type:"8公斤直驱变频一启动",count:889},
+            {type:"9公斤直驱变频超级秒杀",count:899},
+            {type:"9公斤定频大神童 送豪礼",count:1089},
+         
+        ]
     },
     {
         src:'/image/home/likeListLeft/24.webp',
@@ -236,8 +415,15 @@ let likeListLeft = [
         qt:'',
         text:['秒杀'],
         price1:'1899',
-        price2:'',
-        evaluate:'300+评价'
+        price2:'.00',
+        evaluate:'300+评价',
+        spece:[
+            {type:"【店铺推荐】8KG除菌洗烘",count:1899},
+            {type:"【热销爆款】10KG除菌空气变频洗烘",count:1999},
+            {type:"【爆款推荐】10KG除菌空气洗变频洗烘",count:2199},
+            {type:"【金色爆款】10KG消毒除螨洗烘",count:2599},
+            {type:"【门店同款】10KG直驱空气洗",count:2999},
+        ]
     },
     {
         src:'/image/home/likeListLeft/25.webp',
@@ -246,8 +432,15 @@ let likeListLeft = [
         qt:'',
         text:['拼购'],
         price1:'69',
-        price2:'',
-        evaluate:'800+评价'
+        price2:'.00',
+        evaluate:'800+评价',
+        spece:[
+            {type:"喷水爆炸双用",count:69},
+            {type:"差旅便捷式",count:64},
+            {type:"无绳熨斗",count:109},
+            {type:"蒸汽喷射",count:125},
+
+        ]
     },
     {
         src:'/image/home/likeListLeft/26.webp',
@@ -256,8 +449,16 @@ let likeListLeft = [
         qt:'',
         text:[],
         price1:'649',
-        price2:'',
-        evaluate:''
+        price2:'.00',
+        evaluate:'',
+        spece:[
+            {type:"BD58372",count:649},
+            {type:"FW39823",count:619},
+            {type:"EE48372",count:999},
+            {type:"OI89232",count:599},
+            {type:"UY78299",count:689},
+            {type:"LK90900",count:969},
+        ]
     },
     {
         src:'/image/home/likeListLeft/27.webp',
@@ -266,8 +467,15 @@ let likeListLeft = [
         qt:'',
         text:['抢'],
         price1:'499',
-        price2:'',
-        evaluate:'2400+评价'
+        price2:'.00',
+        evaluate:'2400+评价',
+        spece:[
+            {type:"20L 光波烧烤",count:499},
+            {type:"20L 平板速热",count:699},
+            {type:"21L 平板速热",count:589},
+            {type:"21L 旋转匀热",count:899},
+            {type:"变频速热",count:299},
+        ]
     },
     {
         src:'/image/home/likeListLeft/28.webp',
@@ -275,9 +483,17 @@ let likeListLeft = [
         zy:'自营',
         qt:'',
         text:['抢','领券99-30'],
-        price1:'52',
+        price1:'18',
         price2:'.9',
-        evaluate:'9100+评价'
+        evaluate:'9100+评价',
+        spece:[
+            {type:"三层120抽*5包",count:18},
+            {type:"三层120抽*10包",count:28},
+            {type:"三层120抽*15包",count:40},
+            {type:"三层120抽*20包",count:49},
+            {type:"三层120抽*25包",count:58},
+            {type:"三层120抽*30包",count:65},
+        ]
     },
     {
         src:'/image/home/likeListLeft/29.webp',
@@ -286,8 +502,16 @@ let likeListLeft = [
         qt:'',
         text:['抢','返'],
         price1:'519',
-        price2:'',
-        evaluate:'1.2万+评价'
+        price2:'.00',
+        evaluate:'1.2万+评价',
+        spece:[
+            {type:"10L",count:519},
+            {type:"12L",count:539},
+            {type:"15L",count:599},
+            {type:"18L",count:659},
+            {type:"20L",count:699},
+            {type:"22L",count:789},
+        ]
     },
     {
         src:'/image/home/likeListLeft/30.webp',
@@ -296,8 +520,17 @@ let likeListLeft = [
         qt:'',
         text:['秒杀','赠'],
         price1:'99',
-        price2:'',
-        evaluate:'2.1万+评价'
+        price2:'.00',
+        evaluate:'2.1万+评价',
+        spece:[
+            {type:"控油清爽洗发水520*2瓶",count:99},
+            {type:"控油清爽洗发水720*2瓶",count:149},
+            {type:"控油清爽洗发水920*2瓶",count:199},
+            {type:"控油清爽洗发水1000*2瓶",count:259},
+            {type:"控油清爽洗发水1220*2瓶",count:299},
+            {type:"控油清爽洗发水150*2瓶",count:349},
+        ]
+        
     },
 ];
 export {likeListLeft};

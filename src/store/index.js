@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    shopList:[]
   },
   mutations: {
+    addData(state,obj){
+      state.shopList.push(obj);
+    }
 
   },
   actions: {

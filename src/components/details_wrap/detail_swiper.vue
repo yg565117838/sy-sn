@@ -2,27 +2,27 @@
   <swiper ref="mySwiper">
     <swiper-slide>
       <div class="img_container"  @scroll="imgScroll">
-        <img src="../../assets/detailsImg/detailspage/cooker.png" alt />
+        <img :src="this.$route.query.img" alt />
       </div>
     </swiper-slide>
     <swiper-slide>
       <div class="img_container">
-        <img src="../../assets/detailsImg/detailspage/cooker2.jpg" alt />
+         <img :src="this.$route.query.img" alt />
       </div>
     </swiper-slide>
     <swiper-slide>
       <div class="img_container">
-        <img src="../../assets/detailsImg/detailspage/coker3.jpg" alt />
+         <img :src="this.$route.query.img" alt />
       </div>
     </swiper-slide>
     <swiper-slide>
       <div class="img_container">
-        <img src="../../assets/detailsImg/detailspage/cooker4.jpg" alt />
+         <img :src="this.$route.query.img" alt />
       </div>
     </swiper-slide>
     <swiper-slide>
       <div class="img_container">
-        <img src="../../assets/detailsImg/detailspage/cooker5.jpg" alt />
+         <img :src="this.$route.query.img" alt />
       </div>
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
