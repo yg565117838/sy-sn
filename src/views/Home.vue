@@ -255,6 +255,9 @@ export default {
     },
     mounted(){
         let that = this;
+        let height = document.body.clientHeight;
+        let likes = document.querySelectorAll('.guessulike-content');
+        let lazy = document.querySelectorAll('.lazy-img');
         let sTop = window.scrollY;
         if(sTop > 500){
             that.seenLike = true;
@@ -288,6 +291,18 @@ export default {
                 that.seenBack = false;
                 that.seenIcon = true;
             };
+            //懒加载
+            if(that.seenLike){
+                for(let i=0;i<likes.length;i++){
+                    if(lazy[i].src != lazy[i].dataset.src){
+                        setTimeout(function(){
+                            if(likes[i].getBoundingClientRect().y < height){
+                                lazy[i].src = lazy[i].dataset.src;
+                            }
+                        },10)
+                    }
+                }
+            }
         };
     }
 }
