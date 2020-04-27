@@ -1,5 +1,5 @@
 <template>
-    <div class="ad"  :style='{"background-image":"url("+item.bgimg+")"}'>
+    <div class="ad"  :style='{"background-image":"url("+item.bgimg+")"}' @click="notFound">
         <div class="content">
             <img :src="item.src" alt="">
         </div>
@@ -9,7 +9,12 @@
 </template>
 <script>
 export default {
-    props:['item']
+    props:['item'],
+    methods:{
+        notFound(){
+            this.$router.push('404');
+        }
+    }
 }
 </script>
 <style scoped>

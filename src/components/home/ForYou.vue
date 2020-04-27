@@ -5,7 +5,7 @@
             <p class="desc">精选频道</p>
         </div>
         <div class="four-space">
-            <div class="four-item" v-for="(item,index) in forYou" :key="index">
+            <div class="four-item" v-for="(item,index) in forYou" :key="index" @click="notFound">
                 <div>
                     <img :src="item.src" alt="">
                 </div>
@@ -20,6 +20,11 @@ export default {
     data(){
         return {
             forYou
+        }
+    },
+    methods:{
+        notFound(){
+            this.$router.push('404');
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="newbd-one">
+    <div class="newbd-one" @click="notFound">
         <img src="../../assets/home/backgroud/3.png" alt="" class="item-bg">
         <img :src="item.src" alt="" class="item-image">
         <p class="three-name">
@@ -11,7 +11,12 @@
 </template>
 <script>
 export default {
-    props:['item']
+    props:['item'],
+    methods:{
+        notFound(){
+            this.$router.push('404');
+        }
+    }
 }
 </script>
 <style scoped>

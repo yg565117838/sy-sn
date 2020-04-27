@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="big-blank"></div>
-        <div class="guessulike">
+        <div class="guessulike" v-show="seenLike">
             <div class="guessulike-title">
                 <img src="../assets/home/like/1.webp" alt="">
             </div>
@@ -80,24 +80,24 @@
             <img src="../assets/home/backgroud/5.png" alt="" class="sn-logo">
         </div>
 
-        <div class="fixed-nav" v-show="false">
-            <img src="../assets/home/icon/1.png" alt="" class="fixed-nav-icon">
-            <div class="fixed-nav-search">
+        <div class="fixed-nav" v-show="seenSearch">
+            <img src="../assets/home/icon/1.png" alt="" class="fixed-nav-icon" @click="navLeft">
+            <div class="fixed-nav-search" @click="searchClick">
                 <img src="../assets/home/icon/3.png" alt="">
                 <input type="text" :placeholder="placeholder">
             </div>
-            <img src="../assets/home/icon/2.png" alt="" class="fixed-nav-icon">
+            <img src="../assets/home/icon/2.png" alt="" class="fixed-nav-icon" @click="navRight">
         </div>
 
-        <div class="sign">
+        <div class="sign" @click="navRight">
             <img src="../assets/home/backgroud/8.png" alt="">
         </div>
 
-        <div class="back-icon"></div>
+        <div class="back-icon" v-show="seenBack" @click="backTopClick"></div>
 
         <div class="footer">
             <router-link to="/" class="go">
-                <template v-if="true">
+                <template v-if="seenIcon">
                     <img src="../assets/home/icon/5.png" alt="">
                     <span>猜你喜欢</span>
                 </template>
@@ -240,8 +240,55 @@ export default {
         },
         notFound(){
             this.$router.push('404');
+        },
+        backTopClick(){
+            window.scrollTo(0,0);
         }
-
+    },
+    data(){
+        return {
+            seenSearch:false,
+            seenBack:false,
+            seenIcon:true,
+            seenLike:false,
+        }
+    },
+    mounted(){
+        let that = this;
+        let sTop = window.scrollY;
+        if(sTop > 500){
+            that.seenLike = true;
+        };
+        if(sTop > 800){
+            that.seenSearch = true;
+        }else{
+            that.seenSearch = false;
+        };
+        if(sTop > 1000){
+            that.seenBack = true;
+            that.seenIcon = false;
+        }else{
+            that.seenBack = false;
+            that.seenIcon = true;
+        };
+        window.onscroll = function(){
+            sTop = window.scrollY;
+            if(sTop > 500){
+                that.seenLike = true;
+            };
+            if(sTop > 800){
+                that.seenSearch = true;
+            }else{
+                that.seenSearch = false;
+            };
+            if(sTop > 1000){
+                that.seenBack = true;
+                that.seenIcon = false;
+            }else{
+                that.seenBack = false;
+                that.seenIcon = true;
+            };
+        };
     }
 }
 </script>

@@ -12,11 +12,11 @@
         </div>
         <p class="desc">{{item.desc}}</p>
         <div class="main">
-            <div class="left">
+            <div class="left" @click="notFound">
                 <img :src="item.src1" alt="">
                 <span>{{item.price1}}</span>
             </div>
-            <div class="right">
+            <div class="right" @click="notFound">
                 <img :src="item.src2" alt="">
                 <span>{{item.price2}}</span>
             </div>
@@ -68,6 +68,11 @@ export default {
                 };
             }
         },1000);
+    },
+    methods:{
+        notFound(){
+            this.$router.push('404');
+        }
     }
 }
 </script>

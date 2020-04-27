@@ -5,11 +5,11 @@
         </div>
         <p class="desc">{{item.desc}}</p>
         <div class="main">
-            <div class="left">
+            <div class="left" @click="notFound">
                 <img :src="item.src1" alt="">
                 <p>{{item.text1}}</p>
             </div>
-            <div class="right">
+            <div class="right" @click="notFound">
                 <img :src="item.src2" alt="">
                 <p>{{item.text2}}</p>
             </div>
@@ -18,7 +18,12 @@
 </template>
 <script>
 export default {
-    props:['item']
+    props:['item'],
+    methods:{
+        notFound(){
+            this.$router.push('404');
+        }
+    }
 }
 </script>
 <style scoped>
