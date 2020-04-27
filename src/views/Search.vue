@@ -4,60 +4,96 @@
             <img src="../assets/search/1.png" alt="" class="back-icon" @click="back">
             <div class="header-search">
                 <img src="../assets/search/2.png" alt="">
-                <input type="text" placeholder="冰洗抢300元神券">
-                <img src="../assets/search/3.png" alt="">
+                <input type="text" :placeholder="placeholder" v-model.trim="message" @focus="myFocus" @blur="myBlur" @input="myInput">
+                <img src="../assets/search/3.png" alt="" v-show="show" @click="clearClick">
             </div>
-            <span>搜索</span>
+            <span @click="notFound">搜索</span>
         </div>
-        <div class="content" v-show="false">
-            <div class="content-title">
+        <div class="content" v-if="show">
+            <div class="content-title" @click="notFound">
                 <p>
                     搜索
-                    <span class="content-title-span">‘1’</span>
+                    <span class="content-title-span">‘{{message}}’</span>
                     相关店铺
                 </p>
                 <img src="../assets/search/2.png" alt="">
             </div>
-            <div class="search-content">
+            <div class="search-content" v-for="(item,index) in contentList" :key="'content'+index" @click="notFound">
                 <p>
-                    <b>1</b>
-                    <span>060</span>
+                    <b>{{item.firstTitle}}</b>
+                    <span>{{item.lastTitle}}</span>
                 </p>
                 <p>
-                    <span>11</span>
-                    <span>2222222222222222222222222222</span>
-                </p>
-            </div>
-            <div class="search-content">
-                <p>
-                    <b>1</b>
-                    <span>060</span>
-                </p>
-                <p>
-                    <span>11</span>
-                    <span>2222222222222222222222222222</span>
+                    <span v-for="(item,index) in item.desc" :key="'desc'+index">{{item}}</span>
                 </p>
             </div>
         </div>
-        <div class="body" v-show="true">
+        <div class="body" v-else>
             <p class="body-title">热门搜索</p>
             <div class="body-list">
-                <div class="body-content">养生壶</div>
-                <div class="body-content">养生壶</div>
-                <div class="body-content">养生壶</div>
-                <div class="body-content">养生壶</div>
-                <div class="body-content">养生壶</div>
-                <div class="body-content">养生壶</div>
+                <div class="body-content" v-for="(item,index) in hotSearch" :key="'hot'+index" :class="{'content-active':item.hot}" @click="notFound">{{item.title}}</div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import {hotSearch} from '../data/search/hotSearch.js';
+import {searchList} from '../data/search/searchList.js'
 export default {
     methods:{
         back(){
             window.history.go(-1);
+        },
+        myFocus(){
+            if(this.message == ''){
+                this.placeholder = '输入1有惊喜';
+            }
+        },
+        myBlur(){
+            this.placeholder = this.myplaceholder;
+        },
+        myInput(){
+            if(this.message != ''){
+                this.show = true;
+            }else{
+                this.show = false;
+            };
+            this.contentList = [];
+            for(let i=0;i<this.searchList.length;i++){
+                if(this.searchList[i].title.slice(0,this.message.length) == this.message){
+                    this.contentList.push({
+                        firstTitle:this.searchList[i].title.slice(0,this.message.length),
+                        lastTitle:this.searchList[i].title.slice(this.message.length),
+                        desc:this.searchList[i].desc
+                    });
+                }
+            }
+        },
+        clearClick(){
+            this.message = '';
+            this.myInput();
+        },
+        notFound(){
+            this.$router.push('404');
         }
+    },
+    computed:{
+        myplaceholder(){
+            return this.$store.state.searchPlaceholder;
+        }
+    },
+    data(){
+        return {
+            hotSearch,
+            searchList,
+            contentList:[],
+            message:'',
+            placeholder:'',
+            show:false
+        }
+    },
+    created(){
+        this.placeholder = this.myplaceholder;
     }
 }
 </script>
@@ -157,6 +193,10 @@ export default {
     color: #333;
     font-size: .48rem;
 }
+.search-content p:first-child b{
+    color: #333;
+    font-size: .48rem;
+}
 .search-content p:last-child span{
     display: inline-block;
     max-width: 4.14rem;
@@ -208,6 +248,8 @@ export default {
 }
 .body-content:nth-child(3n){
     margin-right: 0;
+}
+.content-active{
     color: #f60;
 }
 </style>

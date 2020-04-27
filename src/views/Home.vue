@@ -2,13 +2,13 @@
     <div class="home">
         <div class="nav">
             <div class="nav-icon">
-                <img src="../assets/home/icon/1.png" alt="">
-                <img src="../assets/home/icon/2.png" alt="">
+                <img src="../assets/home/icon/1.png" alt="" @click="navLeft">
+                <img src="../assets/home/icon/2.png" alt="" @click="navRight">
             </div>
             <div class="nav-search" @click="searchClick">
                 <div class="nav-search-content">
                     <img src="../assets/home/icon/3.png" alt="">
-                    <input type="text" placeholder="冰洗抢300元神券">
+                    <input type="text" :placeholder="placeholder">
                 </div>
             </div>
         </div>
@@ -17,9 +17,9 @@
         </div>
         <enter-list class="enter-list"></enter-list>
         <div class="new-img">
-            <img src="../assets/home/new/1.png" alt="">
-            <img src="../assets/home/new/2.png" alt="">
-            <img src="../assets/home/new/3.png" alt="">
+            <img src="../assets/home/new/1.png" alt="" @click="notFound">
+            <img src="../assets/home/new/2.png" alt="" @click="notFound">
+            <img src="../assets/home/new/3.png" alt="" @click="notFound">
         </div>
         <div class="big-blank"></div>
         <channel-warp1></channel-warp1>
@@ -80,11 +80,11 @@
             <img src="../assets/home/backgroud/5.png" alt="" class="sn-logo">
         </div>
 
-        <div class="fixed-nav">
+        <div class="fixed-nav" v-show="false">
             <img src="../assets/home/icon/1.png" alt="" class="fixed-nav-icon">
             <div class="fixed-nav-search">
                 <img src="../assets/home/icon/3.png" alt="">
-                <input type="text" placeholder="冰洗抢300元神券">
+                <input type="text" :placeholder="placeholder">
             </div>
             <img src="../assets/home/icon/2.png" alt="" class="fixed-nav-icon">
         </div>
@@ -92,6 +92,8 @@
         <div class="sign">
             <img src="../assets/home/backgroud/8.png" alt="">
         </div>
+
+        <div class="back-icon"></div>
 
         <div class="footer">
             <router-link to="/" class="go">
@@ -221,12 +223,25 @@ export default {
         },
         ad21(){
             return ad2[0];
+        },
+        placeholder(){
+            return this.$store.state.searchPlaceholder;
         }
     },
     methods:{
         searchClick(){
             this.$router.push('search');
+        },
+        navLeft(){
+            this.$router.push('classification');
+        },
+        navRight(){
+            this.$router.push('myebay');
+        },
+        notFound(){
+            this.$router.push('404');
         }
+
     }
 }
 </script>
@@ -442,6 +457,18 @@ export default {
 .sign img{
     width: 15rem;
     height: 1.8rem;
+}
+
+.back-icon{
+    position: fixed;
+    width: 1.4rem;
+    height: 1.4rem;
+    bottom: 2.8rem;
+    left: 13rem;
+    border-radius: 1.6rem;
+    background: #fff url(../assets/home/icon/4.png) center no-repeat;
+    background-size: .8rem .8rem;
+    z-index: 999999;
 }
 
 .footer{

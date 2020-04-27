@@ -10,6 +10,7 @@ import ShoppingCart from '../views/ShoppingCart.vue'
 import MyEbay from '../views/MyEbay.vue'
 import NotShopCart from "../views/ShopCart-Not.vue"
 import Search from '../views/Search.vue'
+import NotFound from '../views/NotFound.vue'
 offscreenBuffering
 
 Vue.use(VueRouter)
@@ -32,7 +33,7 @@ const routes = [
   },
  
   {
-    path: '/Classification',
+    path: '/classification',
     component: Classification
   },
   {
@@ -54,6 +55,10 @@ const routes = [
   {
     path: '/search',
     component: Search
+  },
+  {
+    path:'*',
+    component:NotFound
   }
 ]
 

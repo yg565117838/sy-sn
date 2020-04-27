@@ -2,7 +2,7 @@
   <swiper ref="mySwiper" :options="swiperOptions" class="banner">
     <swiper-slide v-for='(item,index) in banner1' :key="index">
       <div class="banner-content">
-        <img :src="item" alt="">
+        <img :src="item" alt=""  @click="notFound">
       </div>
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
@@ -25,6 +25,11 @@ export default {
         loop:true
       },
       banner1
+    }
+  },
+  methods:{
+    notFound(){
+      this.$router.push('404');
     }
   }
 }
