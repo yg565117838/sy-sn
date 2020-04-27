@@ -65,9 +65,7 @@
             </div>
             <div class="right_alltwo">
               <span class="all_two">共2张</span>
-              <i class="right">
-                <img src="../../assets/detailsImg/detailspage/right.png" alt />
-              </i>
+              
             </div>
           </div>
         </div>
@@ -269,7 +267,8 @@ export default {
     },
     image() {
       return this.$route.query.img;
-    }
+    },
+  
   },
   mounted() {
     this.$router.afterEach((to, from, next) => {
@@ -639,7 +638,7 @@ b {
 .two {
   margin-left: 0.417rem;
 }
-.right {
+/* .right {
   display: inline-block;
   width: 0.583rem;
   height: 0.583rem;
@@ -648,7 +647,7 @@ b {
 .right img {
   width: 100%;
   height: 100%;
-}
+} */
 .style_img {
   position: absolute;
   top: -0.875rem;

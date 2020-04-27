@@ -54,19 +54,17 @@
 export default {
 methods:{
   backPage(){
-    this.$router.push({
-      path:"/details"
-    })
+   window.history.go(-1);
   }
 }
 };
 </script>
 
 
-<style>
+<style scoped>
 * {
   padding: 0;
-  left: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 .comment_body {

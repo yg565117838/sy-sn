@@ -6,7 +6,7 @@ let likeListLeft = [
         qt:'',
         text:['秒杀'],
         price1:'8',
-        price2:'.38',
+        price2:'.8',
         evaluate:'90+评价',
         spece:[
             {type:"5盒装",count:8},

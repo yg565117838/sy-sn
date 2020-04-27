@@ -4,7 +4,7 @@
       <div class="true_title">
         <div class="git"></div>
         <div>购物车</div>
-        <div class="edit" @click="status==!status">{{editbtn}}</div>
+        <div class="edit" @click="editClick">{{editbtn}}</div>
       </div>
       <div class="label_one">
         <span>重庆市重庆南岸区</span>
@@ -14,8 +14,8 @@
         <div class="addshop">
           <div class="add_head">
             <span class="check_box">
-              <input type="checkbox" name id class="true_enter" />
-              <span class="inner"></span>
+              <input type="checkbox" class="true_enter" @change="boxChange(index,item)" />
+              <span class="inner" v-show="yes"></span>
             </span>
             <div class="self">
               <img src="../assets/detailsImg/detailspage/lion.png" alt />
@@ -28,8 +28,8 @@
         <!-- 2 -->
         <div class="second_part">
           <span class="check_box ff">
-            <input type="checkbox" name id class="true_enter" />
-            <span class="inner"></span>
+            <input type="checkbox" name id class="true_enter" @change="boxChange(index,item)" />
+            <span class="inner" v-show="yes"></span>
           </span>
           <div class="right_true">
             <div class="pic">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="select_wrap_container">
                   <button class="minus clearfix" @click="cartMinus(item)" :disabled="zero">-</button>
-                  <input type="text" class="input_container clearfix" :value="item.num"  />
+                  <input type="text" class="input_container clearfix" :value="item.num" />
                   <i class="plus clearfix" @click="cartPlus(item)">+</i>
                 </div>
               </div>
@@ -87,17 +87,18 @@
     <div class="count_page">
       <div class="count_left">
         <span class="check_box">
-          <input type="checkbox" name id class="true_enter" />
-          <span class="inner"></span>
+          <input type="checkbox" name id class="trueenter" @change="allChange" />
+          <span class="inner2" v-show="yes"></span>
         </span>
         <span class="all">全部</span>
       </div>
       <div class="count_right">
-        <div class="count_text">
+        <div class="count_text" v-show="flag">
           <div class="all_money">
             <span>合计：</span>
             <span class="good_price">
-              <span class="sign">￥</span>{{countPrice}}.
+              <span class="sign">￥</span>
+              {{countPrice}}.
               <span class="smallsign">{{countSmall}}</span>
             </span>
           </div>
@@ -106,7 +107,10 @@
             <span>￥0</span>
           </div>
         </div>
-        <button>{{message}}({{count}})</button>
+        <button>
+          {{message}}
+          <b class="delete_" v-if="b">({{count}})</b>
+        </button>
       </div>
     </div>
     <div class="footer">
@@ -139,59 +143,86 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 import store from "../store/index.js";
 export default {
-    data(){
-      return {
-        zero:false,
-        status:true,
-        editbtn:"编辑",
-        message:"去结算"
-      }
-    },
+  data() {
+    return {
+      zero: false,
+      status: true,
+      editbtn: "编辑",
+      message: "去结算",
+      flag: true,
+      b: true,
+      yes: true,
+      flag:true
+    };
+  },
   computed: {
     shopList() {
       return this.$store.state.shopList;
     },
-    count(){
-      let sum=0;
-      for(let val of this.$store.state.shopList){
-        sum+=val.num;
+    count() {
+      let sum = 0;
+      for (let val of this.$store.state.shopList) {
+        sum += val.num;
       }
       return sum;
     },
-    countPrice(){
-      let price=0;
-      for(let res of this.$store.state.shopList){
-        price+=res.num*(res.integer);
+    countPrice() {
+      let price = 0;
+      for (let res of this.$store.state.shopList) {
+        price += res.num * res.integer;
       }
       return price;
     },
-    countSmall(){
-      let smallnum=0;
-      for(let res of this.$store.state.shopList){
-        smallnum+=res.num*(res.decimals.slice(1));
+    countSmall() {
+      let smallnum = 0;
+      for (let res of this.$store.state.shopList) {
+        smallnum += res.num * res.decimals.slice(1);
+        if (smallnum.length > 2) {
+          smallnum = smallnum.slice(0, 3);
+        }
       }
       return smallnum;
-    },
-   
- 
-   
-  
+    }
   },
-    methods: {
-      cartPlus(item) {
-        console.log(item.decimals.slice(1)*2);
-        item.num++;
-        if (item.num != 1) {
-          this.zero = false;
-        }
-      },
-      cartMinus(item) {
-        item.num--;
-        if (item.num == 1) {
-          this.zero = true;
-        }
-      },
+  methods: {
+    cartPlus(item) {
+      item.num++;
+      if (item.num != 1) {
+        this.zero = false;
+      }
     },
+    cartMinus(item) {
+      item.num--;
+      if (item.num == 1) {
+        this.zero = true;
+      }
+    },
+    editClick() {
+      if (this.editbtn == "编辑") {
+        this.editbtn = "完成";
+        this.message = "删除";
+        this.flag = false;
+        this.b = false;
+      } else if (this.editbtn == "完成") {
+        this.editbtn = "编辑";
+        this.message = "去结算";
+        this.flag = true;
+        this.b = true;
+      }
+    },
+    boxChange(index,item) {
+    console.log()
+     
+    },
+ 
+    allChange() {
+      if (event.target.checked == false) {
+        this.yes = false;
+      } else {
+        this.yes = true;
+      }
+    }
+  }
 };
 </script>
 <style scoped>
@@ -233,11 +264,10 @@ export default {
   margin-top: 0.208rem;
 }
 .sign {
-  
   font-weight: 700;
   font-size: 0.4rem;
 }
-.smallsign{
+.smallsign {
   margin-left: -0.133rem;
   font-size: 0.3rem;
   font-weight: 900;
@@ -423,8 +453,7 @@ export default {
   right: 0;
   width: 18px;
   height: 18px;
-  border: 1px solid #ccc;
-  border-radius: 50%;
+
   transform: rotate(0deg);
   box-sizing: border-box;
   border: 0 !important;
@@ -434,8 +463,24 @@ export default {
   -moz-background-size: 100% 100% !important;
   background-size: 100% 100% !important;
 }
+.inner2{
+   position: absolute;
+  right: 0;
+  width: 18px;
+  height: 18px;
+
+  transform: rotate(0deg);
+  box-sizing: border-box;
+  border: 0 !important;
+  background: url(//oss.suning.com/vss/activity/wximg/cart/selected-icon.png)
+    no-repeat !important;
+  -webkit-background-size: 100% 100% !important;
+  -moz-background-size: 100% 100% !important;
+  background-size: 100% 100% !important; 
+}
 /* 复选框 */
 .true_enter {
+  flex-shrink: 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -445,14 +490,33 @@ export default {
   z-index: 2;
   border: 0 none;
   appearance: none;
+  box-sizing: border-box;
+}
+.trueenter {
+  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  border: 0 none;
+  appearance: none;
+  box-sizing: border-box;
 }
 /* 外面包裹的span */
 .check_box {
   position: relative;
   display: inline-block;
+  flex-shrink: 0;
   vertical-align: middle;
   width: 18px;
   height: 18px;
+  z-index: 10;
+  border: 1px solid#ccc;
+  border-radius: 50%;
+  background-color: #fff;
 }
 
 .git {
@@ -534,5 +598,8 @@ export default {
 }
 .secondkill {
   font-size: 0.1rem;
+}
+.delete_ {
+  color: black;
 }
 </style>

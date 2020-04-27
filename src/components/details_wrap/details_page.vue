@@ -52,7 +52,6 @@
       <!-- 轮播图 -->
       <detailswiper></detailswiper>
       <!-- 轮播图 -->
-
       <!-- 地址选择 -->
       <addressselect :addresspage="addresspage" @address-cancel="cancelBtn"></addressselect>
       <!-- 地址选择 -->
@@ -92,7 +91,7 @@
         <div class="attention_container">
           <div class="attention_menu">
             <div class="media_title">
-              <span class="intro_text">{{$route.query.title}}</span>
+              <span class="intro_text">{{text}}</span>
             </div>
             <div class="attention_img">
               <img src="../../assets/detailsImg/detailspage/attention.png" alt />
@@ -248,6 +247,11 @@ export default {
       zero: false,
       ozy: false
     };
+  },
+  computed:{
+      text(){
+      return this.$route.query.title
+    },
   },
   components: {
     detailswiper,
@@ -1101,4 +1105,5 @@ body {
   width: 100%;
   background-color: #fb0;
 }
+
 </style>
