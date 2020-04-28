@@ -1,7 +1,7 @@
 <template>
     <div class="guessulike-content" @click="myClick">
         <div class="content-image">
-            <img :src="item.src" alt="">
+            <img :data-src="item.src" alt="" class="lazy-img" src=''>
         </div>
         <p class="content-title">{{item.title}}</p>
         <p class="content-tag">
