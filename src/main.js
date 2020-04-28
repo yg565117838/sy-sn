@@ -18,7 +18,13 @@ Vue.use(VueAwesomeSwiper)
 
 
 Vue.config.productionTip = false
-
+Vue.directive("touchmove",{
+  inserted(el){
+    el.addEventListener("touchmove",function(event){
+      event.preventDefault();
+    });
+  }
+});
 new Vue({
   router,
   store,

@@ -63,9 +63,11 @@ export default {
 </script>
 
 
-<style >
+<style>
 .quick_nav {
   position: fixed;
+  left: 0;
+  top: 0.7rem;
   width: 96%;
   height: 9.042rem;
   margin: 1.458rem 2%;

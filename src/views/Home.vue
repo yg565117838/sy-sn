@@ -2,13 +2,13 @@
     <div class="home">
         <div class="nav">
             <div class="nav-icon">
-                <img src="../assets/home/icon/1.png" alt="">
-                <img src="../assets/home/icon/2.png" alt="">
+                <img src="../assets/home/icon/1.png" alt="" @click="navLeft">
+                <img src="../assets/home/icon/2.png" alt="" @click="navRight">
             </div>
             <div class="nav-search" @click="searchClick">
                 <div class="nav-search-content">
                     <img src="../assets/home/icon/3.png" alt="">
-                    <input type="text" placeholder="冰洗抢300元神券">
+                    <input type="text" :placeholder="placeholder">
                 </div>
             </div>
         </div>
@@ -17,9 +17,9 @@
         </div>
         <enter-list class="enter-list"></enter-list>
         <div class="new-img">
-            <img src="../assets/home/new/1.png" alt="">
-            <img src="../assets/home/new/2.png" alt="">
-            <img src="../assets/home/new/3.png" alt="">
+            <img src="../assets/home/new/1.png" alt="" @click="notFound">
+            <img src="../assets/home/new/2.png" alt="" @click="notFound">
+            <img src="../assets/home/new/3.png" alt="" @click="notFound">
         </div>
         <div class="big-blank"></div>
         <channel-warp1></channel-warp1>
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="big-blank"></div>
-        <div class="guessulike">
+        <div class="guessulike" v-show="seenLike">
             <div class="guessulike-title">
                 <img src="../assets/home/like/1.webp" alt="">
             </div>
@@ -80,22 +80,24 @@
             <img src="../assets/home/backgroud/5.png" alt="" class="sn-logo">
         </div>
 
-        <div class="fixed-nav">
-            <img src="../assets/home/icon/1.png" alt="" class="fixed-nav-icon">
-            <div class="fixed-nav-search">
+        <div class="fixed-nav" v-show="seenSearch">
+            <img src="../assets/home/icon/1.png" alt="" class="fixed-nav-icon" @click="navLeft">
+            <div class="fixed-nav-search" @click="searchClick">
                 <img src="../assets/home/icon/3.png" alt="">
-                <input type="text" placeholder="冰洗抢300元神券">
+                <input type="text" :placeholder="placeholder">
             </div>
-            <img src="../assets/home/icon/2.png" alt="" class="fixed-nav-icon">
+            <img src="../assets/home/icon/2.png" alt="" class="fixed-nav-icon" @click="navRight">
         </div>
 
-        <div class="sign">
+        <div class="sign" @click="navRight">
             <img src="../assets/home/backgroud/8.png" alt="">
         </div>
 
+        <div class="back-icon" v-show="seenBack" @click="backTopClick"></div>
+
         <div class="footer">
             <router-link to="/" class="go">
-                <template v-if="true">
+                <template v-if="seenIcon">
                     <img src="../assets/home/icon/5.png" alt="">
                     <span>猜你喜欢</span>
                 </template>
@@ -221,12 +223,72 @@ export default {
         },
         ad21(){
             return ad2[0];
+        },
+        placeholder(){
+            return this.$store.state.searchPlaceholder;
         }
     },
     methods:{
         searchClick(){
             this.$router.push('search');
+        },
+        navLeft(){
+            this.$router.push('classification');
+        },
+        navRight(){
+            this.$router.push('myebay');
+        },
+        notFound(){
+            this.$router.push('404');
+        },
+        backTopClick(){
+            window.scrollTo(0,0);
         }
+    },
+    data(){
+        return {
+            seenSearch:false,
+            seenBack:false,
+            seenIcon:true,
+            seenLike:false,
+        }
+    },
+    mounted(){
+        let that = this;
+        let sTop = window.scrollY;
+        if(sTop > 500){
+            that.seenLike = true;
+        };
+        if(sTop > 800){
+            that.seenSearch = true;
+        }else{
+            that.seenSearch = false;
+        };
+        if(sTop > 1000){
+            that.seenBack = true;
+            that.seenIcon = false;
+        }else{
+            that.seenBack = false;
+            that.seenIcon = true;
+        };
+        window.onscroll = function(){
+            sTop = window.scrollY;
+            if(sTop > 500){
+                that.seenLike = true;
+            };
+            if(sTop > 800){
+                that.seenSearch = true;
+            }else{
+                that.seenSearch = false;
+            };
+            if(sTop > 1000){
+                that.seenBack = true;
+                that.seenIcon = false;
+            }else{
+                that.seenBack = false;
+                that.seenIcon = true;
+            };
+        };
     }
 }
 </script>
@@ -442,6 +504,18 @@ export default {
 .sign img{
     width: 15rem;
     height: 1.8rem;
+}
+
+.back-icon{
+    position: fixed;
+    width: 1.4rem;
+    height: 1.4rem;
+    bottom: 2.8rem;
+    left: 13rem;
+    border-radius: 1.6rem;
+    background: #fff url(../assets/home/icon/4.png) center no-repeat;
+    background-size: .8rem .8rem;
+    z-index: 999999;
 }
 
 .footer{

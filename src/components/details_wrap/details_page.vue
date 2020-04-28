@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="cover" v-if="cover" @click="coverRelieve" @touchmove.prevent></div>
     <div class="details_page">
       <!-- 更多 -->
       <div class="zy"></div>
@@ -13,7 +14,7 @@
             </div>
           </div>
           <div class="see_footer">
-            <div class="up">可参加以下优惠活动</div>
+            <div class="up_">可参加以下优惠活动</div>
             <p class="gray_color">促销</p>
             <div class="first_minus">
               <span class="diamond">云钻促销</span>
@@ -53,7 +54,7 @@
       <detailswiper></detailswiper>
       <!-- 轮播图 -->
       <!-- 地址选择 -->
-      <addressselect :addresspage="addresspage" @address-cancel="cancelBtn"></addressselect>
+      <addressselect :addresspage="addresspage" @address-cancel="cancelBtn" @child-value="childValue" @city-value="cityValue" @area-value="areaValue"></addressselect>
       <!-- 地址选择 -->
 
       <div>
@@ -79,7 +80,7 @@
         </div>
         <!-- 点击查看 -->
         <div class="view_container">
-          <div class="gray_container">
+          <div class="gray_container" @scroll="pageScroll">
             <div class="title_container">
               <div class="member">SUPER会员预计返价格1.19元云钻</div>
               <div class="welfare">福利上新！您有每月100元礼包待领取</div>
@@ -143,7 +144,7 @@
         <div class="has_select" @click="addressClick">
           <div class="ser_container">
             <span class="gray_color">送至</span>
-            <span class="detail">江苏 南京 玄武区</span>
+            <span class="detail">{{proinfor}} {{cityinfor}} {{areainfor}}</span>
           </div>
           <div class="right second r_icon_"></div>
         </div>
@@ -217,7 +218,9 @@
         <button class="qucik" @click="enterCart">马上抢</button>
         <button class="join_cart" @click="addCart">加入购物车</button>
         <!-- 遮罩层 -->
-        <div class="cover" v-if="cover" @click="coverRelieve"></div>
+        
+        <div class="up" v-if="up" @click="toTop"></div>
+        <div class="zj"></div>
       </div>
       <!--  -->
     </div>
@@ -231,8 +234,9 @@ import addressselect from "../part_page/address_select.vue";
 import serviceselect from "../part_page/service_select.vue";
 import quicknav from "../part_page/quicknav.vue";
 import detailswiper from "./detail_swiper.vue";
+
 export default {
-  props: ["pmessage", "value"],
+  props: [ "value"],
   data() {
     return {
       cover: false,
@@ -245,13 +249,17 @@ export default {
       see: false,
       num: 1,
       zero: false,
-      ozy: false
+      ozy: false,
+      up:false,
+      proinfor:"请选择地址",
+      cityinfor:"",
+      areainfor:""
     };
   },
-  computed:{
-      text(){
-      return this.$route.query.title
-    },
+  computed: {
+    text() {
+      return this.$route.query.title;
+    }
   },
   components: {
     detailswiper,
@@ -333,17 +341,49 @@ export default {
         this.zero = true;
       }
     },
-    coverNone(){
-      this.cover=false;
-      this.selectpage=false;
-      this.num=1
+    coverNone() {
+      this.cover = false;
+      this.selectpage = false;
+      this.num = 1;
+    },
+    childValue(provinceMessage){
+      this.proinfor=provinceMessage;
+
+    },
+    cityValue(cityDefaultValue){
+      this.cityinfor=cityDefaultValue;
+    },
+    areaValue(areaDefaultValue){
+       this.areainfor=areaDefaultValue;
+    },
+    pageScroll(){
+      
+    },
+   
+    laedscroll(){
+      let scrollTop=window.pageYOffset;
+      if(scrollTop>200){
+        this.ozy=true;
+        this.up=true;
+      }
+      else{
+        this.ozy=false;
+        this.up=false;
+      }
+    },
+    toTop(){
+      window.scrollTo(0,0)
     }
   },
   mounted() {
     this.$router.afterEach((to, from, next) => {
       window.scrollTo(0, 0);
     });
-  }
+
+    window.addEventListener("scroll",this.laedscroll);
+ 
+  },
+
 };
 </script>
  
@@ -355,6 +395,28 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+/* .zj{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2rem;
+  background-color: white;
+  z-index: 2;
+} */
+.address_middle{
+  flex-grow: 1;
+  overflow: auto;
+}
+.up {
+  position: fixed;
+  bottom: 2rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  background: url(../../assets/detailsImg/detailspage/top.png) center center;
+  background-size: contain;
 }
 
 .img_container {
@@ -714,6 +776,7 @@ export default {
   height: 1.167rem;
   background: url(../../assets/detailsImg/detailspage/left.png) no-repeat;
   background-size: 1.167rem 1.167rem;
+  
 }
 
 .more {
@@ -737,6 +800,7 @@ export default {
   z-index: 10001;
 }
 /* 遮罩层 */
+
 .cover {
   overflow: hidden;
   position: fixed;
@@ -1040,7 +1104,7 @@ b {
   border-bottom: 0.042rem solid#eee;
 }
 
-.up {
+.up_ {
   padding: 0.417rem 0;
   font-size: 0.48rem;
 }
@@ -1085,10 +1149,10 @@ b {
   background: url(../../assets/detailsImg/detailspage/right.png) center center;
   background-size: contain;
 }
-body {
+/* body {
   background-color: white !important;
   line-height: 1 !important;
-}
+} */
 .quick_nav {
   position: fixed;
   width: 96%;
@@ -1103,7 +1167,6 @@ body {
   left: 0;
   height: 50px;
   width: 100%;
-  background-color: #fb0;
+  background-color: white;
 }
-
 </style>

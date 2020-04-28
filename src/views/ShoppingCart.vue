@@ -14,8 +14,13 @@
         <div class="addshop">
           <div class="add_head">
             <span class="check_box">
-              <input type="checkbox" class="true_enter" @change="boxChange(index,item)" />
-              <span class="inner" v-show="yes"></span>
+              <input
+                type="checkbox"
+                class="true_enter"
+                @change="boxChange(index,item)"
+                :checked="item.status"
+              />
+              <span class="inner" v-show="item.status"></span>
             </span>
             <div class="self">
               <img src="../assets/detailsImg/detailspage/lion.png" alt />
@@ -28,8 +33,15 @@
         <!-- 2 -->
         <div class="second_part">
           <span class="check_box ff">
-            <input type="checkbox" name id class="true_enter" @change="boxChange(index,item)" />
-            <span class="inner" v-show="yes"></span>
+            <input
+              type="checkbox"
+              name
+              id
+              class="true_enter"
+              @change="boxChange(index,item)"
+              :checked="item.status"
+            />
+            <span class="inner" v-show="item.status"></span>
           </span>
           <div class="right_true">
             <div class="pic">
@@ -87,7 +99,7 @@
     <div class="count_page">
       <div class="count_left">
         <span class="check_box">
-          <input type="checkbox" name id class="trueenter" @change="allChange" />
+          <input type="checkbox" name id class="trueenter" @change="allChange" checked />
           <span class="inner2" v-show="yes"></span>
         </span>
         <span class="all">全部</span>
@@ -107,7 +119,7 @@
             <span>￥0</span>
           </div>
         </div>
-        <button>
+        <button @click="changeBtn">
           {{message}}
           <b class="delete_" v-if="b">({{count}})</b>
         </button>
@@ -151,8 +163,9 @@ export default {
       message: "去结算",
       flag: true,
       b: true,
-      yes: true,
-      flag:true
+      yes: false,
+      flag: true,
+      filterArray: []
     };
   },
   computed: {
@@ -161,24 +174,28 @@ export default {
     },
     count() {
       let sum = 0;
-      for (let val of this.$store.state.shopList) {
-        sum += val.num;
+      for (let i = 0; i < this.shopList.length; i++) {
+        if (this.shopList[i].status == true) {
+          sum += this.shopList[i].num;
+          sum=parseInt(sum);
+        }
       }
       return sum;
     },
     countPrice() {
       let price = 0;
-      for (let res of this.$store.state.shopList) {
-        price += res.num * res.integer;
+      for (let i = 0; i < this.shopList.length; i++) {
+        if (this.shopList[i].status == true) {
+          price += this.shopList[i].integer * this.shopList[i].num;
+        }
       }
       return price;
     },
     countSmall() {
       let smallnum = 0;
-      for (let res of this.$store.state.shopList) {
-        smallnum += res.num * res.decimals.slice(1);
-        if (smallnum.length > 2) {
-          smallnum = smallnum.slice(0, 3);
+      for (let i = 0; i < this.shopList.length; i++) {
+        if (this.shopList[i].status == true) {
+          smallnum += this.shopList[i].decimals.slice(1) * this.shopList[i].num;
         }
       }
       return smallnum;
@@ -210,16 +227,36 @@ export default {
         this.b = true;
       }
     },
-    boxChange(index,item) {
-    console.log()
-     
+    boxChange(index, item) {
+      this.$store.state.shopList[index].status = !this.$store.state.shopList[
+        index
+      ].status;
+      let flag = true;
+      for (let i = 0; i < this.shopList.length; i++) {
+        if (!this.shopList[i].status) {
+          flag = false;
+          break;
+        }
+      }
+      this.yes = flag;
     },
- 
+
     allChange() {
-      if (event.target.checked == false) {
-        this.yes = false;
-      } else {
-        this.yes = true;
+      this.yes = !this.yes;
+      if (this.yes == true) {
+        for (let i = 0; i < this.shopList.length; i++) {
+          this.shopList[i].status = true;
+        }
+      }
+      if (this.yes == false) {
+        for (let i = 0; i < this.shopList.length; i++) {
+          this.shopList[i].status = false;
+        }
+      }
+    },
+    changeBtn() {
+      if (this.message == "删除") {
+        this.$store.commit("deleteGood");
       }
     }
   }
@@ -463,8 +500,8 @@ export default {
   -moz-background-size: 100% 100% !important;
   background-size: 100% 100% !important;
 }
-.inner2{
-   position: absolute;
+.inner2 {
+  position: absolute;
   right: 0;
   width: 18px;
   height: 18px;
@@ -476,7 +513,7 @@ export default {
     no-repeat !important;
   -webkit-background-size: 100% 100% !important;
   -moz-background-size: 100% 100% !important;
-  background-size: 100% 100% !important; 
+  background-size: 100% 100% !important;
 }
 /* 复选框 */
 .true_enter {
@@ -564,6 +601,7 @@ export default {
   border-bottom: 0.042rem solid#ddd;
 }
 .xiao {
+  margin-left: -0.18rem;
   font-size: 0.2rem;
 }
 .footer {

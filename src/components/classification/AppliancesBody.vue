@@ -3,7 +3,7 @@
         <div class="tips">
             <span class="tips-name">{{item.title}}</span>
         </div>
-        <div class="appliances-list">
+        <div class="appliances-list" @click="notFound">
             <div class="content" v-for="(item,index) in item.list" :key="index">
                 <img :src="item.src" alt="">
                 <p>{{item.name}}</p>
@@ -13,7 +13,12 @@
 </template>
 <script>
 export default {
-    props:['item']
+    props:['item'],
+    methods:{
+        notFound(){
+            this.$router.push('404');
+        }
+    }
 }
 </script>
 <style scoped>

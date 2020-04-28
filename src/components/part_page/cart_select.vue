@@ -42,8 +42,8 @@
         <div class="cart_select_number">
           <div class="number_text">购买数量</div>
           <div class="select_wrap_container">
-            <button class="minus clearfix" @click="minus" :disabled="zero">-</button>
-            <input type="text" class="input_container clearfix" :value="num" />
+            <button class="minus clearfix" @click="minus" :disabled="can">-</button>
+            <input type="text" class="input_container clearfix"  @change="numChange" v-model="zy"/>
             <i class="plus clearfix" @click="plus">+</i>
           </div>
         </div>
@@ -220,14 +220,31 @@ export default {
       this.$emit("cart-cancel");
     },
     minus() {
-      this.$emit("minus-num");
+      this.zy--;
+      if(this.zy==1){
+      this.can=true;
+      }
     },
     plus() {
-      this.$emit("plus-num");
+      this.zy++;
+      if(this.zy!=1){
+        this.can=false;
+      }
+      
+    },
+    numChange(){
+      if(this.zy<=0){
+        this.zy=1;
+      }
+      if(isNaN(this.zy)){
+        this.zy=1;
+      }
+    
     },
 
     open2() {
-      this.$emit("cover-none")
+      this.$emit("cover-none");
+      this.zy=1;
       this.$message({
         message: "加入购物车成功",
         type: "success"
@@ -237,14 +254,17 @@ export default {
       let integer = this.$route.query.price1;
       let decimals = this.$route.query.price2;
       let img = this.$route.query.img;
-      let num=this.num;
+      let num=this.zy;
+      let status=false;
       let obj = {
         qt: qt,
         title: title,
         integer: integer,
         decimals: decimals,
         img: img,
-        num:num
+        num:num,
+        status:false
+       
       };
       this.$store.commit("addData", obj);
       this.selectPage = 0;
@@ -258,7 +278,9 @@ export default {
   },
   data() {
     return {
-      selectPage: 0
+      selectPage: 0,
+      zy:1,
+      can:false,
     };
   },
   computed: {
@@ -306,11 +328,7 @@ export default {
   padding: 0 0 0.417rem 0;
   border-bottom: 0.042rem solid #eee;
 }
-.cart_select_middle,
-.address_middle {
-  overflow: auto;
-  flex-grow: 1;
-}
+
 .cart_select_footer {
   flex-shrink: 0;
 }

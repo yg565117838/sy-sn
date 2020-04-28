@@ -11,6 +11,7 @@ import MyEbay from '../views/MyEbay.vue'
 import NotShopCart from "../views/ShopCart-Not.vue"
 import Search from '../views/Search.vue'
 import Login from "../views/Login.vue"
+import NotFound from '../views/NotFound.vue'
 offscreenBuffering
 
 Vue.use(VueRouter)
@@ -31,9 +32,9 @@ const routes = [
     name: "Commentpage",
     component: Commentpage
   },
- 
+
   {
-    path: '/Classification',
+    path: '/classification',
     component: Classification
   },
   {
@@ -57,8 +58,12 @@ const routes = [
     component: Search
   },
   {
-    path:"/login",
-    component:Login
+    path: "/login",
+    component: Login
+  },
+  {
+    path: '*',
+    component: NotFound
   }
 ]
 

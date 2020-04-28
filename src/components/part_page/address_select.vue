@@ -14,58 +14,98 @@
         </div>
 
         <div class="locate_container">
-          <div class="province_select" :pmessage="provinceMessage">{{provinceMessage}}</div>
-          <div class="city_select">{{cityDefaultValue}}</div>
-          <div class="area_select">{{areaDefaultValue}}</div>
+          <div class="province_select" :pmessage="provinceMessage" @click="hjyClick(1)" :class="{'hcolor':hindex==1}">{{provinceMessage}}</div>
+          <div class="city_select" @click="hjyClick(2)" :class="{'hcolor':hindex==2}">{{cityDefaultValue}}</div>
+          <div class="area_select" @click="hjyClick(3)" :class="{'hcolor':hindex==3}">{{areaDefaultValue}}</div>
         </div>
       </div>
-      <div class="address_middle">
-        <div
-          class="differ_city"
-          :key="index"
-          v-for="(item,index) in provinceList"
-          @click="itemclick(item,index)"
-        >{{item.name}}</div>
-      </div>
+      <component :is="componentName" @pro-click="proClick" @city-select="hcitySelect" @area-select="areaSelect"></component>
     </div>
   </transition>
 </template>
 
 <script>
+import Vue from "vue";
+import Vuex from "vuex";
+Vue.use(Vuex);
+import store from "../../store/index.js";
 import Axios from "axios";
+import province from "../part_page/address_box/Province.vue";
+import city from "../part_page/address_box/City.vue";
+import area from "../part_page/address_box/Area.vue";
 export default {
-  props: ["addresspage","pmessage"],
+  props: ["addresspage", "pmessage"],
   data() {
     return {
-      provinceList: [],
       cityDefaultValue: "请选择",
       areaDefaultValue: "",
-      provinceMessage: "江苏"
+      provinceMessage: "江苏",
+      componentName:province,
+      hindex:1
     };
+  },
+  component: {
+    province,
+    city,
+    area
   },
   methods: {
     addresscancel() {
       this.$emit("address-cancel");
     },
-    itemclick(item, index) {
-      this.provinceList = item.city;
-      this.provinceMessage = item.name;
+    proClick(item){
+      this.componentName=city;
+      this.provinceMessage=item.name;
+      this.cityDefaultValue="请选择";
+      this.areaDefaultValue="";
+      this.$emit("child-value",this.provinceMessage);
+      if(this.componentName=city){
+        this.hindex=2;
+      }
+    },
+    hcitySelect(item){
+      this.componentName=area;
+      this.cityDefaultValue=item.name;
+      this.$emit("city-value",this.cityDefaultValue);
+      if(this.componentName=area){
+        this.hindex=3;
+        this.areaDefaultValue="请选择";
+      }
+    },
+    areaSelect(item){
+       this.areaDefaultValue=item;
+       this.$emit("area-value",this.areaDefaultValue);
 
+    },
+    hjyClick(index){
+      if(index==1){
+        this.hindex=index;
+        this.componentName=province;
+        
+      }
+      if(index==2){
+        this.hindex=index;
+        this.componentName=city;
+      }
+      if(index==3){
+        this.hindex=index;
+        this.componentName=area;
+      }
     }
+ 
   },
-  created() {
-    let that = this;
-    Axios.get("/details_json/address.json").then(function(content) {
-      that.provinceList = content.data;
-    });
-  }
+
 };
 </script>
 
 
 
 <style>
-    .cart_select,
+.hcolor{
+  color: #fb0;
+  border-bottom: 2px solid #fb0;
+}
+.cart_select,
 .address_select,
 .service_select,
 .see_select {
@@ -119,7 +159,7 @@ export default {
   left: 0;
   z-index: 1;
 }
-body{
+body {
   line-height: 1;
 }
 </style>

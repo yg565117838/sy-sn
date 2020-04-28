@@ -1,6 +1,6 @@
 <template>
     <div class="enter-list">
-        <div class="content" v-for="(item,index) in channel" :key="index">
+        <div class="content" v-for="(item,index) in channel" :key="index" @click="notFound">
             <img :src="item.src" alt="">
             <span>{{item.text}}</span>
         </div>
@@ -12,6 +12,11 @@ export default {
     data(){
         return {
             channel
+        }
+    },
+    methods:{
+        notFound(){
+            this.$router.push('404');
         }
     }
 }
