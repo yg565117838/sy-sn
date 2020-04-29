@@ -7,7 +7,15 @@ let likeListRight = [
         text:['拼购','领券10-5','包税'],
         price1:'49',
         price2:'.9',
-        evaluate:'7.5万+评价'
+        evaluate:'7.5万+评价',
+        spece:[
+            {type:"5袋装",count:49},
+            {type:"10袋装",count:149},
+            {type:"15袋装",count:199},
+            {type:"20袋装",count:259},
+            {type:"25袋装",count:299},
+            {type:"30袋装",count:349},
+        ]
     },
     {
         src:'/image/home/likeListRight/2.webp',
@@ -17,7 +25,15 @@ let likeListRight = [
         text:['抢'],
         price1:'259',
         price2:'',
-        evaluate:'200+评价'
+        evaluate:'200+评价',
+        spece:[
+            {type:"20L家用均匀烘烤",count:259},
+            {type:"30L家用均匀烘烤",count:349},
+            {type:"40L家用均匀烘烤",count:499},
+            {type:"50L家用均匀烘烤",count:559},
+            {type:"60L家用均匀烘烤",count:699},
+            {type:"70L家用均匀烘烤",count:749},
+        ]
     },
     {
         src:'/image/home/likeListRight/3.webp',
@@ -27,7 +43,14 @@ let likeListRight = [
         text:['抢'],
         price1:'179',
         price2:'',
-        evaluate:'3.3万+评价'
+        evaluate:'3.3万+评价',
+        spece:[
+            {type:"【A12】300M增强版",count:159},
+            {type:"【AC10】1200M全千兆端口4天线",count:249},
+            {type:"【AC11】1200M全千兆端口5天线",count:399},
+            {type:"【AC5】性价比1200M",count:459},
+        
+        ]
     },
     {
         src:'/image/home/likeListRight/4.webp',
@@ -37,7 +60,15 @@ let likeListRight = [
         text:['秒杀','赠'],
         price1:'9299',
         price2:'',
-        evaluate:'3.0万+评价'
+        evaluate:'3.0万+评价',
+        spece:[
+            {type:"深空灰",count:9299},
+            {type:"银色",count:9499},
+            {type:"暗夜绿色",count:9999},
+            {type:"深灰色",count:9899},
+            {type:"金色",count:9699},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/5.webp',
@@ -47,7 +78,15 @@ let likeListRight = [
         text:['秒杀','赠'],
         price1:'30',
         price2:'.9',
-        evaluate:'4.5万+评价'
+        evaluate:'4.5万+评价',
+        spece:[
+            {type:"柠檬红茶洗洁精5kg",count:30},
+            {type:"抹茶绿洗洁精5kg",count:39},
+            {type:"果纷呈洗洁精5kg",count:40},
+            {type:"天空蓝洗洁精5kg",count:29},
+            {type:"纷扰灰洗洁精5kg",count:35},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/6.webp',
@@ -57,7 +96,15 @@ let likeListRight = [
         text:['秒杀','满5890减400','赠'],
         price1:'3999',
         price2:'',
-        evaluate:'1100+评价'
+        evaluate:'1100+评价',
+        spece:[
+            {type:"8GB+128G 钛银黑",count:3999},
+            {type:"8GB+128G 热烈红",count:3899},
+            {type:"8GB+128G 炫酷银",count:4099},
+            {type:"8GB+128G 温柔绿",count:3989},
+            {type:"8GB+128G 劲爆蓝",count:3599},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/7.webp',
@@ -67,7 +114,15 @@ let likeListRight = [
         text:['抢','每99-30','领券25-20','赠'],
         price1:'99',
         price2:'',
-        evaluate:'5.4万+评价'
+        evaluate:'5.4万+评价',
+        spece:[
+            {type:"2千克×3瓶+1千克×3瓶",count:99},
+            {type:"2千克×4瓶+1千克×2瓶",count:89},
+            {type:"2千克×5瓶+1千克×4瓶",count:98},
+            {type:"2千克×2瓶+1千克×4瓶",count:109},
+            {type:"2千克×6瓶+1千克×6瓶",count:95},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/8.webp',
@@ -77,7 +132,15 @@ let likeListRight = [
         text:[],
         price1:'44',
         price2:'',
-        evaluate:'1评价'
+        evaluate:'1评价',
+        spece:[
+            {type:"FK0891",count:44},
+            {type:"FR3451",count:54},
+            {type:"YO9971",count:58},
+            {type:"PK9876",count:59},
+            {type:"LK8791",count:55},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/9.webp',
@@ -87,7 +150,13 @@ let likeListRight = [
         text:['抢','领券2000-30','赠'],
         price1:'2199',
         price2:'',
-        evaluate:'20万+评价'
+        evaluate:'20万+评价',
+        spece:[
+            {type:"智能旗舰款-极酷",count:1999},
+            {type:"1999一级款",count:2199},
+            {type:"闭眼入一级",count:2099},
+        
+        ]
     },
     {
         src:'/image/home/likeListRight/10.webp',
@@ -97,7 +166,15 @@ let likeListRight = [
         text:['秒杀','领券79-6'],
         price1:'9',
         price2:'.9',
-        evaluate:''
+        evaluate:'',
+        spece:[
+            {type:"净重2.5斤",count:9},
+            {type:"净重3斤",count:19},
+            {type:"净重3.5斤",count:28},
+            {type:"净重4斤",count:39},
+            {type:"净重4.5斤",count:45},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/11.webp',
@@ -107,7 +184,13 @@ let likeListRight = [
         text:['秒杀','每1700-100','领券1000-100','赠'],
         price1:'1899',
         price2:'',
-        evaluate:'7700+评价'
+        evaluate:'7700+评价',
+        spece:[
+            {type:"智能旗舰款-极酷",count:1999},
+            {type:"1999一级款",count:2199},
+            {type:"闭眼入一级",count:2099},
+        
+        ]
     },
     {
         src:'/image/home/likeListRight/12.webp',
@@ -117,7 +200,15 @@ let likeListRight = [
         text:['抢','99元3件'],
         price1:'39',
         price2:'.9',
-        evaluate:'11万+评价'
+        evaluate:'11万+评价',
+        spece:[
+            {type:"超韧132抽*6包",count:39},
+            {type:"超韧132抽*8包",count:59},
+            {type:"超韧132抽*10包",count:75},
+            {type:"超韧132抽*15包",count:90},
+            {type:"超韧132抽*20包",count:109},
+            {type:"超韧132抽*30包",count:134},
+        ]
     },
     {
         src:'/image/home/likeListRight/13.webp',
@@ -127,7 +218,15 @@ let likeListRight = [
         text:['秒杀','满2件打9折'],
         price1:'102',
         price2:'',
-        evaluate:'11.6万+评价'
+        evaluate:'11.6万+评价',
+        spece:[
+            {type:"净重2.5斤",count:109},
+            {type:"净重3斤",count:119},
+            {type:"净重3.5斤",count:128},
+            {type:"净重4斤",count:139},
+            {type:"净重4.5斤",count:145},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/14.webp',
@@ -137,7 +236,15 @@ let likeListRight = [
         text:['抢','满880减30','赠'],
         price1:'899',
         price2:'',
-        evaluate:'1.5万+评价'
+        evaluate:'1.5万+评价',
+        spece:[
+            {type:"8GB+128G 钛银黑",count:999},
+            {type:"8GB+128G 热烈红",count:899},
+            {type:"8GB+128G 炫酷银",count:1099},
+            {type:"8GB+128G 温柔绿",count:989},
+            {type:"8GB+128G 劲爆蓝",count:599},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/15.webp',
@@ -147,7 +254,14 @@ let likeListRight = [
         text:['拼购'],
         price1:'589',
         price2:'',
-        evaluate:'8000+评价'
+        evaluate:'8000+评价',
+        spece:[
+            {type:"【一级能效】手机控制",count:799},
+            {type:"【热销爆款】双管速热",count:759},
+            {type:"【畅销万台】7倍热水",count:699},
+            {type:"【新品上市】智慧物联",count:689},
+            {type:"【新品首发】3000W速热",count:889},
+        ]
     },
     {
         src:'/image/home/likeListRight/16.webp',
@@ -157,7 +271,15 @@ let likeListRight = [
         text:['秒杀','每1099-100','领券999-20'],
         price1:'1099',
         price2:'',
-        evaluate:'1.5万+评价'
+        evaluate:'1.5万+评价',
+        spece:[
+            {type:"AI全面屏AX系列",count:1999},
+            {type:"AI全面屏C系列",count:1889},
+            {type:"AI全面超窄4C系列",count:1298},
+            {type:"畅销爆款A系列",count:1099},
+            {type:"Remid系列",count:1959},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/17.webp',
@@ -167,7 +289,15 @@ let likeListRight = [
         text:['满79减50','领券100-20'],
         price1:'169',
         price2:'',
-        evaluate:'3评价'
+        evaluate:'3评价',
+        spece:[
+            {type:"41",count:199},
+            {type:"42",count:189},
+            {type:"43",count:198},
+            {type:"44",count:109},
+            {type:"45",count:195},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/18.webp',
@@ -177,7 +307,15 @@ let likeListRight = [
         text:['拼购'],
         price1:'18',
         price2:'.9',
-        evaluate:'100+评价'
+        evaluate:'100+评价',
+        spece:[
+            {type:"2千克×3瓶+1千克×3瓶",count:99},
+            {type:"2千克×4瓶+1千克×2瓶",count:89},
+            {type:"2千克×5瓶+1千克×4瓶",count:98},
+            {type:"2千克×2瓶+1千克×4瓶",count:109},
+            {type:"2千克×6瓶+1千克×6瓶",count:95},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/19.webp',
@@ -187,7 +325,15 @@ let likeListRight = [
         text:['拼购'],
         price1:'79',
         price2:'',
-        evaluate:'3.1万+评价'
+        evaluate:'3.1万+评价',
+        spece:[
+            {type:"2千克×3瓶+1千克×3瓶",count:99},
+            {type:"2千克×4瓶+1千克×2瓶",count:89},
+            {type:"2千克×5瓶+1千克×4瓶",count:98},
+            {type:"2千克×2瓶+1千克×4瓶",count:109},
+            {type:"2千克×6瓶+1千克×6瓶",count:95},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/20.webp',
@@ -197,7 +343,15 @@ let likeListRight = [
         text:['抢','赠'],
         price1:'1599',
         price2:'',
-        evaluate:'1.0万+评价'
+        evaluate:'1.0万+评价',
+        spece:[
+            {type:"AI全面屏AX系列",count:1999},
+            {type:"AI全面屏C系列",count:1889},
+            {type:"AI全面超窄4C系列",count:1298},
+            {type:"畅销爆款A系列",count:1099},
+            {type:"Remid系列",count:1959},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/21.webp',
@@ -207,7 +361,14 @@ let likeListRight = [
         text:['秒杀'],
         price1:'1199',
         price2:'',
-        evaluate:'1.7万+评价'
+        evaluate:'1.7万+评价',
+        spece:[
+            {type:"7公斤定频大神童",count:849},
+            {type:"8公斤直驱变频一启动",count:889},
+            {type:"9公斤直驱变频超级秒杀",count:899},
+            {type:"9公斤定频大神童 送豪礼",count:1089},
+         
+        ]
     },
     {
         src:'/image/home/likeListRight/22.webp',
@@ -217,7 +378,14 @@ let likeListRight = [
         text:['秒杀','每1000-100'],
         price1:'1299',
         price2:'',
-        evaluate:'8700+评价'
+        evaluate:'8700+评价',
+        spece:[
+            {type:"7公斤定频大神童",count:849},
+            {type:"8公斤直驱变频一启动",count:889},
+            {type:"9公斤直驱变频超级秒杀",count:899},
+            {type:"9公斤定频大神童 送豪礼",count:1089},
+         
+        ]
     },
     {
         src:'/image/home/likeListRight/23.webp',
@@ -227,7 +395,14 @@ let likeListRight = [
         text:['拼购'],
         price1:'45',
         price2:'',
-        evaluate:'1.2万+评价'
+        evaluate:'1.2万+评价',
+        spece:[
+            {type:"【A12】300M增强版",count:159},
+            {type:"【AC10】1200M全千兆端口4天线",count:249},
+            {type:"【AC11】1200M全千兆端口5天线",count:399},
+            {type:"【AC5】性价比1200M",count:459},
+        
+        ]
     },
     {
         src:'/image/home/likeListRight/24.webp',
@@ -237,7 +412,15 @@ let likeListRight = [
         text:['抢','满2件打5折'],
         price1:'25',
         price2:'',
-        evaluate:'2.5万+评价'
+        evaluate:'2.5万+评价',
+        spece:[
+            {type:"2千克×3瓶+1千克×3瓶",count:99},
+            {type:"2千克×4瓶+1千克×2瓶",count:89},
+            {type:"2千克×5瓶+1千克×4瓶",count:98},
+            {type:"2千克×2瓶+1千克×4瓶",count:109},
+            {type:"2千克×6瓶+1千克×6瓶",count:95},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/25.webp',
@@ -247,7 +430,15 @@ let likeListRight = [
         text:['秒杀','领券1880-100','赠'],
         price1:'2698',
         price2:'',
-        evaluate:'40+评价'
+        evaluate:'40+评价',
+        spece:[
+            {type:"2千克×3瓶+1千克×3瓶",count:99},
+            {type:"2千克×4瓶+1千克×2瓶",count:89},
+            {type:"2千克×5瓶+1千克×4瓶",count:98},
+            {type:"2千克×2瓶+1千克×4瓶",count:109},
+            {type:"2千克×6瓶+1千克×6瓶",count:95},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/26.webp',
@@ -257,7 +448,15 @@ let likeListRight = [
         text:['满79减50','领券100-20'],
         price1:'269',
         price2:'',
-        evaluate:'5评价'
+        evaluate:'5评价',
+        spece:[
+            {type:"2千克×3瓶+1千克×3瓶",count:99},
+            {type:"2千克×4瓶+1千克×2瓶",count:89},
+            {type:"2千克×5瓶+1千克×4瓶",count:98},
+            {type:"2千克×2瓶+1千克×4瓶",count:109},
+            {type:"2千克×6瓶+1千克×6瓶",count:95},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/27.webp',
@@ -267,7 +466,15 @@ let likeListRight = [
         text:[],
         price1:'44',
         price2:'',
-        evaluate:'40+评价'
+        evaluate:'40+评价',
+        spece:[
+            {type:"2千克×3瓶+1千克×3瓶",count:99},
+            {type:"2千克×4瓶+1千克×2瓶",count:89},
+            {type:"2千克×5瓶+1千克×4瓶",count:98},
+            {type:"2千克×2瓶+1千克×4瓶",count:109},
+            {type:"2千克×6瓶+1千克×6瓶",count:95},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/28.webp',
@@ -277,7 +484,15 @@ let likeListRight = [
         text:['秒杀','领券199-120'],
         price1:'17',
         price2:'.9',
-        evaluate:'4.8万+评价'
+        evaluate:'4.8万+评价',
+        spece:[
+            {type:"2千克×3瓶+1千克×3瓶",count:99},
+            {type:"2千克×4瓶+1千克×2瓶",count:89},
+            {type:"2千克×5瓶+1千克×4瓶",count:98},
+            {type:"2千克×2瓶+1千克×4瓶",count:109},
+            {type:"2千克×6瓶+1千克×6瓶",count:95},
+
+        ]
     },
     {
         src:'/image/home/likeListRight/29.webp',
@@ -287,7 +502,13 @@ let likeListRight = [
         text:['抢'],
         price1:'5499',
         price2:'',
-        evaluate:'1.0万+评价'
+        evaluate:'1.0万+评价',
+        spece:[
+            {type:"智能旗舰款-极酷",count:1999},
+            {type:"1999一级款",count:2199},
+            {type:"闭眼入一级",count:2099},
+        
+        ]
     },
     {
         src:'/image/home/likeListRight/30.webp',
@@ -297,7 +518,15 @@ let likeListRight = [
         text:['抢','满2件免1件'],
         price1:'68',
         price2:'',
-        evaluate:'1.1万+评价'
+        evaluate:'1.1万+评价',
+        spece:[
+            {type:"2千克×3瓶+1千克×3瓶",count:99},
+            {type:"2千克×4瓶+1千克×2瓶",count:89},
+            {type:"2千克×5瓶+1千克×4瓶",count:98},
+            {type:"2千克×2瓶+1千克×4瓶",count:109},
+            {type:"2千克×6瓶+1千克×6瓶",count:95},
+
+        ]
     },
 ];
 export {likeListRight};

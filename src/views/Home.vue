@@ -89,7 +89,7 @@
             <img src="../assets/home/icon/2.png" alt="" class="fixed-nav-icon" @click="navRight">
         </div>
 
-        <div class="sign" @click="navRight">
+        <div class="sign" @click="navSign">
             <img src="../assets/home/backgroud/8.png" alt="">
         </div>
 
@@ -231,6 +231,9 @@ export default {
     methods:{
         searchClick(){
             this.$router.push('search');
+        },
+        navSign(){
+            this.$router.push("login");
         },
         navLeft(){
             this.$router.push('classification');

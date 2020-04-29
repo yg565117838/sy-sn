@@ -39,10 +39,10 @@ export default {
   },
   methods: {
     toMainPage() {
-      this.$emit("close-nav",this.test);
-      this.$router.push({
-        path: "/"
-      });
+      this.$emit("main-page");
+      // this.$router.push({
+      //   path: "/"
+      // });
     },
     toClassifyPage() {
       this.$router.push({
@@ -64,6 +64,8 @@ export default {
         path: "/shoppingcart"
       });
     }
+
+    // 
   }
 };
 </script>

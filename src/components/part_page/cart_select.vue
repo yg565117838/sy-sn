@@ -43,7 +43,7 @@
           <div class="number_text">购买数量</div>
           <div class="select_wrap_container">
             <button class="minus clearfix" @click="minus" :disabled="can">-</button>
-            <input type="text" class="input_container clearfix"  @change="numChange" v-model="zy"/>
+            <input type="text" class="input_container clearfix" @change="numChange" v-model="zy" />
             <i class="plus clearfix" @click="plus">+</i>
           </div>
         </div>
@@ -65,7 +65,6 @@
             </div>
             <div class="right_alltwo">
               <span class="all_two">共2张</span>
-              
             </div>
           </div>
         </div>
@@ -214,73 +213,71 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 import store from "../../store/index.js";
 export default {
-  props: ["selectpage", "zero", "num","cover"],
+  props: ["selectpage", "zero", "num", "cover"],
   methods: {
     cartCancel() {
       this.$emit("cart-cancel");
     },
     minus() {
       this.zy--;
-      if(this.zy==1){
-      this.can=true;
+      if (this.zy == 1) {
+        this.can = true;
       }
     },
     plus() {
       this.zy++;
-      if(this.zy!=1){
-        this.can=false;
+      if (this.zy != 1) {
+        this.can = false;
       }
-      
     },
-    numChange(){
-      if(this.zy<=0){
-        this.zy=1;
+    numChange() {
+      if (this.zy <= 0) {
+        this.zy = 1;
       }
-      if(isNaN(this.zy)){
-        this.zy=1;
+      if (isNaN(this.zy)) {
+        this.zy = 1;
       }
-    
     },
 
     open2() {
-      this.$emit("cover-none");
-      this.$message({
-        message: "加入购物车成功",
-        type: "success"
-      });
-     
-      let qt = this.$route.query.qt;
-      let title = this.$route.query.title;
-      let integer = this.$route.query.price1;
-      let decimals = this.$route.query.price2;
-      let img = this.$route.query.img;
-      let num=parseInt(this.zy);
-      let status=false;
-      let obj = {
-        qt: qt,
-        title: title,
-        integer: integer,
-        decimals: decimals,
-        img: img,
-        num:num,
-        status:false
-      };
-      this.$store.commit("addData", obj);
-      this.selectPage = 0;
-      this.zy=1;
-      
+        this.$emit("cover-none");
+        this.$message({
+          message: "加入购物车成功",
+          type: "success"
+        });
+        let qt = this.$route.query.qt;
+        let title = this.$route.query.title;
+        let integer = this.$route.query.price1;
+        let decimals = this.$route.query.price2;
+        let img = this.$route.query.img;
+        let num = parseInt(this.zy);
+        let status = false;
+        let obj = {
+          qt: qt,
+          title: title,
+          integer: integer,
+          decimals: decimals,
+          img: img,
+          num: num,
+          status: false
+        };
+        this.$store.commit("addData", obj);
+        this.selectPage = 0;
+        this.zy = 1;
+    
     },
     speceClick(item, index) {
       this.selectPage = index;
       this.$route.query.price1 = item.count;
       this.$route.query.qt = item.type;
+      this.$emit("hjy-select", item);
     }
   },
   data() {
     return {
       selectPage: 0,
-      zy:1,
-      can:false,
+      zy: 1,
+      can: false
     };
   },
   computed: {
@@ -289,8 +286,7 @@ export default {
     },
     image() {
       return this.$route.query.img;
-    },
-  
+    }
   },
   mounted() {
     this.$router.afterEach((to, from, next) => {

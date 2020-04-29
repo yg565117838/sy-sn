@@ -47,6 +47,7 @@
         @plus-num="plusNum"
         :num="num"
         @cover-none="coverNone"
+        @hjy-select="hjySelect"
       ></cartselect>
       <!-- 购物车选择商品页面 -->
 
@@ -54,7 +55,13 @@
       <detailswiper></detailswiper>
       <!-- 轮播图 -->
       <!-- 地址选择 -->
-      <addressselect :addresspage="addresspage" @address-cancel="cancelBtn" @child-value="childValue" @city-value="cityValue" @area-value="areaValue"></addressselect>
+      <addressselect
+        :addresspage="addresspage"
+        @address-cancel="cancelBtn"
+        @child-value="childValue"
+        @city-value="cityValue"
+        @area-value="areaValue"
+      ></addressselect>
       <!-- 地址选择 -->
 
       <div>
@@ -63,7 +70,34 @@
         <div class="more" @click="moreClick" v-if="more">
           <div class="wrong" v-if="close" @click.stop="closeNav"></div>
           <!-- 导航栏 -->
-          <quicknav :quicknav="quicknav"  :cover="cover"></quicknav>
+          <transition name="fade">
+            <div class="quick_nav" v-if="quicknav">
+              <div class="tranigle"></div>
+              <div class="quick_text">快速导航</div>
+              <div class="five_box">
+                <div class="quick_item" @click="toMainPage">
+                  <div class="main_bgd"></div>
+                  <div class="main_text">首页</div>
+                </div>
+                <div class="quick_item" @click="toSearchPage">
+                  <div class="search_bgd"></div>
+                  <div class="search_text">搜索</div>
+                </div>
+                <div class="quick_item" @click="toCartPage">
+                  <div class="mycart_bgd"></div>
+                  <div class="mycart_text">购物车</div>
+                </div>
+                <div class="quick_item" @click="toMyPage">
+                  <div class="myeasy_bgd"></div>
+                  <div class="myeasy">我的易购</div>
+                </div>
+                <div class="quick_item" @click="toClassifyPage">
+                  <div class="all_bgd"></div>
+                  <div class="all_classify">全部分类</div>
+                </div>
+              </div>
+            </div>
+          </transition>
         </div>
       </div>
 
@@ -128,7 +162,7 @@
       <div class="do_container" @click="seeClick">
         <div class="do">
           <span class="gray_color">刮券</span>
-          <span>100%刮中券，最高50元无敌券</span>
+          <span class="h_gua">100%刮中券，最高50元无敌券</span>
         </div>
         <div class="right second r_icon"></div>
       </div>
@@ -137,7 +171,7 @@
         <div class="has_select" @click="addServe">
           <div class="ser_container">
             <span class="gray_color">已选</span>
-            <span class="bold_text detail">4.8L双圆灶 1件 可选增值服务</span>
+            <span class="bold_text detail">{{hcontent}} 可选增值服务</span>
           </div>
           <div class="right second r_icon_"></div>
         </div>
@@ -213,14 +247,15 @@
         <div class="icon_item cartbox">
           <img src="../../assets/detailsImg/detailspage/cart.png" alt />
           <!-- 红点 -->
-          <div class="red_circle">0</div>
         </div>
         <button class="qucik" @click="enterCart">马上抢</button>
         <button class="join_cart" @click="addCart">加入购物车</button>
         <!-- 遮罩层 -->
-        
+
         <div class="up" v-if="up" @click="toTop"></div>
         <div class="zj"></div>
+
+        <!--  -->
       </div>
       <!--  -->
     </div>
@@ -236,7 +271,7 @@ import quicknav from "../part_page/quicknav.vue";
 import detailswiper from "./detail_swiper.vue";
 
 export default {
-  props: [ "value"],
+  props: ["value"],
   data() {
     return {
       cover: false,
@@ -250,10 +285,12 @@ export default {
       num: 1,
       zero: false,
       ozy: false,
-      up:false,
-      proinfor:"请选择地址",
-      cityinfor:"",
-      areainfor:""
+      up: false,
+      proinfor: "请选择地址",
+      cityinfor: "",
+      areainfor: "",
+      hcontent: "",
+      hnum: ""
     };
   },
   computed: {
@@ -265,10 +302,44 @@ export default {
     detailswiper,
     cartselect,
     addressselect,
-    serviceselect,
-    quicknav
+    serviceselect
   },
   methods: {
+    toMainPage() {
+      console.log(666);
+      this.quicknav=false;
+      this.$router.push({
+        path: "/"
+      });
+    },
+    toClassifyPage() {
+      this.$router.push({
+        path: "/Classification"
+      });
+    },
+    toMyPage() {
+      this.$router.push({
+        path: "/myebay"
+      });
+    },
+    toSearchPage() {
+      this.$router.push({
+        path: "/mustgrablist"
+      });
+    },
+    toCartPage() {
+      this.$router.push({
+        path: "/shoppingcart"
+      });
+    },
+    closeMain() {
+      console.log(666);
+      this.cover = false;
+    },
+    hjySelect(item) {
+      this.hcontent = item.type;
+      this.hnum = item.count + "件";
+    },
     enterCart() {
       this.cover = true;
       this.selectpage = true;
@@ -293,7 +364,7 @@ export default {
       this.quicknav = false;
       this.servicepage = false;
       this.see = false;
-      this.close=false;
+      this.close = false;
     },
     addressClick() {
       this.cover = true;
@@ -342,38 +413,34 @@ export default {
         this.zero = true;
       }
     },
-   
+
     coverNone() {
       this.cover = false;
       this.selectpage = false;
       this.num = 1;
     },
-    childValue(provinceMessage){
-      this.proinfor=provinceMessage;
-
+    childValue(provinceMessage) {
+      this.proinfor = provinceMessage;
     },
-    cityValue(cityDefaultValue){
-      this.cityinfor=cityDefaultValue;
+    cityValue(cityDefaultValue) {
+      this.cityinfor = cityDefaultValue;
     },
-    areaValue(areaDefaultValue){
-       this.areainfor=areaDefaultValue;
+    areaValue(areaDefaultValue) {
+      this.areainfor = areaDefaultValue;
     },
-    pageScroll(){
-      
-    },
-    laedscroll(){
-      let scrollTop=window.pageYOffset;
-      if(scrollTop>200){
-        this.ozy=true;
-        this.up=true;
-      }
-      else{
-        this.ozy=false;
-        this.up=false;
+    pageScroll() {},
+    laedscroll() {
+      let scrollTop = window.pageYOffset;
+      if (scrollTop > 200) {
+        this.ozy = true;
+        this.up = true;
+      } else {
+        this.ozy = false;
+        this.up = false;
       }
     },
-    toTop(){
-      window.scrollTo(0,0)
+    toTop() {
+      window.scrollTo(0, 0);
     }
   },
   mounted() {
@@ -381,10 +448,8 @@ export default {
       window.scrollTo(0, 0);
     });
 
-    window.addEventListener("scroll",this.laedscroll);
- 
-  },
-
+    window.addEventListener("scroll", this.laedscroll);
+  }
 };
 </script>
  
@@ -406,7 +471,7 @@ export default {
   background-color: white;
   z-index: 2;
 } */
-.address_middle{
+.address_middle {
   flex-grow: 1;
   overflow: auto;
 }
@@ -777,7 +842,6 @@ export default {
   height: 1.167rem;
   background: url(../../assets/detailsImg/detailspage/left.png) no-repeat;
   background-size: 1.167rem 1.167rem;
-  
 }
 
 .more {
@@ -1169,5 +1233,91 @@ b {
   height: 50px;
   width: 100%;
   background-color: white;
+}
+.h_gua {
+  margin-left: 0.5rem;
+}
+.quick_nav {
+  position: fixed;
+  left: 0;
+  top: 0.7rem;
+  width: 96%;
+  height: 9.042rem;
+  margin: 1.458rem 2%;
+  background-color: white;
+  border-radius: 0.333rem;
+}
+.tranigle {
+  position: absolute;
+  left: 321px;
+  top: -14px;
+  width: 0;
+  height: 0;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+}
+.quick_text {
+  padding: 0.625rem 0.417rem;
+  font-size: 0.583rem;
+}
+.five_box {
+  /* width: 13rem; */
+  display: flex;
+  flex-wrap: wrap;
+}
+.quick_item {
+  width: 2.88rem;
+  height: 2.76rem;
+  margin-left: 0.583rem;
+  background-color: #eee;
+  border-radius: 0.25rem;
+}
+.five_box .quick_item:last-child {
+  margin-top: 0.583rem;
+}
+.main_text,
+.search_text,
+.all_classify,
+.myeasy,
+.mycart_text {
+  margin-top: 0.125rem;
+  font-size: 0.583rem;
+  text-align: center;
+}
+.main_bgd {
+  height: 1.43rem;
+  width: 100%;
+  background: url(../../assets/detailsImg/detailspage/main.png) center bottom
+    no-repeat;
+  background-size: 0.958rem 0.958rem;
+}
+.search_bgd {
+  height: 1.43rem;
+  width: 100%;
+  background: url(../../assets/detailsImg/detailspage/search.png) center bottom
+    no-repeat;
+  background-size: 0.958rem 0.958rem;
+}
+.mycart_bgd {
+  height: 1.43rem;
+  width: 100%;
+  background: url(../../assets/detailsImg/detailspage/yellowcart.png) center
+    bottom no-repeat;
+  background-size: 0.958rem 0.958rem;
+}
+.myeasy_bgd {
+  height: 1.43rem;
+  width: 100%;
+  background: url(../../assets/detailsImg/detailspage/my.png) center bottom
+    no-repeat;
+  background-size: 0.958rem 0.958rem;
+}
+.all_bgd {
+  height: 1.43rem;
+  width: 100%;
+  background: url(../../assets/detailsImg/detailspage/classify.png) center
+    bottom no-repeat;
+  background-size: 0.958rem 0.958rem;
 }
 </style>

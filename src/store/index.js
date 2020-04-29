@@ -8,7 +8,7 @@ export default new Vuex.Store({
     shopList: [],
     cityList: [],
     areaList: [],
-    searchPlaceholder: '冰洗抢300元神券'
+    searchPlaceholder: '冰洗抢300元神券',
   },
   mutations: {
     addData(state, obj) {
