@@ -15,23 +15,25 @@
           <div class="login_title">欢迎登录苏宁易购</div>
         </div>
         <div class="input_box">
-          <input type="text" placeholder="请输入手机号" class="login_input" />
+          <input type="text" placeholder="请输入手机号" class="login_input"  v-model="message" />
         </div>
         <div class="yzm">
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
+          <input type="text" v-model="one" value="1"/>
+          <input type="text" v-model="two"/>
+          <input type="text" v-model="three"/>
+          <input type="text" v-model="four"/>
           <button class="getyzm">获取验证码</button>
         </div>
         <div class="warn">未注册的手机号验证后自动注册</div>
         <div>
-          <button class="yellowbtn">登录</button>
+          <button class="yellowbtn" @click="loginBtn">登录</button>
         </div>
         <div class="login_change">账号密码登陆</div>
+       
       </div>
 
-
+  <div class="h_error" v-if="error">验证码错误</div>
+ 
       <div>
           <div class="other">——————其他登录方式———————</div>
       </div>
@@ -52,10 +54,52 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods:{
+  loginBtn(){
+    if(this.message==1234&&this.one==1&&this.two==2&&this.three==3&&this.four==4){
+      localStorage.setItem("token",this.message);
+      this.error=false;
+      this.$router.replace({
+        path:"/myebay"
+      })
+    }
+    else{
+    this.error=true;
+    }
+  }
+  },
+  data(){
+    return {
+      message:"",
+      one:"",
+      two:"",
+      three:"",
+      four:"",
+      error:false
+    }
+  },
+  created(){
+    let token=localStorage.getItem("token");
+    if(token){
+      this.$router.replace({
+        path:"/"
+      })
+    }
+  }
+};
 </script>
 
 <style >
+.iu{
+  text-align: center;
+}
+.h_error{
+  text-align: center;
+  margin-top: .3rem;
+  color: red;
+  font-size: 0.7rem;
+}
 .login_head {
   display: flex;
   justify-content: space-between;
@@ -81,6 +125,7 @@ export default {};
   /* margin: 0.417rem 0 9% 9%; */
   padding: 0.2rem 0;
   border-style: none;
+  outline: none;
 }
 
 .input_box {

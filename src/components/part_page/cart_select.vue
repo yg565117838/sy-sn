@@ -244,17 +244,17 @@ export default {
 
     open2() {
       this.$emit("cover-none");
-      this.zy=1;
       this.$message({
         message: "加入购物车成功",
         type: "success"
       });
+     
       let qt = this.$route.query.qt;
       let title = this.$route.query.title;
       let integer = this.$route.query.price1;
       let decimals = this.$route.query.price2;
       let img = this.$route.query.img;
-      let num=this.zy;
+      let num=parseInt(this.zy);
       let status=false;
       let obj = {
         qt: qt,
@@ -264,10 +264,10 @@ export default {
         img: img,
         num:num,
         status:false
-       
       };
       this.$store.commit("addData", obj);
       this.selectPage = 0;
+      this.zy=1;
       
     },
     speceClick(item, index) {

@@ -8,14 +8,14 @@
       </div>
       <div class="label_two">
         <span>登录后同步电脑与手机购物车的商品</span>
-        <div class="go_login">去登录</div>
+        <div class="go_login" @click="hgoLogin">去登录</div>
       </div>
       <div class="cart_img">
         <img src="../assets/detailsImg/detailspage/hhh.png" alt />
       </div>
       <div class="empty_still">购物车还是空的，快来挑选好货吧</div>
       <div class="btn_container">
-        <button class="go_seesee">去逛逛</button>
+        <button class="go_seesee" @click="goSee">去逛逛</button>
       </div>
  
     </div>
@@ -63,6 +63,23 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+methods:{
+   hgoLogin() {
+   this.$router.push({
+     path:"/login"
+   })
+ },
+ goSee(){
+   this.$router.push({
+     path:"/"
+   })
+ }
+}
+
+}
+</script>
 <style scoped>
 body,
 html {
@@ -90,7 +107,6 @@ html {
   height: 100%;
 }
 .not_container {
-  height: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -165,7 +181,7 @@ html {
 .icon_right {
   width: 0.833rem;
   height: 0.833rem;
-  background: url(../assets/detailsImg/detailspage/boldright.png) center center;
+  background: url(../assets/detailsImg/detailspage/boldright.png) center center no-repeat;
   background-size: contain;
 }
 .middle {

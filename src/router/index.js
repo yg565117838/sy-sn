@@ -43,7 +43,7 @@ const routes = [
   },
   {
     path: '/shoppingcart',
-    component: ShoppingCart
+    component: ShoppingCart,
   },
   {
     path: '/myebay',
@@ -69,6 +69,29 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  console.log(to,from,next);
+  if (to.path == "/myebay") {
+    if (localStorage.getItem("token")) {
+      next();
+    }
+    else {
+      next("/login");
+    }
+  }
+  else if (to.path == "/shoppingcart") {
+    if (localStorage.getItem("token")) {
+      next();
+    }
+    else {
+      next("/notlogincart");
+    }
+  }
+  else {
+    next();
+  }
 })
 
 export default router

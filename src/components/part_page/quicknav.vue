@@ -31,9 +31,15 @@
 
 <script>
 export default {
-  props: ["quicknav"],
+  props: ["quicknav","cover"],
+  data(){
+    return {
+      test:false
+    }
+  },
   methods: {
     toMainPage() {
+      this.$emit("close-nav",this.test);
       this.$router.push({
         path: "/"
       });

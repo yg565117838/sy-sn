@@ -63,7 +63,7 @@
         <div class="more" @click="moreClick" v-if="more">
           <div class="wrong" v-if="close" @click.stop="closeNav"></div>
           <!-- 导航栏 -->
-          <quicknav :quicknav="quicknav"></quicknav>
+          <quicknav :quicknav="quicknav"  :cover="cover"></quicknav>
         </div>
       </div>
 
@@ -293,6 +293,7 @@ export default {
       this.quicknav = false;
       this.servicepage = false;
       this.see = false;
+      this.close=false;
     },
     addressClick() {
       this.cover = true;
@@ -341,6 +342,7 @@ export default {
         this.zero = true;
       }
     },
+   
     coverNone() {
       this.cover = false;
       this.selectpage = false;
@@ -359,7 +361,6 @@ export default {
     pageScroll(){
       
     },
-   
     laedscroll(){
       let scrollTop=window.pageYOffset;
       if(scrollTop>200){
