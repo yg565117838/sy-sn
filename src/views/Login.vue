@@ -40,6 +40,8 @@
             <button class="yellowbtn" @click="loginBtn">登录</button>
           </div>
           <div class="login_change">账号密码登陆</div>
+          <div>账号：1234</div>
+          <div>验证码:1 2 3 4</div>
         </div>
 
         <div class="h_error" v-if="error">验证码错误</div>
