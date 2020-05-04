@@ -7,7 +7,7 @@
         <div class="edit" @click="editClick">{{editbtn}}</div>
       </div>
       <div class="label_one">
-        <span>重庆市重庆南岸区</span>
+        <span>{{provinceinfor}} {{cityinfor}} {{areainfor}}</span>
         <div class="icon_right"></div>
       </div>
       <div class="overall_good" :key="index" v-for="(item,index) in shopList">
@@ -169,6 +169,34 @@ export default {
     };
   },
   computed: {
+    provinceinfor() {
+      if (
+        this.$store.state.provinceinfor == "北京" ||
+        this.$store.state.provinceinfor == "天津" ||
+        this.$store.state.provinceinfor == "上海" ||
+        this.$store.state.provinceinfor == "重庆"
+      ) {
+        return this.$store.state.provinceinfor + "市";
+      } else {
+        return this.$store.state.provinceinfor + "省";
+      }
+    },
+    cityinfor() {
+      if (
+        this.$store.state.provinceinfor == "北京" ||
+        this.$store.state.provinceinfor == "天津" ||
+        this.$store.state.provinceinfor == "上海" ||
+        this.$store.state.provinceinfor == "重庆"
+      ) {
+        return ""
+      }
+      else{
+        return this.$store.state.cityinfor+"市";
+      }
+    },
+    areainfor() {
+      return this.$store.state.areainfor;
+    },
     shopList() {
       return this.$store.state.shopList;
     },
@@ -177,7 +205,7 @@ export default {
       for (let i = 0; i < this.shopList.length; i++) {
         if (this.shopList[i].status == true) {
           sum += this.shopList[i].num;
-          sum=parseInt(sum);
+          sum = parseInt(sum);
         }
       }
       return sum;

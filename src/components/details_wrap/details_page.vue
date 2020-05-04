@@ -178,7 +178,7 @@
         <div class="has_select" @click="addressClick">
           <div class="ser_container">
             <span class="gray_color">送至</span>
-            <span class="detail">{{proinfor}} {{cityinfor}} {{areainfor}}</span>
+            <span class="detail">{{provinceinfor}} {{cityinfor}} {{areainfor}}</span>
           </div>
           <div class="right second r_icon_"></div>
         </div>
@@ -286,9 +286,6 @@ export default {
       zero: false,
       ozy: false,
       up: false,
-      proinfor: "请选择地址",
-      cityinfor: "",
-      areainfor: "",
       hcontent: "",
       hnum: ""
     };
@@ -296,6 +293,34 @@ export default {
   computed: {
     text() {
       return this.$route.query.title;
+    },
+   provinceinfor() {
+      if (
+        this.$store.state.provinceinfor == "北京" ||
+        this.$store.state.provinceinfor == "天津" ||
+        this.$store.state.provinceinfor == "上海" ||
+        this.$store.state.provinceinfor == "重庆"
+      ) {
+        return this.$store.state.provinceinfor + "市";
+      } else {
+        return this.$store.state.provinceinfor + "省";
+      }
+    },
+    cityinfor() {
+      if (
+        this.$store.state.provinceinfor == "北京" ||
+        this.$store.state.provinceinfor == "天津" ||
+        this.$store.state.provinceinfor == "上海" ||
+        this.$store.state.provinceinfor == "重庆"
+      ) {
+        return ""
+      }
+      else{
+        return this.$store.state.cityinfor+"市";
+      }
+    },
+    areainfor() {
+      return this.$store.state.areainfor;
     }
   },
   components: {
@@ -420,13 +445,13 @@ export default {
       this.num = 1;
     },
     childValue(provinceMessage) {
-      this.proinfor = provinceMessage;
+      this.$store.state.provinceinfor = provinceMessage;
     },
     cityValue(cityDefaultValue) {
-      this.cityinfor = cityDefaultValue;
+      this.$store.state.cityinfor = cityDefaultValue;
     },
     areaValue(areaDefaultValue) {
-      this.areainfor = areaDefaultValue;
+      this.$store.state.areainfor = areaDefaultValue;
     },
     pageScroll() {},
     laedscroll() {
