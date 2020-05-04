@@ -9,7 +9,10 @@ export default new Vuex.Store({
     cityList: [],
     areaList: [],
     searchPlaceholder: '冰洗抢300元神券',
-    seen:true
+    seen:true,
+    provinceinfor:"请选择地址",
+    cityinfor:"",
+    areainfor:""
   },
   mutations: {
     addData(state, obj) {

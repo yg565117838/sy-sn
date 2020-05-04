@@ -17,7 +17,7 @@
           <div class="input_box">
             <input
               type="text"
-              placeholder="请输入手机号"
+              placeholder="账号，验证码都是1234"
               class="login_input"
               v-model="message"
               @change="loginchange"
@@ -40,8 +40,6 @@
             <button class="yellowbtn" @click="loginBtn">登录</button>
           </div>
           <div class="login_change">账号密码登陆</div>
-          <div>账号：1234</div>
-          <div>验证码:1 2 3 4</div>
         </div>
 
         <div class="h_error" v-if="error">验证码错误</div>
