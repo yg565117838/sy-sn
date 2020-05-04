@@ -89,7 +89,7 @@
             <img src="../assets/home/icon/2.png" alt="" class="fixed-nav-icon" @click="navRight">
         </div>
 
-        <div class="sign" @click="navSign">
+        <div class="sign" @click="navSign" v-show="seenSign">
             <img src="../assets/home/backgroud/8.png" alt="">
         </div>
 
@@ -226,6 +226,19 @@ export default {
         },
         placeholder(){
             return this.$store.state.searchPlaceholder;
+        },
+        seenSigns(){
+            return this.$store.state.seen;
+        }
+    },
+    created(){
+        if(localStorage.getItem('seen') == 'false'){
+            this.seenSign = false;
+        }
+    },
+    watch:{
+        seenSigns(newVal,oldVal){
+            this.seenSign = newVal;
         }
     },
     methods:{
@@ -254,6 +267,7 @@ export default {
             seenBack:false,
             seenIcon:true,
             seenLike:false,
+            seenSign:true
         }
     },
     mounted(){

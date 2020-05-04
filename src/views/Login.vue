@@ -101,6 +101,8 @@ export default {
         this.$router.replace({
           path: "/myebay"
         });
+
+        this.$store.commit('seenChange');
       } else {
         this.error = true;
       }
@@ -130,8 +132,8 @@ export default {
   created() {
     let token = localStorage.getItem("token");
     if (token) {
-      this.$router.replace({
-        path: "/"
+      this.$router.push({
+        path: "/myebay"
       });
     }
   }

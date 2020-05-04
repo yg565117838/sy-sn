@@ -9,6 +9,7 @@ export default new Vuex.Store({
     cityList: [],
     areaList: [],
     searchPlaceholder: '冰洗抢300元神券',
+    seen:true
   },
   mutations: {
     addData(state, obj) {
@@ -32,7 +33,10 @@ export default new Vuex.Store({
         return item.status == false;
       });
     },
-   
+    seenChange(state){
+      state.seen = false;
+      localStorage.setItem('seen','false');
+    }
 
   },
   actions: {
